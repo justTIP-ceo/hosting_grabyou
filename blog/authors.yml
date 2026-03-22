@@ -1,0 +1,22 @@
+grigorij:
+  name: Grigorij
+  title: Frontend Developer
+  image_url: https://github.com/grigorij.png
+  page: true
+  socials:
+    github: grigorij
+    telegram: grigorij_username
+
+ivan:
+  name: Иван Петров
+  title: Backend Developer
+  image_url: https://github.com/ivan.png
+  page: true
+  socials:
+    github: ivan
+
+maria:
+  name: Мария Сидорова
+  title: UI/UX Designer
+  image_url: https://github.com/maria.png
+  page: true

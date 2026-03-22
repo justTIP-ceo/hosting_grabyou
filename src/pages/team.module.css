@@ -1,0 +1,378 @@
+.teamPage {
+  padding: 3rem 0 5rem;
+  min-height: calc(100vh - 60px);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  margin-bottom: 0.8rem;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  letter-spacing: -0.03em;
+}
+
+.header p {
+  font-size: 1.1rem;
+  color: var(--ifm-font-color-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.memberCard {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.5rem;
+  padding: 1.8rem;
+  border-radius: 24px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+  box-shadow:
+    0 14px 40px rgba(17, 49, 38, 0.05),
+    0 0 0 1px rgba(34, 199, 214, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.memberCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--ifm-color-primary) 0%,
+    #5FDFF0 100%
+  );
+  opacity: 0.6;
+}
+
+.memberCard:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 20px 50px rgba(17, 49, 38, 0.08),
+    0 0 0 1px rgba(34, 199, 214, 0.08);
+}
+
+.memberCard:hover::before {
+  opacity: 1;
+}
+
+[data-theme='dark'] .memberCard {
+  border-color: rgba(95, 223, 240, 0.09);
+  background: var(--ifm-background-surface-color);
+  box-shadow:
+    0 20px 46px rgba(0, 0, 0, 0.36),
+    0 0 0 1px rgba(95, 223, 240, 0.05);
+}
+
+[data-theme='dark'] .memberCard:hover {
+  box-shadow:
+    0 26px 56px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(95, 223, 240, 0.1);
+}
+
+.memberImageWrap {
+  position: relative;
+}
+
+.memberImage {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .memberImage {
+  border-color: rgba(95, 223, 240, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.memberContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.memberName {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.memberRole {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  letter-spacing: 0.02em;
+}
+
+.memberDescription {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--ifm-font-color-secondary);
+}
+
+.memberSocials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+.memberSocials a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.memberSocials a:hover {
+  color: var(--ifm-link-hover-color);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .teamPage {
+    padding: 2rem 0 3rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .memberCard {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .memberImageWrap {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .memberContent {
+    text-align: center;
+  }
+
+  .memberSocials {
+    justify-content: center;
+  }
+}
+
+
+/* Карточка капитана */
+.captainCard {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  border-radius: 28px;
+  border: 2px solid var(--ifm-color-primary);
+  background: var(--ifm-background-surface-color);
+  box-shadow:
+    0 24px 60px rgba(17, 49, 38, 0.1),
+    0 0 0 1px rgba(34, 199, 214, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.captainCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(
+    90deg,
+    var(--ifm-color-primary) 0%,
+    #5FDFF0 100%
+  );
+  box-shadow: 0 0 28px rgba(34, 197, 94, 0.4);
+}
+
+[data-theme='dark'] .captainCard {
+  border-color: rgba(95, 223, 240, 0.3);
+  background: var(--ifm-background-surface-color);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(95, 223, 240, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.captainImageWrap {
+  position: relative;
+}
+
+.captainImage {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+
+[data-theme='dark'] .captainImage {
+  border-color: rgba(95, 223, 240, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.captainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.captainBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--ifm-color-primary) 0%,
+    #5FDFF0 100%
+  );
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+}
+
+.captainName {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.captainRole {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  letter-spacing: 0.02em;
+}
+
+.captainDescription {
+  margin: 0;
+  line-height: 1.75;
+  color: var(--ifm-font-color-secondary);
+  font-size: 1.05rem;
+}
+
+.captainSkills {
+  margin-top: 0.5rem;
+}
+
+.captainSkills h4 {
+  margin: 0 0 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-font-color-secondary);
+}
+
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skillTag {
+  padding: 0.45rem 0.9rem;
+  border-radius: 12px;
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--ifm-heading-color);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.captainSocials {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.captainSocials a {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ifm-link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.captainSocials a:hover {
+  color: var(--ifm-link-hover-color);
+  text-decoration: underline;
+}
+
+.teamSectionTitle {
+  margin: 0 0 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .captainCard {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .captainImageWrap {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  .captainContent {
+    text-align: center;
+  }
+
+  .captainBadge {
+    margin: 0 auto;
+  }
+
+  .captainName {
+    font-size: 1.8rem;
+  }
+
+  .skillTags {
+    justify-content: center;
+  }
+
+  .captainSocials {
+    justify-content: center;
+  }
+}
