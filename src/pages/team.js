@@ -97,7 +97,6 @@ export default function Team() {
                   ))}
                 </div>
               </div>
-
               <div className={styles.captainSocials}>
                 {captain.github && (
                   <a href={captain.github} target="_blank" rel="noopener noreferrer">
