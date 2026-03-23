@@ -356,39 +356,87 @@ table {
   object-fit: contain;
   border-radius: 999px;
 }
-
-/* Показываем НАВСЕГДА десктопный navbar, даже на телефоне */
 @media (max-width: 996px) {
-  /* Чуть ужмём отступы, чтобы всё влезло */
+  /* Оставляем десктопный navbar */
   .navbar {
-    padding: 0 0.75rem;
+    padding: 0 0.5rem;
   }
 
   .navbar__inner {
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: nowrap;
     align-items: center;
+    gap: 0.35rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  /* Показываем и левую, и правую часть меню */
+  .navbar__inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar__brand {
+    flex: 0 0 auto;
+    min-width: auto;
+    margin-right: 0.25rem;
+  }
+
+  .navbar__logo img {
+    height: 28px;
+    width: auto;
+  }
+
+  .navbar__title {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
   .navbar__items--left,
   .navbar__items--right {
     display: flex !important;
+    flex: 0 0 auto;
     align-items: center;
+    gap: 0.15rem;
   }
 
-  /* Правая часть (переключатель темы, иконки и т.д.) прижимается вправо */
   .navbar__items--right {
     margin-left: auto;
   }
 
-  /* Чуть уменьшим отступы у пунктов, чтобы влезали в линию */
-  .navbar__item,
-  .navbar__link {
-    padding-left: 0.35rem;
-    padding-right: 0.35rem;
+  .navbar__item {
+    display: flex !important;
+    align-items: center;
+    flex: 0 0 auto;
   }
 
-  /* Полностью прячем бургер и сайдбар */
+  .navbar__link {
+    white-space: nowrap;
+    padding: 0.35rem 0.45rem;
+    font-size: 0.92rem;
+  }
+
+  .navbar-telegram-link {
+    padding: 0 0.15rem;
+  }
+
+  .navbar-telegram-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Возвращаем toggle темы в правую часть navbar */
+  .navbar__items--right > [class*='colorModeToggle'],
+  .navbar__items--right > [class*='toggle'],
+  .navbar__items--right [class*='colorModeToggle'],
+  .navbar__items--right [class*='toggleButton'] {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  /* Прячем бургер и mobile sidebar */
   .navbar__toggle,
   .navbar-sidebar,
   .navbar-sidebar__backdrop {

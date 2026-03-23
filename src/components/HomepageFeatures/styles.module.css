@@ -541,10 +541,8 @@
   }
 }
 
-/* styles.module.css */
-
-@media (max-width: 768px) {
-  .galleryGrid > :nth-child(-n + 3) {
+@media (max-width: 996px) {
+  .heroVisual {
     display: none;
   }
 }
