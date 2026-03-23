@@ -540,3 +540,11 @@
     max-width: 220px;
   }
 }
+
+/* styles.module.css */
+
+@media (max-width: 768px) {
+  .galleryGrid > :nth-child(-n + 3) {
+    display: none;
+  }
+}

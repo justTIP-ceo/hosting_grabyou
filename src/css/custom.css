@@ -357,20 +357,41 @@ table {
   border-radius: 999px;
 }
 
-/* Показываем пункты навбара на мобильном так же, как на десктопе */
+/* Показываем НАВСЕГДА десктопный navbar, даже на телефоне */
 @media (max-width: 996px) {
-  /* Левая часть навбара */
-  .navbar__items--left {
-    display: flex !important;
+  /* Чуть ужмём отступы, чтобы всё влезло */
+  .navbar {
+    padding: 0 0.75rem;
   }
 
-  /* Прячем бургер */
-  .navbar__toggle {
-    display: none !important;
-  }
-
-  /* Чтобы элементы не уезжали вниз */
   .navbar__inner {
     justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Показываем и левую, и правую часть меню */
+  .navbar__items--left,
+  .navbar__items--right {
+    display: flex !important;
+    align-items: center;
+  }
+
+  /* Правая часть (переключатель темы, иконки и т.д.) прижимается вправо */
+  .navbar__items--right {
+    margin-left: auto;
+  }
+
+  /* Чуть уменьшим отступы у пунктов, чтобы влезали в линию */
+  .navbar__item,
+  .navbar__link {
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+  }
+
+  /* Полностью прячем бургер и сайдбар */
+  .navbar__toggle,
+  .navbar-sidebar,
+  .navbar-sidebar__backdrop {
+    display: none !important;
   }
 }
