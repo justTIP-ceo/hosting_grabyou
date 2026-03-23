@@ -58,7 +58,7 @@ const teamMembers = [
     description: 'Управляю финансовой стороной проекта, планирую бюджет и анализирую экономическую эффективность решений.',
     skills: ['Financial Planning', 'Budgeting', 'Excel', 'Economic Analysis'],
     github: 'https://github.com/samatova',
-    telegram: 'https://t.me/samatova_username',
+    telegram: 'https://t.me/Munara91319',
   },
 ];
 
