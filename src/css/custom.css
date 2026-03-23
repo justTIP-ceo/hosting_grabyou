@@ -356,3 +356,21 @@ table {
   object-fit: contain;
   border-radius: 999px;
 }
+
+/* Показываем пункты навбара на мобильном так же, как на десктопе */
+@media (max-width: 996px) {
+  /* Левая часть навбара */
+  .navbar__items--left {
+    display: flex !important;
+  }
+
+  /* Прячем бургер */
+  .navbar__toggle {
+    display: none !important;
+  }
+
+  /* Чтобы элементы не уезжали вниз */
+  .navbar__inner {
+    justify-content: space-between;
+  }
+}
