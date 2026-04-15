@@ -96,13 +96,6 @@
     },
     "content": "content---markdown-page-393-028"
   },
-  "/team-e5a": {
-    "__comp": "__comp---site-src-pages-team-js-859-9b3",
-    "__context": {
-      "plugin": "plugin---markdown-pagea-74-7b5"
-    },
-    "config": "config---team-5-e-9-3a3"
-  },
   "/docs-393": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
@@ -125,6 +118,6 @@
     "__context": {
       "plugin": "plugin---markdown-pagea-74-7b5"
     },
-    "config": "config---team-5-e-9-3a3"
+    "config": "config---5-e-9-4f3"
   }
 }

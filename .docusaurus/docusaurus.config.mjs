@@ -84,11 +84,6 @@ export default {
       },
       "items": [
         {
-          "to": "/team",
-          "label": "Наша Команда",
-          "position": "left"
-        },
-        {
           "href": "https://t.me/GrabYouOfficial",
           "position": "right",
           "className": "navbar-telegram-link",
@@ -131,12 +126,7 @@ export default {
         },
         {
           "title": "Ещё",
-          "items": [
-            {
-              "label": "Discord",
-              "href": "https://discord.gg/9wfhcBaw"
-            }
-          ]
+          "items": []
         }
       ],
       "copyright": "© 2026 GrabYou. Маркетплейс срочных предложений от локального бизнеса."

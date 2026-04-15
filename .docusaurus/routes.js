@@ -63,11 +63,6 @@ export default [
     exact: true
   },
   {
-    path: '/team',
-    component: ComponentCreator('/team', 'e5a'),
-    exact: true
-  },
-  {
     path: '/docs',
     component: ComponentCreator('/docs', '393'),
     routes: [

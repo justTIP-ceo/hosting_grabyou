@@ -89,7 +89,6 @@ const config = {
           src: 'img/grabyouph.png',
         },
         items: [
-          {to: '/team', label: 'Наша Команда', position: 'left'},
           {
             href: 'https://t.me/GrabYouOfficial',
             position: 'right',
@@ -133,10 +132,6 @@ const config = {
         {
           title: 'Ещё',
           items: [
-            {
-              label: 'Discord',
-              href: 'https://discord.gg/9wfhcBaw',
-            },
           ],
         },
       ],
