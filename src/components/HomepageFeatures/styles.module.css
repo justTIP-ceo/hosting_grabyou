@@ -622,67 +622,41 @@
   box-shadow: 0 20px 44px rgba(17, 49, 38, 0.12), 0 0 0 1px rgba(34, 199, 214, 0.1);
 }
 
-.momentTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .momentIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(95, 223, 240, 0.08);
-  border: 1px solid rgba(95, 223, 240, 0.14);
-  color: var(--grabyou-accent);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.18);
+  color: var(--ifm-color-primary);
   flex-shrink: 0;
+  margin-bottom: 0.2rem;
 }
 
 [data-theme='light'] .momentIcon {
-  background: rgba(34, 199, 214, 0.07);
-  border-color: rgba(34, 199, 214, 0.18);
-  color: var(--grabyou-accent-deep);
+  background: rgba(34, 197, 94, 0.09);
+  border-color: rgba(34, 197, 94, 0.2);
+  color: var(--ifm-color-primary-dark);
 }
 
-.momentTime {
-  font-size: 0.78rem;
+.momentTitle {
+  margin: 0;
+  font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--grabyou-accent);
-  opacity: 0.8;
-}
-
-[data-theme='light'] .momentTime {
-  color: var(--grabyou-accent-deep);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ifm-heading-color);
 }
 
 .momentText {
   margin: 0;
-  font-size: 0.97rem;
-  line-height: 1.65;
-  color: var(--ifm-font-color-base);
+  font-size: 0.9rem;
+  line-height: 1.68;
+  color: var(--ifm-font-color-secondary);
   flex: 1;
-}
-
-.momentTag {
-  display: inline-block;
-  padding: 0.28rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(95, 223, 240, 0.08);
-  border: 1px solid rgba(95, 223, 240, 0.14);
-  color: var(--grabyou-accent);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-[data-theme='light'] .momentTag {
-  background: rgba(34, 199, 214, 0.07);
-  border-color: rgba(34, 199, 214, 0.18);
-  color: var(--grabyou-accent-deep);
 }
 
 /* Шаги */

@@ -111,10 +111,10 @@ const tickerItems = [
 ];
 
 const moments = [
-  { time: '17:45', Icon: IconCoffee, text: 'Идёшь домой. Кофейня за углом — последние напитки дня по особой цене. Через час закроется.', tag: 'кофе и выпечка' },
-  { time: '13:10', Icon: IconFood,   text: 'Обед в офисе. В 3 минутах ходьбы — кафе с горячим бизнес-ланчем дешевле, чем обычно.', tag: 'еда рядом' },
-  { time: '19:00', Icon: IconFlower, text: 'Вспомнил про день рождения. В соседнем доме — цветочная с букетами по специальной цене.', tag: 'цветы' },
-  { time: '10:30', Icon: IconBread,  text: 'По дороге на работу. Пекарня рядом с метро — свежая выпечка прямо с утра.', tag: 'утренние предложения' },
+  { Icon: IconCard,   title: 'Когда хочется купить выгоднее',          text: 'Смотреть предложения от местных продавцов рядом с домом, работой или учёбой и бронировать то, что актуально сейчас.' },
+  { Icon: IconPin,    title: 'Когда нужно здесь и сейчас',              text: 'Быстро найти рядом еду, товар или услугу, которые доступны сегодня, а не когда‑нибудь потом.' },
+  { Icon: IconCoffee, title: 'Рядом с работой или учёбой',              text: 'Еда, товары и услуги поблизости, которые доступны здесь и сейчас.' },
+  { Icon: IconCheck,  title: 'Без звонков и долгих уточнений',          text: 'Видеть актуальные предложения рядом, бронировать в приложении и забирать самостоятельно — без переписок, ожидания ответа и лишних действий.' },
 ];
 
 const steps = [
@@ -228,14 +228,11 @@ export default function HomepageFeatures() {
           </RevealBlock>
           <div className={styles.momentsGrid}>
             {moments.map((m, i) => (
-              <RevealBlock key={m.time} delay={i * 90}>
+              <RevealBlock key={m.title} delay={i * 90}>
                 <div className={styles.momentCard}>
-                  <div className={styles.momentTop}>
-                    <div className={styles.momentIcon}><m.Icon /></div>
-                    <span className={styles.momentTime}>{m.time}</span>
-                  </div>
+                  <div className={styles.momentIcon}><m.Icon /></div>
+                  <p className={styles.momentTitle}>{m.title}</p>
                   <p className={styles.momentText}>{m.text}</p>
-                  <span className={styles.momentTag}>{m.tag}</span>
                 </div>
               </RevealBlock>
             ))}
