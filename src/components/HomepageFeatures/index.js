@@ -173,7 +173,7 @@ export default function HomepageFeatures() {
                 Сервис срочных предложений от локального бизнеса
               </div>
               <Heading as="h1" className={`${styles.heroTitle} ${styles.heroAnimate} ${styles.heroAnimateDelay1}`}>
-                Хватай <span className={styles.heroTitleGradient}>выгоду</span>,<br />пока горячо
+                Хватай <span className={styles.heroTitleGradient}>выгоду,</span><br />пока горячо
               </Heading>
               <p className={`${styles.heroSubtitle} ${styles.heroAnimate} ${styles.heroAnimateDelay2}`}>
                 GrabYou помогает покупателям получать товары и услуги по
