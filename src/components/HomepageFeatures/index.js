@@ -55,16 +55,11 @@ function IconCheck() {
 }
 
 const tickerItems = [
-  'ВЫГОДНЫЕ ПРЕДЛОЖЕНИЯ РЯДОМ',
-  'GRABYOU',
-  'КОФЕ · ЕДА · ЦВЕТЫ · ВЫПЕЧКА',
-  'ГРАББИРУЙ ЛУЧШЕЕ',
   'СРОЧНЫЕ ПРЕДЛОЖЕНИЯ',
-  'ОПЛАТА ЗА 20 СЕКУНД',
-  'БЕРИ ПОКА ЕСТЬ',
-  'GRABYOU',
-  'ЛОКАЛЬНЫЙ БИЗНЕС РЯДОМ',
-  'СПЕЦИАЛЬНАЯ ЦЕНА',
+  'МНОГО КАТЕГОРИЙ',
+  'ВЫГОДНО',
+  'БОГАТЫЙ АССОРТИМЕНТ',
+  'БЫСТРО И ПРОСТО',
 ];
 
 const moments = [
@@ -136,17 +131,18 @@ export default function HomepageFeatures() {
           <div className={styles.heroGrid}>
             <div className={styles.heroContent}>
               <div className={styles.heroBadge}>
-                Срочные предложения от бизнеса рядом
+                Сервис срочных предложений от локального бизнеса
               </div>
 
               <Heading as="h1" className={styles.heroTitle}>
-                Выгодные находки в твоём районе — прямо сейчас
+                Хватай выгоду, пока горячо
               </Heading>
 
               <p className={styles.heroSubtitle}>
-                Кофейни, пекарни, цветочные и другие местные магазины каждый
-                день делают специальные предложения на ограниченное время.
-                GrabYou показывает их тебе — до того, как они закончатся.
+                GrabYou помогает покупателям получать товары и услуги по
+                выгодным предложениям — а местному бизнесу быстро реализовывать
+                продукцию. Кофейни, пекарни, цветочные, кафе: находи лучшее
+                рядом с собой прямо сейчас.
               </p>
 
               <ul className={styles.heroList}>
@@ -205,6 +201,35 @@ export default function HomepageFeatures() {
           ))}
         </div>
       </div>
+
+      {/* ─── ЧТО ТАКОЕ GRABYOU ─── */}
+      <section className={styles.section}>
+        <div className="container">
+          <div className={styles.aboutCard}>
+            <div className={styles.aboutLeft}>
+              <p className={styles.aboutQuote}>
+                <strong>GrabYou</strong> — сервис срочных предложений, который
+                помогает покупателям получать товары и услуги по выгодным ценам,
+                а бизнесу — быстро реализовывать продукцию.
+              </p>
+            </div>
+            <div className={styles.aboutRight}>
+              <div className={styles.aboutStat}>
+                <span className={styles.aboutStatNum}>1</span>
+                <span className={styles.aboutStatLabel}>приложение</span>
+              </div>
+              <div className={styles.aboutStat}>
+                <span className={styles.aboutStatNum}>∞</span>
+                <span className={styles.aboutStatLabel}>категорий</span>
+              </div>
+              <div className={styles.aboutStat}>
+                <span className={styles.aboutStatNum}>0</span>
+                <span className={styles.aboutStatLabel}>лишних шагов</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ─── МОМЕНТЫ ─── */}
       <section className={styles.section}>
@@ -283,8 +308,9 @@ export default function HomepageFeatures() {
                 Не знаешь что хочешь? Просто напиши — ИИ разберётся
               </Heading>
               <p className={styles.aiText}>
-                Не нужно листать категории и придумывать точный запрос. Напиши
-                как есть — GrabAI понимает живую речь и сам находит подходящее рядом.
+                Не нужно листать категории и придумывать точный запрос. Просто
+                напиши текстом что ищешь — GrabAI разберёт запрос и найдёт
+                подходящие предложения рядом с тобой.
               </p>
               <div className={styles.aiExamples}>
                 <div className={styles.aiExample}>«хочу что-нибудь к чаю»</div>
