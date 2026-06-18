@@ -4,6 +4,18 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
+/* ─── Хук cursor spotlight ─── */
+function useCursorGlow() {
+  useEffect(() => {
+    const move = (e) => {
+      document.documentElement.style.setProperty('--cx', e.clientX + 'px');
+      document.documentElement.style.setProperty('--cy', e.clientY + 'px');
+    };
+    window.addEventListener('mousemove', move, { passive: true });
+    return () => window.removeEventListener('mousemove', move);
+  }, []);
+}
+
 /* ─── Хук для анимации появления ─── */
 function useReveal() {
   const ref = useRef(null);
@@ -12,13 +24,32 @@ function useReveal() {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { el.classList.add(styles.revealed); obs.unobserve(el); } },
-      { threshold: 0.12 }
+      { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
   return ref;
 }
+
+/* ─── Частицы (фиксированные для SSR) ─── */
+const heroParticles = [
+  { x: 8,  y: 18, s: 3, d: 0,   dur: 9  },
+  { x: 91, y: 9,  s: 2, d: 1.4, dur: 11 },
+  { x: 74, y: 38, s: 4, d: 2.8, dur: 8  },
+  { x: 17, y: 71, s: 2, d: 0.6, dur: 12 },
+  { x: 53, y: 24, s: 3, d: 3.5, dur: 10 },
+  { x: 88, y: 62, s: 2, d: 1.9, dur: 9  },
+  { x: 31, y: 85, s: 3, d: 4.4, dur: 11 },
+  { x: 63, y: 76, s: 2, d: 0.3, dur: 8  },
+  { x: 41, y: 52, s: 2, d: 2.2, dur: 13 },
+  { x: 11, y: 44, s: 3, d: 1.1, dur: 10 },
+  { x: 77, y: 91, s: 2, d: 3.7, dur: 9  },
+  { x: 94, y: 47, s: 3, d: 0.8, dur: 12 },
+  { x: 26, y: 33, s: 2, d: 5.1, dur: 8  },
+  { x: 58, y: 14, s: 3, d: 2.0, dur: 11 },
+  { x: 47, y: 67, s: 2, d: 4.8, dur: 10 },
+];
 
 /* ─── SVG иконки ─── */
 function IconCoffee() {
@@ -102,6 +133,7 @@ function RevealBlock({ children, delay = 0, className = '' }) {
 }
 
 export default function HomepageFeatures() {
+  useCursorGlow();
   const aiPicImg        = useBaseUrl('/img/grabyou/ai_pic.png');
   const offerImg        = useBaseUrl('/img/grabyou/offer-screen.png');
   const paymentImg      = useBaseUrl('/img/grabyou/payment-screen.png');
@@ -112,10 +144,27 @@ export default function HomepageFeatures() {
 
   return (
     <div className={styles.page}>
+      <div className={styles.cursorGlow} aria-hidden="true" />
 
       {/* ─── HERO ─── */}
       <section className={styles.heroSection}>
         <div className={styles.heroBgGlow} aria-hidden="true" />
+        <div className={styles.heroParticles} aria-hidden="true">
+          {heroParticles.map((p, i) => (
+            <div
+              key={i}
+              className={styles.particle}
+              style={{
+                left: `${p.x}%`,
+                top: `${p.y}%`,
+                width: `${p.s}px`,
+                height: `${p.s}px`,
+                animationDelay: `${p.d}s`,
+                animationDuration: `${p.dur}s`,
+              }}
+            />
+          ))}
+        </div>
         <div className="container">
           <div className={styles.heroGrid}>
             <div className={styles.heroContent}>
