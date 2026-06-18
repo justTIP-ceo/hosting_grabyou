@@ -179,18 +179,23 @@
   line-height: 0.98;
   letter-spacing: -0.04em;
   max-width: 12ch;
+  color: var(--ifm-heading-color);
+}
+
+/* Градиент применяем к span внутри заголовка */
+.heroTitleGradient {
   background: linear-gradient(
     135deg,
-    var(--ifm-heading-color) 0%,
-    var(--ifm-color-primary) 35%,
-    var(--grabyou-accent) 65%,
-    var(--ifm-heading-color) 100%
+    var(--ifm-color-primary) 0%,
+    var(--grabyou-accent) 50%,
+    var(--ifm-color-primary) 100%
   );
-  background-size: 280% 280%;
+  background-size: 250% 250%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientFlow 6s ease infinite;
+  animation: gradientFlow 5s ease infinite;
+  display: inline;
 }
 
 .heroSubtitle {
