@@ -152,8 +152,13 @@ a {
 }
 
 .navbar__title {
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 900;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+  background: linear-gradient(90deg, var(--ifm-color-primary) 0%, var(--grabyou-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .navbar__link {

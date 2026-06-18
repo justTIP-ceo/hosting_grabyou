@@ -51,7 +51,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'Проект',
+        title: 'GrabYou',
         logo: {
           alt: 'My Site Logo',
           src: 'img/grabyouph.png',
@@ -75,40 +75,8 @@ const config = {
       },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Контакты',
-          items: [
-            {
-              label: 'Email: grabyou@mail.ru',
-              href: 'mailto:grabyou@mail.ru',
-            },
-            {
-              label: 'Telegram канал',
-              href: 'https://t.me/GrabYouOfficial',
-            },
-          ],
-        },
-        {
-          title: 'Материалы',
-          items: [
-            {
-              label: 'Скачать презентацию',
-              to: 'pathname:///files/grabyou-presentation.pdf',
-            },
-            {
-              label: 'Логотип GrabYou',
-              to: 'pathname:///img/grabyouph.png',
-            },
-          ],
-        },
-        {
-          title: 'Ещё',
-          items: [
-          ],
-        },
-      ],
-      copyright: `© ${new Date().getFullYear()} GrabYou. Маркетплейс срочных предложений от локального бизнеса.`,
+      links: [],
+      copyright: `© ${new Date().getFullYear()} GrabYou — Маркетплейс срочных предложений от локального бизнеса`,
     },
       prism: {
         theme: prismThemes.github,

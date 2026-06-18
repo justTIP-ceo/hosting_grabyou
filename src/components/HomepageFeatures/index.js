@@ -288,6 +288,49 @@ export default function HomepageFeatures() {
         </div>
       </section>
 
+      {/* ─── ПОМОЩЬ ─── */}
+      <section className={styles.section}>
+        <div className="container">
+          <RevealBlock>
+            <div className={styles.helpCard}>
+              <div className={styles.helpGlow} aria-hidden="true" />
+              <div className={styles.helpContent}>
+                <div className={styles.eyebrow}>Остались вопросы?</div>
+                <Heading as="h2" className={styles.helpTitle}>
+                  Не нашли то, что нужно?<br />Мы вам поможем
+                </Heading>
+                <p className={styles.helpText}>
+                  Ответим на любые вопросы, расскажем подробнее о сервисе и
+                  отправим всё необходимое. Напишите нам — обычно отвечаем быстро.
+                </p>
+                <div className={styles.helpContacts}>
+                  <Link
+                    href="https://t.me/GrabYouOfficial"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.helpLink}
+                  >
+                    <span className={styles.helpLinkIcon}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.04 9.613c-.152.676-.548.84-1.112.522l-3.07-2.262-1.482 1.427c-.164.164-.302.302-.618.302l.22-3.12 5.676-5.127c.247-.22-.054-.342-.384-.122L7.26 14.663l-3.02-.944c-.657-.206-.67-.657.137-.973l11.804-4.552c.547-.2 1.026.122.88.973-.013.082-.044.17-.098.28l-.4-.199z"/></svg>
+                    </span>
+                    Telegram-канал
+                  </Link>
+                  <Link
+                    href="mailto:grabyou@mail.ru"
+                    className={styles.helpLink}
+                  >
+                    <span className={styles.helpLinkIcon}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </span>
+                    grabyou@mail.ru
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </RevealBlock>
+        </div>
+      </section>
+
     </div>
   );
 }
