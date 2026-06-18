@@ -574,6 +574,11 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
+  align-items: stretch;
+}
+
+.momentsGrid .revealBlock {
+  height: 100%;
 }
 
 .momentCard {
@@ -587,6 +592,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  height: 100%;
+  box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
