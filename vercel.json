@@ -1,5 +1,8 @@
 {
-  "buildCommand": "NODE_OPTIONS=--max-old-space-size=4096 npm run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "engines": {
+    "node": "20.x"
+  }
 }
