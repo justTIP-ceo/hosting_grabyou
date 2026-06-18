@@ -1,7 +1,24 @@
+import { useEffect, useRef } from 'react';
 import Heading from '@theme/Heading';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+
+/* ─── Хук для анимации появления ─── */
+function useReveal() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add(styles.revealed); obs.unobserve(el); } },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
 
 /* ─── SVG иконки ─── */
 function IconCoffee() {
@@ -63,128 +80,75 @@ const tickerItems = [
 ];
 
 const moments = [
-  {
-    time: '17:45',
-    Icon: IconCoffee,
-    text: 'Идёшь домой. Кофейня за углом — последние напитки дня по особой цене. Через час закроется.',
-    tag: 'кофе и выпечка',
-  },
-  {
-    time: '13:10',
-    Icon: IconFood,
-    text: 'Обед в офисе. В 3 минутах ходьбы — кафе с горячим бизнес-ланчем дешевле, чем обычно.',
-    tag: 'еда рядом',
-  },
-  {
-    time: '19:00',
-    Icon: IconFlower,
-    text: 'Вспомнил про день рождения. В соседнем доме — цветочная с букетами по специальной цене.',
-    tag: 'цветы',
-  },
-  {
-    time: '10:30',
-    Icon: IconBread,
-    text: 'По дороге на работу. Пекарня рядом с метро — свежая выпечка прямо с утра.',
-    tag: 'утренние предложения',
-  },
+  { time: '17:45', Icon: IconCoffee, text: 'Идёшь домой. Кофейня за углом — последние напитки дня по особой цене. Через час закроется.', tag: 'кофе и выпечка' },
+  { time: '13:10', Icon: IconFood,   text: 'Обед в офисе. В 3 минутах ходьбы — кафе с горячим бизнес-ланчем дешевле, чем обычно.', tag: 'еда рядом' },
+  { time: '19:00', Icon: IconFlower, text: 'Вспомнил про день рождения. В соседнем доме — цветочная с букетами по специальной цене.', tag: 'цветы' },
+  { time: '10:30', Icon: IconBread,  text: 'По дороге на работу. Пекарня рядом с метро — свежая выпечка прямо с утра.', tag: 'утренние предложения' },
 ];
 
 const steps = [
-  {
-    number: '01',
-    Icon: IconPin,
-    title: 'Открыл — сразу видно что рядом',
-    description:
-      'Лента показывает живые предложения поблизости прямо сейчас. Фото, цена, адрес и сколько времени осталось.',
-  },
-  {
-    number: '02',
-    Icon: IconCard,
-    title: 'Нажал — оплатил — готово',
-    description:
-      'Буквально 20 секунд. Деньги замораживаются в защищённом резерве и спишутся только когда заберёшь. Риска ноль.',
-  },
-  {
-    number: '03',
-    Icon: IconCheck,
-    title: 'Пришёл — показал QR — ушёл',
-    description:
-      'Продавец сканирует твой QR за секунду. Никаких звонков, «подождите минуту» и лишних слов.',
-  },
+  { number: '01', Icon: IconPin,   title: 'Открыл — сразу видно что рядом',    description: 'Лента показывает живые предложения поблизости прямо сейчас. Фото, цена, адрес и сколько времени осталось.' },
+  { number: '02', Icon: IconCard,  title: 'Нажал — оплатил — готово',           description: 'Буквально 20 секунд. Деньги замораживаются в защищённом резерве и спишутся только когда заберёшь. Риска ноль.' },
+  { number: '03', Icon: IconCheck, title: 'Пришёл — показал QR — ушёл',         description: 'Продавец сканирует твой QR за секунду. Никаких звонков, «подождите минуту» и лишних слов.' },
 ];
 
-export default function HomepageFeatures() {
-  const aiPicImg = useBaseUrl('/img/grabyou/ai_pic.png');
-  const offerImg = useBaseUrl('/img/grabyou/offer-screen.png');
-  const paymentImg = useBaseUrl('/img/grabyou/payment-screen.png');
-  const promotionsNearbyImg = useBaseUrl('/img/grabyou/promotions_nearby.png');
-  const qrScannerImg = useBaseUrl('/img/grabyou/qr_scanner.png');
+function RevealBlock({ children, delay = 0, className = '' }) {
+  const ref = useReveal();
+  return (
+    <div ref={ref} className={`${styles.revealBlock} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  );
+}
 
-  const repeated = [...tickerItems, ...tickerItems, ...tickerItems];
+export default function HomepageFeatures() {
+  const aiPicImg        = useBaseUrl('/img/grabyou/ai_pic.png');
+  const offerImg        = useBaseUrl('/img/grabyou/offer-screen.png');
+  const paymentImg      = useBaseUrl('/img/grabyou/payment-screen.png');
+  const promotionsImg   = useBaseUrl('/img/grabyou/promotions_nearby.png');
+  const qrScannerImg    = useBaseUrl('/img/grabyou/qr_scanner.png');
+
+  const repeated = [...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems];
 
   return (
     <div className={styles.page}>
 
       {/* ─── HERO ─── */}
       <section className={styles.heroSection}>
+        <div className={styles.heroBgGlow} aria-hidden="true" />
         <div className="container">
           <div className={styles.heroGrid}>
             <div className={styles.heroContent}>
-              <div className={styles.heroBadge}>
+              <div className={`${styles.heroBadge} ${styles.heroAnimate}`}>
                 Сервис срочных предложений от локального бизнеса
               </div>
-
-              <Heading as="h1" className={styles.heroTitle}>
-                Хватай выгоду, пока горячо
+              <Heading as="h1" className={`${styles.heroTitle} ${styles.heroAnimate} ${styles.heroAnimateDelay1}`}>
+                Хватай выгоду,<br />пока горячо
               </Heading>
-
-              <p className={styles.heroSubtitle}>
+              <p className={`${styles.heroSubtitle} ${styles.heroAnimate} ${styles.heroAnimateDelay2}`}>
                 GrabYou помогает покупателям получать товары и услуги по
-                выгодным предложениям — а местному бизнесу быстро реализовывать
-                продукцию. Кофейни, пекарни, цветочные, кафе: находи лучшее
-                рядом с собой прямо сейчас.
+                выгодным предложениям от местного бизнеса. Кофейни, пекарни,
+                цветочные, кафе — находи лучшее рядом с собой прямо сейчас.
               </p>
-
-              <ul className={styles.heroList}>
+              <ul className={`${styles.heroList} ${styles.heroAnimate} ${styles.heroAnimateDelay3}`}>
                 <li>предложения рядом — видно расстояние и время до конца</li>
                 <li>цена ниже — потому что предложение срочное</li>
                 <li>оплатил в приложении — пришёл и забрал</li>
               </ul>
-
-              <div className={styles.heroButtons}>
+              <div className={`${styles.heroButtons} ${styles.heroAnimate} ${styles.heroAnimateDelay4}`}>
                 <Link className="button button--primary button--lg" to="#how-it-works">
                   Как это работает
                 </Link>
-                <Link
-                  className="button button--secondary button--lg"
-                  href="https://t.me/GrabYouOfficial"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Следить за запуском
+                <Link className="button button--secondary button--lg" to="/download">
+                  Скачать приложение
                 </Link>
               </div>
             </div>
 
             <div className={styles.heroVisual}>
-              <img
-                src={promotionsNearbyImg}
-                alt="Главный экран GrabYou"
-                className={styles.heroMainShot}
-                loading="lazy"
-              />
-              <img
-                src={offerImg}
-                alt="Карточка предложения GrabYou"
-                className={styles.heroFloatingTop}
-                loading="lazy"
-              />
-              <img
-                src={qrScannerImg}
-                alt="QR-сканер GrabYou"
-                className={styles.heroFloatingBottom}
-                loading="lazy"
-              />
+              <img src={promotionsImg}  alt="Главный экран GrabYou"       className={`${styles.heroMainShot} ${styles.heroFloatMain}`} loading="lazy" />
+              <img src={offerImg}       alt="Карточка предложения GrabYou" className={`${styles.heroFloatingTop} ${styles.heroFloatA}`} loading="lazy" />
+              <img src={qrScannerImg}   alt="QR-сканер GrabYou"            className={`${styles.heroFloatingBottom} ${styles.heroFloatB}`} loading="lazy" />
             </div>
           </div>
         </div>
@@ -195,62 +159,35 @@ export default function HomepageFeatures() {
         <div className={styles.tickerTrack}>
           {repeated.map((item, i) => (
             <span key={i} className={styles.tickerItem}>
-              {item}
-              <span className={styles.tickerDot} />
+              {item}<span className={styles.tickerDot} />
             </span>
           ))}
         </div>
       </div>
 
-      {/* ─── ЧТО ТАКОЕ GRABYOU ─── */}
-      <section className={styles.section}>
-        <div className="container">
-          <div className={styles.aboutCard}>
-            <div className={styles.aboutLeft}>
-              <p className={styles.aboutQuote}>
-                <strong>GrabYou</strong> — сервис срочных предложений, который
-                помогает покупателям получать товары и услуги по выгодным ценам,
-                а бизнесу — быстро реализовывать продукцию.
-              </p>
-            </div>
-            <div className={styles.aboutRight}>
-              <div className={styles.aboutStat}>
-                <span className={styles.aboutStatNum}>1</span>
-                <span className={styles.aboutStatLabel}>приложение</span>
-              </div>
-              <div className={styles.aboutStat}>
-                <span className={styles.aboutStatNum}>∞</span>
-                <span className={styles.aboutStatLabel}>категорий</span>
-              </div>
-              <div className={styles.aboutStat}>
-                <span className={styles.aboutStatNum}>0</span>
-                <span className={styles.aboutStatLabel}>лишних шагов</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ─── МОМЕНТЫ ─── */}
       <section className={styles.section}>
         <div className="container">
-          <div className={styles.momentsHeading}>
-            <div className={styles.eyebrow}>Узнаёшь себя?</div>
-            <Heading as="h2" className={styles.sectionTitle}>
-              GrabYou — это про обычные моменты,<br />в которых можно сэкономить
-            </Heading>
-          </div>
-
+          <RevealBlock>
+            <div className={styles.momentsHeading}>
+              <div className={styles.eyebrow}>Узнаёшь себя?</div>
+              <Heading as="h2" className={styles.sectionTitle}>
+                GrabYou — это про обычные моменты,<br />в которых можно сэкономить
+              </Heading>
+            </div>
+          </RevealBlock>
           <div className={styles.momentsGrid}>
-            {moments.map((m) => (
-              <div key={m.time} className={styles.momentCard}>
-                <div className={styles.momentTop}>
-                  <div className={styles.momentIcon}><m.Icon /></div>
-                  <span className={styles.momentTime}>{m.time}</span>
+            {moments.map((m, i) => (
+              <RevealBlock key={m.time} delay={i * 90}>
+                <div className={styles.momentCard}>
+                  <div className={styles.momentTop}>
+                    <div className={styles.momentIcon}><m.Icon /></div>
+                    <span className={styles.momentTime}>{m.time}</span>
+                  </div>
+                  <p className={styles.momentText}>{m.text}</p>
+                  <span className={styles.momentTag}>{m.tag}</span>
                 </div>
-                <p className={styles.momentText}>{m.text}</p>
-                <span className={styles.momentTag}>{m.tag}</span>
-              </div>
+              </RevealBlock>
             ))}
           </div>
         </div>
@@ -259,41 +196,35 @@ export default function HomepageFeatures() {
       {/* ─── КАК РАБОТАЕТ ─── */}
       <section className={styles.section} id="how-it-works">
         <div className="container">
-          <div className={styles.sectionHeading}>
-            <div className={styles.eyebrow}>Как это работает</div>
-            <Heading as="h2" className={styles.sectionTitle}>
-              Три шага. Меньше минуты.
-            </Heading>
-            <p className={styles.sectionSubtitle}>
-              Никаких звонков менеджерам, подтверждений по почте и ожидания ответа.
-            </p>
-          </div>
-
+          <RevealBlock>
+            <div className={styles.sectionHeading}>
+              <div className={styles.eyebrow}>Как это работает</div>
+              <Heading as="h2" className={styles.sectionTitle}>Три шага. Меньше минуты.</Heading>
+              <p className={styles.sectionSubtitle}>Никаких звонков менеджерам, подтверждений по почте и ожидания ответа.</p>
+            </div>
+          </RevealBlock>
           <div className={styles.stepsGrid}>
-            {steps.map((step) => (
-              <div key={step.number} className={styles.stepCard}>
-                <div className={styles.stepTop}>
-                  <div className={styles.stepNumber}>{step.number}</div>
-                  <div className={styles.stepIconWrap}><step.Icon /></div>
+            {steps.map((step, i) => (
+              <RevealBlock key={step.number} delay={i * 110}>
+                <div className={styles.stepCard}>
+                  <div className={styles.stepTop}>
+                    <div className={styles.stepNumber}>{step.number}</div>
+                    <div className={styles.stepIconWrap}><step.Icon /></div>
+                  </div>
+                  <Heading as="h3" className={styles.cardTitle}>{step.title}</Heading>
+                  <p className={styles.cardText}>{step.description}</p>
                 </div>
-                <Heading as="h3" className={styles.cardTitle}>
-                  {step.title}
-                </Heading>
-                <p className={styles.cardText}>{step.description}</p>
-              </div>
+              </RevealBlock>
             ))}
           </div>
-
           <div className={styles.stepsScreenshots}>
-            <div className={styles.screenshotItem}>
-              <img src={offerImg} alt="Карточка предложения" className={styles.screenshotImg} loading="lazy" />
-            </div>
-            <div className={styles.screenshotItem}>
-              <img src={paymentImg} alt="Оплата" className={styles.screenshotImg} loading="lazy" />
-            </div>
-            <div className={styles.screenshotItem}>
-              <img src={qrScannerImg} alt="QR-получение" className={styles.screenshotImg} loading="lazy" />
-            </div>
+            {[offerImg, paymentImg, qrScannerImg].map((src, i) => (
+              <RevealBlock key={i} delay={i * 100}>
+                <div className={styles.screenshotItem}>
+                  <img src={src} alt="" className={styles.screenshotImg} loading="lazy" />
+                </div>
+              </RevealBlock>
+            ))}
           </div>
         </div>
       </section>
@@ -301,60 +232,59 @@ export default function HomepageFeatures() {
       {/* ─── GRABAI ─── */}
       <section className={styles.section}>
         <div className="container">
-          <div className={styles.aiCard}>
-            <div className={styles.aiContent}>
-              <div className={styles.eyebrow}>GrabAI — встроенный ИИ</div>
-              <Heading as="h2" className={styles.aiTitle}>
-                Не знаешь что хочешь? Просто напиши — ИИ разберётся
-              </Heading>
-              <p className={styles.aiText}>
-                Не нужно листать категории и придумывать точный запрос. Просто
-                напиши текстом что ищешь — GrabAI разберёт запрос и найдёт
-                подходящие предложения рядом с тобой.
-              </p>
-              <div className={styles.aiExamples}>
-                <div className={styles.aiExample}>«хочу что-нибудь к чаю»</div>
-                <div className={styles.aiExample}>«что-то вкусное рядом с метро»</div>
-                <div className={styles.aiExample}>«букет подруге вечером»</div>
-                <div className={styles.aiExample}>«обед до 200 рублей»</div>
+          <RevealBlock>
+            <div className={styles.aiCard}>
+              <div className={styles.aiContent}>
+                <div className={styles.eyebrow}>GrabAI — встроенный ИИ</div>
+                <Heading as="h2" className={styles.aiTitle}>
+                  Не знаешь что хочешь?<br />Просто напиши — ИИ разберётся
+                </Heading>
+                <p className={styles.aiText}>
+                  Не нужно листать категории. Напиши текстом что ищешь —
+                  GrabAI разберёт запрос и найдёт подходящие предложения рядом с тобой.
+                </p>
+                <div className={styles.aiExamples}>
+                  {['«хочу что-нибудь к чаю»','«что-то вкусное рядом с метро»','«букет подруге вечером»','«обед до 200 рублей»'].map((ex) => (
+                    <div key={ex} className={styles.aiExample}>{ex}</div>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.aiVisual}>
+                <img src={aiPicImg} alt="GrabAI" className={styles.aiImage} loading="lazy" />
               </div>
             </div>
-            <div className={styles.aiVisual}>
-              <img
-                src={aiPicImg}
-                alt="GrabAI"
-                className={styles.aiImage}
-                loading="lazy"
-              />
-            </div>
-          </div>
+          </RevealBlock>
         </div>
       </section>
 
       {/* ─── CTA ─── */}
       <section className={styles.section}>
         <div className="container">
-          <div className={styles.finalCard}>
-            <div className={styles.eyebrow}>Скоро запуск</div>
-            <Heading as="h2" className={styles.finalTitle}>
-              Будь первым — узнай о старте раньше всех
-            </Heading>
-            <p className={styles.finalText}>
-              Подпишись на Telegram-канал GrabYou. Узнаешь когда запустимся,
-              увидишь первые предложения в своём районе и получишь доступ
-              раньше остальных.
-            </p>
-            <div className={styles.finalButtons}>
-              <Link
-                className="button button--primary button--lg"
-                href="https://t.me/GrabYouOfficial"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Подписаться в Telegram
-              </Link>
+          <RevealBlock>
+            <div className={styles.finalCard}>
+              <div className={styles.eyebrow}>Скоро запуск</div>
+              <Heading as="h2" className={styles.finalTitle}>
+                Будь первым — узнай о старте раньше всех
+              </Heading>
+              <p className={styles.finalText}>
+                Подпишись на Telegram-канал GrabYou. Узнаешь когда запустимся,
+                увидишь первые предложения в своём районе и получишь доступ раньше остальных.
+              </p>
+              <div className={styles.finalButtons}>
+                <Link className="button button--primary button--lg" to="/download">
+                  Скачать / Открыть приложение
+                </Link>
+                <Link
+                  className="button button--secondary button--lg"
+                  href="https://t.me/GrabYouOfficial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Telegram-канал
+                </Link>
+              </div>
             </div>
-          </div>
+          </RevealBlock>
         </div>
       </section>
 

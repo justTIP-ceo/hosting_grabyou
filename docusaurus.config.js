@@ -58,6 +58,11 @@ const config = {
         },
         items: [
           {
+            to: '/download',
+            label: 'Скачать',
+            position: 'right',
+          },
+          {
             href: 'https://t.me/GrabYouOfficial',
             position: 'right',
             className: 'navbar-telegram-link',
