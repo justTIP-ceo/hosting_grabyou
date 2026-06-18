@@ -135,6 +135,7 @@ function RevealBlock({ children, delay = 0, className = '' }) {
 export default function HomepageFeatures() {
   useCursorGlow();
   const aiPicImg        = useBaseUrl('/img/grabyou/ai_pic.png');
+  const myOrderImg      = useBaseUrl('/img/grabyou/my_order.png');
   const offerImg        = useBaseUrl('/img/grabyou/offer-screen.png');
   const paymentImg      = useBaseUrl('/img/grabyou/payment-screen.png');
   const promotionsImg   = useBaseUrl('/img/grabyou/promotions_nearby.png');
@@ -196,7 +197,7 @@ export default function HomepageFeatures() {
 
             <div className={styles.heroVisual}>
               <img src={promotionsImg}  alt="Главный экран GrabYou"       className={`${styles.heroMainShot} ${styles.heroFloatMain}`} loading="lazy" />
-              <img src={offerImg}       alt="Карточка предложения GrabYou" className={`${styles.heroFloatingTop} ${styles.heroFloatA}`} loading="lazy" />
+              <img src={myOrderImg}     alt="Мой заказ GrabYou"            className={`${styles.heroFloatingTop} ${styles.heroFloatA}`} loading="lazy" />
               <img src={qrScannerImg}   alt="QR-сканер GrabYou"            className={`${styles.heroFloatingBottom} ${styles.heroFloatB}`} loading="lazy" />
             </div>
           </div>
