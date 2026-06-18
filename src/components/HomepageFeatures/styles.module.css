@@ -274,6 +274,60 @@
   margin-bottom: 0;
 }
 
+/* Тикер */
+.ticker {
+  overflow: hidden;
+  width: 100%;
+  border-top: 1px solid rgba(34, 197, 94, 0.18);
+  border-bottom: 1px solid rgba(34, 197, 94, 0.18);
+  background: rgba(34, 197, 94, 0.04);
+  padding: 0.85rem 0;
+  margin: 0.5rem 0;
+}
+
+[data-theme='dark'] .ticker {
+  border-color: rgba(53, 222, 114, 0.15);
+  background: rgba(53, 222, 114, 0.04);
+}
+
+.tickerTrack {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: tickerScroll 38s linear infinite;
+}
+
+.tickerTrack:hover {
+  animation-play-state: paused;
+}
+
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  padding: 0 1.4rem;
+}
+
+.tickerDot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--ifm-color-primary);
+  opacity: 0.5;
+  margin-left: 1.4rem;
+}
+
 /* Моменты */
 .momentsHeading {
   max-width: 640px;
@@ -335,9 +389,23 @@
   justify-content: space-between;
 }
 
-.momentEmoji {
-  font-size: 1.8rem;
-  line-height: 1;
+.momentIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(95, 223, 240, 0.08);
+  border: 1px solid rgba(95, 223, 240, 0.14);
+  color: var(--grabyou-accent);
+  flex-shrink: 0;
+}
+
+[data-theme='light'] .momentIcon {
+  background: rgba(34, 199, 214, 0.07);
+  border-color: rgba(34, 199, 214, 0.18);
+  color: var(--grabyou-accent-deep);
 }
 
 .momentTime {
@@ -399,9 +467,22 @@
   justify-content: space-between;
 }
 
-.stepEmoji {
-  font-size: 1.6rem;
-  opacity: 0.7;
+.stepIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(95, 223, 240, 0.07);
+  border: 1px solid rgba(95, 223, 240, 0.12);
+  color: var(--grabyou-accent);
+}
+
+[data-theme='light'] .stepIconWrap {
+  background: rgba(34, 199, 214, 0.06);
+  border-color: rgba(34, 199, 214, 0.16);
+  color: var(--grabyou-accent-deep);
 }
 
 .stepsScreenshots {
@@ -455,19 +536,9 @@
   max-width: fit-content;
 }
 
-.aiExample span {
-  color: var(--grabyou-accent);
-  font-style: italic;
-  opacity: 0.7;
-}
-
 [data-theme='light'] .aiExample {
   background: rgba(34, 199, 214, 0.06);
   border-color: rgba(34, 199, 214, 0.16);
-}
-
-[data-theme='light'] .aiExample span {
-  color: var(--grabyou-accent-deep);
 }
 
 /* Карточки (общие) */
