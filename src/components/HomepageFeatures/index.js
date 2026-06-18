@@ -155,14 +155,14 @@ const gallery = [
               </Heading>
 
               <p className={styles.heroSubtitle}>
-                Каждый день местные кофейни, пекарни и магазины продают остатки
-                по сниженной цене — лишь бы не выбрасывать. GrabYou показывает
-                тебе эти предложения раньше, чем они закончатся.
+                Местные кофейни, пекарни и магазины каждый день делают
+                специальные предложения по сниженной цене — на ограниченное время.
+                GrabYou собирает их в одном месте и показывает тебе прямо сейчас.
               </p>
 
               <ul className={styles.heroList}>
-                <li>предложения обновляются каждый день — всегда что-то новое</li>
-                <li>цена ниже не потому что плохо, а потому что срочно</li>
+                <li>свежие предложения каждый день — всегда что-то интересное</li>
+                <li>цена ниже — потому что предложение срочное и ограниченное</li>
                 <li>оплатил — пришёл — забрал. Без звонков и очередей</li>
               </ul>
 
@@ -170,8 +170,8 @@ const gallery = [
                 <Link className="button button--primary button--lg" to="#how-it-works">
                   Как это работает
                 </Link>
-                <Link className="button button--secondary button--lg" to="#for-whom">
-                  Для кого это
+                <Link className="button button--secondary button--lg" to="#features">
+                  Что внутри
                 </Link>
               </div>
             </div>
@@ -200,38 +200,12 @@ const gallery = [
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className="container">
-          <div className={styles.problemCard}>
-            <div>
-              <div className={styles.eyebrow}>Подумай об этом</div>
-              <Heading as="h2" className={styles.problemTitle}>
-                Прямо сейчас рядом с тобой выбрасывают то, что ты бы купил
-              </Heading>
-            </div>
-
-            <div className={styles.problemText}>
-              <p>
-                Пекарня испекла лишние круассаны. Кафе сварило больше кофе.
-                Цветочный не распродал букеты к вечеру. Всё это хорошее, свежее
-                и вкусное — просто не нашло покупателя вовремя.
-              </p>
-              <p>
-                GrabYou это исправляет. Ты видишь предложение, пока оно ещё есть.
-                Платишь меньше. Забираешь быстро. И всем хорошо — и тебе, и
-                бизнесу, который продал, а не выбросил.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.section}>
+      <section className={styles.section} id="features">
         <div className="container">
           <SectionHeading
-            eyebrow="Почему это круто"
-            title="Ты экономишь. Бизнес зарабатывает. Планета не плачет."
-            subtitle="GrabYou — это не просто скидки. Это способ покупать умнее: брать хорошее по честной цене, пока оно ещё есть, прямо у себя в районе."
+            eyebrow="Почему GrabYou"
+            title="Специальные предложения от магазинов рядом — только для тебя"
+            subtitle="Локальный бизнес каждый день делает ограниченные предложения по особой цене. GrabYou собирает их все в одном приложении — так ты всегда в курсе, что интересного есть поблизости."
             centered
           />
 
@@ -277,42 +251,6 @@ const gallery = [
                   <img
                     src={step.image}
                     alt={step.imageAlt}
-                    className={styles.stepImage}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.section} id="for-whom">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Для кого"
-            title="Для тех, кто любит выгодные находки — и для тех, кто их создаёт"
-            subtitle="Ты экономишь — бизнес зарабатывает. Никто не в проигрыше. Вот почему это работает."
-            centered
-          />
-
-          <div className={styles.audienceGrid}>
-            {audienceList.map((item) => (
-              <div key={item.title} className={styles.infoCard}>
-                <Heading as="h3" className={styles.cardTitle}>
-                  {item.title}
-                </Heading>
-
-                <ul className={styles.pointList}>
-                  {item.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-
-                <div className={styles.stepImageWrap}>
-                  <img
-                    src={item.image}
-                    alt={item.imageAlt}
                     className={styles.stepImage}
                     loading="lazy"
                   />
