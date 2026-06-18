@@ -196,6 +196,7 @@
   background-clip: text;
   animation: gradientFlow 5s ease infinite;
   display: inline;
+  padding-bottom: 0.12em;
 }
 
 .heroSubtitle {
