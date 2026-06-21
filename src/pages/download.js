@@ -25,10 +25,10 @@ function IconAPK() {
     </svg>
   );
 }
-function IconClock() {
+function IconRuStore() {
   return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 3.5C8.41 5.5 5.5 8.41 5.5 12S8.41 18.5 12 18.5 18.5 15.59 18.5 12 15.59 5.5 12 5.5zm0 1.5a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm-1.5 2.5v5l4-2.5-4-2.5z"/>
     </svg>
   );
 }
@@ -82,13 +82,13 @@ const androidOptions = [
     arrow: '↓',
   },
   {
-    Icon: IconClock,
+    Icon: IconRuStore,
     title: 'RuStore',
-    sub: 'Скоро',
-    desc: 'Появится в магазине приложений',
-    href: null,
+    sub: 'Магазин приложений',
+    desc: 'Официальный российский магазин приложений',
+    href: 'https://www.rustore.ru/catalog/app/com.grabyou.app',
     color: 'rustore',
-    soon: true,
+    external: true,
   },
 ];
 
