@@ -67,39 +67,39 @@
   --grabyou-accent-soft: #8ef5d8;
   --grabyou-accent-deep: #27c9a0;
 
-  /* Тёмно-зелёный фон — приятный, не чёрный */
-  --ifm-background-color: #112b1c;
-  --ifm-background-surface-color: #183826;
-  --ifm-navbar-background-color: rgba(15, 36, 24, 0.92);
-  --ifm-footer-background-color: #0e2418;
+  /* Тёмно-зелёный фон — насыщенный, явно зелёный */
+  --ifm-background-color: #1a3d28;
+  --ifm-background-surface-color: #214e33;
+  --ifm-navbar-background-color: rgba(22, 48, 32, 0.94);
+  --ifm-footer-background-color: #163321;
 
-  --ifm-font-color-base: #e6faf0;
-  --ifm-font-color-secondary: #94c4ab;
-  --ifm-heading-color: #f2fef7;
+  --ifm-font-color-base: #e4f9ee;
+  --ifm-font-color-secondary: #91c4a8;
+  --ifm-heading-color: #f0fdf5;
 
-  --ifm-color-emphasis-100: #152b1e;
-  --ifm-color-emphasis-200: #1c3828;
-  --ifm-color-emphasis-300: #254a36;
-  --ifm-color-emphasis-400: #2f5e44;
-  --ifm-color-emphasis-500: #3d7558;
-  --ifm-color-emphasis-600: #559670;
-  --ifm-color-emphasis-700: #7bb891;
-  --ifm-color-emphasis-800: #b2d9c3;
-  --ifm-color-emphasis-900: #e6faf0;
+  --ifm-color-emphasis-100: #1e4430;
+  --ifm-color-emphasis-200: #265540;
+  --ifm-color-emphasis-300: #306950;
+  --ifm-color-emphasis-400: #3c8062;
+  --ifm-color-emphasis-500: #4d9a78;
+  --ifm-color-emphasis-600: #67b391;
+  --ifm-color-emphasis-700: #8dcbac;
+  --ifm-color-emphasis-800: #bbdecb;
+  --ifm-color-emphasis-900: #e4f9ee;
 
-  --ifm-link-color: #52e8c0;
-  --ifm-link-hover-color: #8ef5d8;
+  --ifm-link-color: #4fe3bb;
+  --ifm-link-hover-color: #87f0d3;
 
-  --docusaurus-highlighted-code-line-bg: rgba(82, 232, 192, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(79, 227, 187, 0.1);
 
-  --ifm-hero-background-color: #112b1c;
+  --ifm-hero-background-color: #1a3d28;
 
-  --grabyou-navbar-accent: rgba(18, 44, 30, 0.94);
-  --grabyou-secondary-bg: rgba(82, 232, 192, 0.08);
-  --grabyou-card-tint: rgba(82, 232, 192, 0.04);
-  --grabyou-soft-border: rgba(82, 232, 192, 0.18);
-  --grabyou-selection-bg: rgba(82, 232, 192, 0.2);
-  --grabyou-glow: 0 0 0 1px rgba(82, 232, 192, 0.12);
+  --grabyou-navbar-accent: rgba(26, 58, 40, 0.96);
+  --grabyou-secondary-bg: rgba(79, 227, 187, 0.1);
+  --grabyou-card-tint: rgba(79, 227, 187, 0.05);
+  --grabyou-soft-border: rgba(79, 227, 187, 0.2);
+  --grabyou-selection-bg: rgba(79, 227, 187, 0.22);
+  --grabyou-glow: 0 0 0 1px rgba(79, 227, 187, 0.14);
 }
 
 /* База */

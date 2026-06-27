@@ -101,6 +101,27 @@ function IconCheck() {
     </svg>
   );
 }
+function IconLeaf() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+    </svg>
+  );
+}
+function IconZap() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>
+  );
+}
+
+const values = [
+  { Icon: IconCard,  color: 'green',  title: 'Выгода',                   text: 'Помогаем экономить деньги — без компромиссов по качеству товаров и услуг.' },
+  { Icon: IconPin,   color: 'teal',   title: 'Близость',                  text: 'Все предложения — рядом с вами. Покупка занимает минуты, а не часы.' },
+  { Icon: IconZap,   color: 'yellow', title: 'Скорость',                  text: 'Найти, оплатить и забрать — всего за несколько минут. Никаких лишних шагов.' },
+  { Icon: IconLeaf,  color: 'sage',   title: 'Разумное потребление',      text: 'Меньше отходов, эффективнее ресурсы. GrabYou делает потребление осознанным.' },
+];
 
 const tickerItems = [
   'СРОЧНЫЕ ПРЕДЛОЖЕНИЯ',
@@ -269,6 +290,29 @@ export default function HomepageFeatures() {
               <RevealBlock key={i} delay={i * 100}>
                 <div className={styles.screenshotItem}>
                   <img src={src} alt="" className={styles.screenshotImg} loading="lazy" />
+                </div>
+              </RevealBlock>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── ЦЕННОСТИ ─── */}
+      <section className={styles.section}>
+        <div className="container">
+          <RevealBlock>
+            <div className={styles.sectionHeading}>
+              <div className={styles.eyebrow}>Наши ценности</div>
+              <Heading as="h2" className={styles.sectionTitle}>В основе GrabYou</Heading>
+            </div>
+          </RevealBlock>
+          <div className={styles.valuesGrid}>
+            {values.map((v, i) => (
+              <RevealBlock key={v.title} delay={i * 90}>
+                <div className={`${styles.valueCard} ${styles[`valueCard_${v.color}`]}`}>
+                  <div className={`${styles.valueIcon} ${styles[`valueIcon_${v.color}`]}`}><v.Icon /></div>
+                  <Heading as="h3" className={styles.cardTitle}>{v.title}</Heading>
+                  <p className={styles.cardText}>{v.text}</p>
                 </div>
               </RevealBlock>
             ))}
