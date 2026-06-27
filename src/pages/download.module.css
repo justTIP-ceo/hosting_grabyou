@@ -253,7 +253,7 @@
 .optIcon[data-color='telegram'] { background: rgba(41, 168, 224, 0.16); color: #29a8e0; }
 .optIcon[data-color='vk']       { background: rgba(74, 118, 168, 0.16); color: #5b87c5; }
 .optIcon[data-color='android']  { background: rgba(34, 197, 94, 0.14);  color: var(--ifm-color-primary); }
-.optIcon[data-color='rustore']  { background: rgba(99, 91, 255, 0.14); color: #635bff; }
+.optIcon[data-color='rustore']  { background: transparent; color: #7b6fff; padding: 0; }
 
 /* Тело карточки */
 .optBody { flex: 1; }

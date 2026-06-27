@@ -27,8 +27,15 @@ function IconAPK() {
 }
 function IconRuStore() {
   return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 3.5C8.41 5.5 5.5 8.41 5.5 12S8.41 18.5 12 18.5 18.5 15.59 18.5 12 15.59 5.5 12 5.5zm0 1.5a5 5 0 1 1 0 10A5 5 0 0 1 12 7zm-1.5 2.5v5l4-2.5-4-2.5z"/>
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <defs>
+        <linearGradient id="rsGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#7B6FFF"/>
+          <stop offset="100%" stopColor="#4E43D6"/>
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="9" fill="url(#rsGrad)"/>
+      <path d="M9 8h8.2C19.9 8 22 10.1 22 12.8c0 1.8-1 3.4-2.4 4.2l3 6H19l-2.7-5.5H12v5.5H9V8zm3 2.5v4.5h5c1.2 0 2.2-1 2.2-2.25S18.2 10.5 17 10.5H12z" fill="white"/>
     </svg>
   );
 }
