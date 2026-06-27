@@ -67,11 +67,11 @@
   --grabyou-accent-soft: #8ef5d8;
   --grabyou-accent-deep: #27c9a0;
 
-  /* Тёмно-зелёный фон — насыщенный, явно зелёный */
-  --ifm-background-color: #1a3d28;
-  --ifm-background-surface-color: #214e33;
-  --ifm-navbar-background-color: rgba(22, 48, 32, 0.94);
-  --ifm-footer-background-color: #163321;
+  /* Тёмно-зелёный фон */
+  --ifm-background-color: #0e2318;
+  --ifm-background-surface-color: #152e20;
+  --ifm-navbar-background-color: rgba(10, 28, 18, 0.94);
+  --ifm-footer-background-color: #0b1d13;
 
   --ifm-font-color-base: #e4f9ee;
   --ifm-font-color-secondary: #91c4a8;
@@ -112,7 +112,7 @@ body {
 [data-theme='dark'] body,
 [data-theme='dark'] #__docusaurus,
 [data-theme='dark'] .main-wrapper {
-  background-color: #1a3d28 !important;
+  background-color: #0e2318 !important;
 }
 
 ::selection {
