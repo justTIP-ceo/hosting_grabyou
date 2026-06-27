@@ -108,6 +108,13 @@ body {
   background: var(--ifm-background-color);
 }
 
+[data-theme='dark'] html,
+[data-theme='dark'] body,
+[data-theme='dark'] #__docusaurus,
+[data-theme='dark'] .main-wrapper {
+  background-color: #1a3d28 !important;
+}
+
 ::selection {
   background: var(--grabyou-selection-bg);
 }
