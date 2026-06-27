@@ -236,24 +236,22 @@ export default function HomepageFeatures() {
         </div>
       </div>
 
-      {/* ─── МОМЕНТЫ ─── */}
+      {/* ─── ЦЕННОСТИ (перенесено сюда) ─── */}
       <section className={styles.section}>
         <div className="container">
           <RevealBlock>
-            <div className={styles.momentsHeading}>
-              <div className={styles.eyebrow}>Узнаёшь себя?</div>
-              <Heading as="h2" className={styles.sectionTitle}>
-                GrabYou — это про обычные моменты,<br />в которых можно сэкономить
-              </Heading>
+            <div className={styles.sectionHeading}>
+              <div className={styles.eyebrow}>Наши ценности</div>
+              <Heading as="h2" className={styles.sectionTitle}>В основе GrabYou</Heading>
             </div>
           </RevealBlock>
-          <div className={styles.momentsGrid}>
-            {moments.map((m, i) => (
-              <RevealBlock key={m.title} delay={i * 90}>
-                <div className={styles.momentCard}>
-                  <div className={styles.momentIcon}><m.Icon /></div>
-                  <p className={styles.momentTitle}>{m.title}</p>
-                  <p className={styles.momentText}>{m.text}</p>
+          <div className={styles.valuesGrid}>
+            {values.map((v, i) => (
+              <RevealBlock key={v.title} delay={i * 90}>
+                <div className={`${styles.valueCard} ${styles[`valueCard_${v.color}`]}`}>
+                  <div className={`${styles.valueIcon} ${styles[`valueIcon_${v.color}`]}`}><v.Icon /></div>
+                  <Heading as="h3" className={styles.cardTitle}>{v.title}</Heading>
+                  <p className={styles.cardText}>{v.text}</p>
                 </div>
               </RevealBlock>
             ))}
@@ -290,29 +288,6 @@ export default function HomepageFeatures() {
               <RevealBlock key={i} delay={i * 100}>
                 <div className={styles.screenshotItem}>
                   <img src={src} alt="" className={styles.screenshotImg} loading="lazy" />
-                </div>
-              </RevealBlock>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── ЦЕННОСТИ ─── */}
-      <section className={styles.section}>
-        <div className="container">
-          <RevealBlock>
-            <div className={styles.sectionHeading}>
-              <div className={styles.eyebrow}>Наши ценности</div>
-              <Heading as="h2" className={styles.sectionTitle}>В основе GrabYou</Heading>
-            </div>
-          </RevealBlock>
-          <div className={styles.valuesGrid}>
-            {values.map((v, i) => (
-              <RevealBlock key={v.title} delay={i * 90}>
-                <div className={`${styles.valueCard} ${styles[`valueCard_${v.color}`]}`}>
-                  <div className={`${styles.valueIcon} ${styles[`valueIcon_${v.color}`]}`}><v.Icon /></div>
-                  <Heading as="h3" className={styles.cardTitle}>{v.title}</Heading>
-                  <p className={styles.cardText}>{v.text}</p>
                 </div>
               </RevealBlock>
             ))}
