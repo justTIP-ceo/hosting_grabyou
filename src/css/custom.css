@@ -1,6 +1,9 @@
 :root {
   --ifm-navbar-height: 3.6rem;
 
+  --ifm-font-family-base: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --grabyou-font-display: 'Unbounded', 'Manrope', system-ui, sans-serif;
+
   /* Светлая тема */
   --ifm-color-primary: #22c55e;
   --ifm-color-primary-dark: #1fb454;
@@ -124,10 +127,20 @@ main {
 }
 
 h1,
-h2,
+h2 {
+  font-family: var(--grabyou-font-display);
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
 h3,
 h4 {
   letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.navbar__title {
+  font-family: var(--grabyou-font-display);
 }
 
 a {

@@ -28,6 +28,13 @@ const config = {
     locales: ['ru'],
   },
 
+  stylesheets: [
+    {
+      href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap',
+      type: 'text/css',
+    },
+  ],
+
   presets: [
     [
       'classic',
