@@ -16,6 +16,38 @@ function useCursorGlow() {
   }, []);
 }
 
+/* ─── Хук 3D-наклона за курсором ─── */
+function useTilt(maxDeg = 7) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia('(hover: none)').matches) return; // тач-устройства — без наклона
+    let raf = 0;
+    const move = (e) => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        el.style.transform = `perspective(1100px) rotateY(${px * maxDeg}deg) rotateX(${-py * maxDeg}deg)`;
+      });
+    };
+    const leave = () => {
+      cancelAnimationFrame(raf);
+      el.style.transform = 'perspective(1100px) rotateY(0deg) rotateX(0deg)';
+    };
+    el.addEventListener('mousemove', move, { passive: true });
+    el.addEventListener('mouseleave', leave);
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener('mousemove', move);
+      el.removeEventListener('mouseleave', leave);
+    };
+  }, [maxDeg]);
+  return ref;
+}
+
 /* ─── Хук для анимации появления ─── */
 function useReveal() {
   const ref = useRef(null);
@@ -155,6 +187,7 @@ function RevealBlock({ children, delay = 0, className = '' }) {
 
 export default function HomepageFeatures() {
   useCursorGlow();
+  const tiltRef = useTilt(7);
   const aiPicImg        = useBaseUrl('/img/grabyou/ai_pic.png');
   const myOrderImg      = useBaseUrl('/img/grabyou/my_order.png');
   const offerImg        = useBaseUrl('/img/grabyou/offer-screen.png');
@@ -167,6 +200,13 @@ export default function HomepageFeatures() {
   return (
     <div className={styles.page}>
       <div className={styles.cursorGlow} aria-hidden="true" />
+
+      {/* Аврора-фон на всю страницу */}
+      <div className={styles.aurora} aria-hidden="true">
+        <div className={`${styles.auroraBlob} ${styles.auroraA}`} />
+        <div className={`${styles.auroraBlob} ${styles.auroraB}`} />
+        <div className={`${styles.auroraBlob} ${styles.auroraC}`} />
+      </div>
 
       {/* ─── HERO ─── */}
       <section className={styles.heroSection}>
@@ -216,7 +256,7 @@ export default function HomepageFeatures() {
               </div>
             </div>
 
-            <div className={styles.heroVisual}>
+            <div className={styles.heroVisual} ref={tiltRef}>
               <img src={promotionsImg}  alt="Главный экран GrabYou"       className={`${styles.heroMainShot} ${styles.heroFloatMain}`} loading="lazy" />
               <img src={myOrderImg}     alt="Мой заказ GrabYou"            className={`${styles.heroFloatingTop} ${styles.heroFloatA}`} loading="lazy" />
               <img src={qrScannerImg}   alt="QR-сканер GrabYou"            className={`${styles.heroFloatingBottom} ${styles.heroFloatB}`} loading="lazy" />

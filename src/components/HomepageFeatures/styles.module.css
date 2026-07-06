@@ -1,5 +1,6 @@
 .page {
   padding: 0 0 5rem;
+  overflow-x: clip;
 }
 
 /* ─── Анимации появления ─── */
@@ -66,6 +67,75 @@
 .heroAnimateDelay2 { animation-delay: 0.28s; }
 .heroAnimateDelay3 { animation-delay: 0.4s;  }
 .heroAnimateDelay4 { animation-delay: 0.52s; }
+
+/* ─── Аврора-фон ─── */
+@keyframes auroraDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(120px, 60px) scale(1.15); }
+  66%      { transform: translate(-60px, 120px) scale(0.9); }
+}
+@keyframes auroraDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%      { transform: translate(-140px, -60px) scale(1.2); }
+  70%      { transform: translate(80px, -100px) scale(0.95); }
+}
+@keyframes auroraDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(90px, -90px) scale(1.25); }
+}
+
+.aurora {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.auroraBlob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.auroraA {
+  top: -15%;
+  left: -10%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.14) 0%, transparent 65%);
+  animation: auroraDrift1 26s ease-in-out infinite;
+}
+
+.auroraB {
+  top: 25%;
+  right: -15%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(79, 227, 187, 0.11) 0%, transparent 65%);
+  animation: auroraDrift2 32s ease-in-out infinite;
+}
+
+.auroraC {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(34, 199, 214, 0.09) 0%, transparent 65%);
+  animation: auroraDrift3 38s ease-in-out infinite;
+}
+
+[data-theme='light'] .auroraA { background: radial-gradient(circle, rgba(34, 197, 94, 0.16) 0%, transparent 65%); }
+[data-theme='light'] .auroraB { background: radial-gradient(circle, rgba(34, 199, 214, 0.13) 0%, transparent 65%); }
+[data-theme='light'] .auroraC { background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 65%); }
+
+/* Контент поверх авроры */
+.page > section,
+.page > div:not(.aurora):not(.cursorGlow) {
+  position: relative;
+  z-index: 1;
+}
 
 /* Cursor spotlight */
 .cursorGlow {
@@ -241,9 +311,37 @@
   gap: 0.9rem;
 }
 
+@keyframes buttonGlow {
+  0%, 100% { box-shadow: 0 12px 30px rgba(34, 197, 94, 0.22), 0 0 0 1px rgba(34, 199, 214, 0.1); }
+  50%       { box-shadow: 0 14px 44px rgba(34, 197, 94, 0.45), 0 0 24px rgba(79, 227, 187, 0.25), 0 0 0 1px rgba(34, 199, 214, 0.18); }
+}
+
+.heroButtons :global(.button--primary) {
+  animation: buttonGlow 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroButtons :global(.button--primary)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  animation: shimmerSweep 3.5s ease infinite;
+  animation-delay: 1s;
+  pointer-events: none;
+}
+
 .heroVisual {
   position: relative;
   min-height: 760px;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out;
+  will-change: transform;
 }
 
 .heroMainShot,
@@ -418,20 +516,24 @@
   margin-bottom: 0;
 }
 
-/* Тикер */
+/* Тикер — наклонная лента */
 .ticker {
   overflow: hidden;
-  width: 100%;
-  border-top: 1px solid rgba(34, 197, 94, 0.18);
-  border-bottom: 1px solid rgba(34, 197, 94, 0.18);
-  background: rgba(34, 197, 94, 0.04);
-  padding: 0.85rem 0;
-  margin: 0.5rem 0;
+  width: 110%;
+  margin-left: -5%;
+  border-top: 1px solid rgba(34, 197, 94, 0.25);
+  border-bottom: 1px solid rgba(34, 197, 94, 0.25);
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 199, 214, 0.08) 50%, rgba(34, 197, 94, 0.1) 100%);
+  padding: 0.95rem 0;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  transform: rotate(-1.4deg);
+  box-shadow: 0 10px 40px rgba(34, 197, 94, 0.08);
 }
 
 [data-theme='dark'] .ticker {
-  border-color: rgba(53, 222, 114, 0.15);
-  background: rgba(53, 222, 114, 0.04);
+  border-color: rgba(79, 227, 187, 0.22);
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.1) 0%, rgba(79, 227, 187, 0.07) 50%, rgba(34, 197, 94, 0.1) 100%);
 }
 
 .tickerTrack {
@@ -454,11 +556,14 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
+  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ifm-color-primary);
+  background: linear-gradient(90deg, var(--ifm-color-primary) 0%, var(--grabyou-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   padding: 0 1.4rem;
 }
 
@@ -1337,5 +1442,68 @@
 @media (max-width: 996px) {
   .heroVisual {
     display: none;
+  }
+}
+
+/* Мобильная оптимизация эффектов */
+@media (max-width: 768px) {
+  .auroraBlob {
+    filter: blur(60px);
+  }
+
+  .auroraA { width: 90vw; height: 90vw; }
+  .auroraB { width: 80vw; height: 80vw; }
+  .auroraC { width: 75vw; height: 75vw; }
+
+  .cursorGlow {
+    display: none;
+  }
+
+  .ticker {
+    transform: rotate(-1deg);
+    margin-bottom: 1.4rem;
+  }
+
+  .tickerItem {
+    font-size: 0.78rem;
+  }
+}
+
+/* Уважение к reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .auroraBlob,
+  .particle,
+  .heroBgGlow,
+  .heroFloatMain,
+  .heroFloatA,
+  .heroFloatB,
+  .heroTitleGradient,
+  .tickerTrack,
+  .aiCard,
+  .helpGlow {
+    animation: none !important;
+  }
+
+  .heroButtons :global(.button--primary) {
+    animation: none !important;
+  }
+
+  .heroButtons :global(.button--primary)::after {
+    display: none;
+  }
+
+  .revealBlock {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .heroAnimate {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .heroVisual {
+    transition: none;
   }
 }
