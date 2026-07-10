@@ -21,27 +21,12 @@ function IconVK() {
 function IconRuStore({ size = 34 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-      <defs>
-        <linearGradient id="rsGrad2" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#8A94FF"/>
-          <stop offset="55%" stopColor="#5E5CE6"/>
-          <stop offset="100%" stopColor="#4636C7"/>
-        </linearGradient>
-        <linearGradient id="rsShine" x1="0" y1="0" x2="32" y2="14" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.35"/>
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0"/>
-        </linearGradient>
-      </defs>
-      <rect width="32" height="32" rx="9.5" fill="url(#rsGrad2)"/>
-      <rect width="32" height="16" rx="9.5" fill="url(#rsShine)"/>
-      <path
-        d="M11.4 23.5V10.8a2.3 2.3 0 0 1 2.3-2.3h3.1a5.2 5.2 0 0 1 1.6 10.15L21.9 23.5"
-        stroke="#ffffff"
-        strokeWidth="3.1"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
+      <rect width="32" height="32" rx="9.5" fill="#0077FF"/>
+      <g transform="skewY(-13)">
+        <rect x="6"    y="13.4" width="6.4" height="14.6" rx="2.4" fill="#ffffff"/>
+        <rect x="13.1" y="13.4" width="6.4" height="13.2" rx="2.4" fill="#ffffff"/>
+        <rect x="20.2" y="13.4" width="6.4" height="11.8" rx="2.4" fill="#ffffff"/>
+      </g>
     </svg>
   );
 }
