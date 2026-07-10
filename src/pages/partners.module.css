@@ -601,6 +601,183 @@
   color: var(--ifm-color-primary);
 }
 
+/* ─── Модалка-анкета ─── */
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(26px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: rgba(4, 14, 9, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: overlayIn 0.2s ease;
+  overflow-y: auto;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  border-radius: 28px 28px 28px 10px;
+  border: 1px solid rgba(79, 227, 187, 0.22);
+  background: linear-gradient(160deg, #17402c 0%, #123322 100%);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5), 0 0 60px rgba(34, 197, 94, 0.12);
+  padding: 2.1rem 2rem 1.9rem;
+  animation: modalIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme='light'] .modal {
+  background: #ffffff;
+  border-color: rgba(34, 197, 94, 0.2);
+  box-shadow: 0 40px 90px rgba(17, 49, 38, 0.28);
+}
+
+.modalClose {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  background: rgba(34, 197, 94, 0.08);
+  color: var(--ifm-font-color-base);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.modalClose:hover {
+  background: rgba(34, 197, 94, 0.16);
+  transform: rotate(90deg);
+}
+
+.modalTitle {
+  margin: 0 0 0.6rem;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  padding-right: 2rem;
+}
+
+.modalSub {
+  margin: 0 0 1.4rem;
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--ifm-font-color-secondary);
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modalLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+}
+
+.modalInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(79, 227, 187, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ifm-font-color-base);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.modalInput::placeholder {
+  color: var(--ifm-font-color-secondary);
+  opacity: 0.6;
+}
+
+.modalInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+}
+
+[data-theme='light'] .modalInput {
+  background: #f7fcf9;
+  border-color: rgba(34, 197, 94, 0.22);
+}
+
+.modalConsent {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
+  cursor: pointer;
+}
+
+.modalConsent input {
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ifm-color-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.modalSubmit {
+  margin-top: 0.3rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, #1fae52 100%);
+  color: #06281a;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(34, 197, 94, 0.3);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.modalSubmit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(34, 197, 94, 0.45);
+}
+
+.modalSubmit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modalSuccess {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ctaMainBtn {
+  border-radius: 999px;
+}
+
 /* ─── Адаптив ─── */
 @media (max-width: 996px) {
   .benefitsGrid {

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import Link from '@docusaurus/Link';
@@ -144,7 +145,103 @@ const faq = [
   },
 ];
 
+/* ─── Модалка-анкета ─── */
+function PartnerFormModal({ open, onClose }) {
+  const [form, setForm] = useState({ name: '', address: '', phone: '', email: '' });
+  const [consent, setConsent] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const set = (key) => (e) => setForm({ ...form, [key]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!consent) return;
+    const subject = encodeURIComponent('Заявка на партнёрство GrabYou');
+    const body = encodeURIComponent(
+      `Название заведения: ${form.name}\n` +
+      `Город / адрес: ${form.address}\n` +
+      `Телефон: ${form.phone}\n` +
+      `Email: ${form.email}`
+    );
+    window.location.href = `mailto:grabyou@mail.ru?subject=${subject}&body=${body}`;
+    setSent(true);
+  };
+
+  return (
+    <div className={styles.modalOverlay} onClick={onClose} role="dialog" aria-modal="true">
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <button type="button" className={styles.modalClose} onClick={onClose} aria-label="Закрыть">×</button>
+
+        {sent ? (
+          <div className={styles.modalSuccess}>
+            <Heading as="h3" className={styles.modalTitle}>Почти готово!</Heading>
+            <p className={styles.modalSub}>
+              Мы открыли письмо с вашей заявкой — просто нажмите «Отправить»
+              в почтовом клиенте. Или напишите нам напрямую в{' '}
+              <Link href="https://t.me/GrabYouOfficial" target="_blank" rel="noopener noreferrer">Telegram</Link>.
+            </p>
+            <button type="button" className={styles.modalSubmit} onClick={onClose}>Закрыть</button>
+          </div>
+        ) : (
+          <>
+            <Heading as="h3" className={styles.modalTitle}>Присоединяйтесь к нам сегодня!</Heading>
+            <p className={styles.modalSub}>
+              Оставьте заявку — мы свяжемся с вами и подробно расскажем
+              про формат, условия и первые шаги.
+            </p>
+
+            <form onSubmit={handleSubmit} className={styles.modalForm}>
+              <label className={styles.modalLabel}>
+                Название кафе / ресторана / магазина
+                <input className={styles.modalInput} type="text" required value={form.name} onChange={set('name')} placeholder="Например, «Пекарня на Лиговском»" />
+              </label>
+
+              <label className={styles.modalLabel}>
+                Город / адрес торговой точки
+                <input className={styles.modalInput} type="text" required value={form.address} onChange={set('address')} placeholder="Санкт-Петербург, Лиговский пр., 30" />
+              </label>
+
+              <label className={styles.modalLabel}>
+                Номер телефона
+                <input className={styles.modalInput} type="tel" required value={form.phone} onChange={set('phone')} placeholder="+7 (900) 000-00-00" />
+              </label>
+
+              <label className={styles.modalLabel}>
+                Email
+                <input className={styles.modalInput} type="email" required value={form.email} onChange={set('email')} placeholder="you@example.com" />
+              </label>
+
+              <label className={styles.modalConsent}>
+                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
+                <span>Даю согласие на обработку персональных данных</span>
+              </label>
+
+              <button type="submit" className={styles.modalSubmit} disabled={!consent}>
+                Отправить заявку
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function PartnersPage() {
+  const [formOpen, setFormOpen] = useState(false);
   return (
     <Layout title="Партнёрам" description="Станьте партнёром GrabYou: превращайте свободные часы и горящие предложения в выручку и новых клиентов">
       <main className={styles.page}>
@@ -167,9 +264,9 @@ export default function PartnersPage() {
               без рисков, с оплатой вперёд.
             </p>
             <div className={styles.heroCtas}>
-              <Link className="button button--primary button--lg" href="https://t.me/GrabYouOfficial" target="_blank" rel="noopener noreferrer">
+              <button type="button" className="button button--primary button--lg" onClick={() => setFormOpen(true)}>
                 Стать партнёром
-              </Link>
+              </button>
               <Link className="button button--secondary button--lg" to="#how">
                 Как это работает
               </Link>
@@ -269,6 +366,9 @@ export default function PartnersPage() {
                 и первым предложением. Это займёт один день.
               </p>
               <div className={styles.ctaButtons}>
+                <button type="button" className={`button button--primary button--lg ${styles.ctaMainBtn}`} onClick={() => setFormOpen(true)}>
+                  Оставить заявку
+                </button>
                 <Link className={styles.ctaLink} href="https://t.me/GrabYouOfficial" target="_blank" rel="noopener noreferrer">
                   <IconTelegram /> Написать в Telegram
                 </Link>
@@ -280,6 +380,8 @@ export default function PartnersPage() {
           </section>
 
         </div>
+
+        <PartnerFormModal open={formOpen} onClose={() => setFormOpen(false)} />
       </main>
     </Layout>
   );
