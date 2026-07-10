@@ -63,6 +63,7 @@ const universalOptions = [
     href: 'https://t.me/GrabYou_bot',
     color: 'telegram',
     external: true,
+    badge: 'быстрее всего',
     arrow: '→',
   },
   {
@@ -102,6 +103,8 @@ const androidOptions = [
 function OptionCard({ opt }) {
   const inner = (
     <>
+      {opt.badge && <span className={styles.optBadge}>{opt.badge}</span>}
+      <div className={styles.optWatermark} aria-hidden="true"><opt.Icon /></div>
       <div className={styles.optIcon} data-color={opt.color}>
         <opt.Icon />
       </div>
@@ -139,6 +142,7 @@ export default function DownloadPage() {
 
         <div className={styles.bgTop} aria-hidden="true" />
         <div className={styles.bgBottom} aria-hidden="true" />
+        <span className={styles.ghostWord} aria-hidden="true">GRAB</span>
 
         <div className={styles.inner}>
 

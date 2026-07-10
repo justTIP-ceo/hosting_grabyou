@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Heading from '@theme/Heading';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -176,6 +176,60 @@ const steps = [
   { number: '03', Icon: IconCheck, title: 'Пришёл — показал QR — ушёл',         description: 'Продавец сканирует твой QR за секунду. Никаких звонков, «подождите минуту» и лишних слов.' },
 ];
 
+/* ─── Полоса прогресса скролла ─── */
+function ScrollProgress() {
+  const barRef = useRef(null);
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+        if (barRef.current) barRef.current.style.width = p + '%';
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); };
+  }, []);
+  return <div className={styles.scrollProgress}><div ref={barRef} className={styles.scrollProgressBar} /></div>;
+}
+
+/* ─── Счётчик с анимацией набора ─── */
+function CountUp({ to, suffix = '', prefix = '', duration = 1400 }) {
+  const ref = useRef(null);
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      obs.disconnect();
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        setVal(Math.round(to * eased));
+        if (t < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+    obs.observe(el);
+    return () => { obs.disconnect(); cancelAnimationFrame(raf); };
+  }, [to, duration]);
+  return <span ref={ref}>{prefix}{val}{suffix}</span>;
+}
+
+const stats = [
+  { to: 40, prefix: '−', suffix: '%', label: 'средняя выгода' },
+  { to: 10, suffix: ' км', label: 'радиус поиска' },
+  { to: 20, suffix: ' сек', label: 'на бронирование' },
+  { to: 5,  suffix: '+', label: 'категорий рядом' },
+];
+
 function RevealBlock({ children, delay = 0, className = '' }) {
   const ref = useReveal();
   return (
@@ -199,6 +253,7 @@ export default function HomepageFeatures() {
 
   return (
     <div className={styles.page}>
+      <ScrollProgress />
       <div className={styles.cursorGlow} aria-hidden="true" />
 
       {/* Аврора-фон на всю страницу */}
@@ -285,12 +340,30 @@ export default function HomepageFeatures() {
       <div className={styles.ticker} aria-hidden="true">
         <div className={styles.tickerTrack}>
           {repeated.map((item, i) => (
-            <span key={i} className={styles.tickerItem}>
+            <span key={i} className={`${styles.tickerItem} ${i % 2 === 1 ? styles.tickerItemOutline : ''}`}>
               {item}<span className={styles.tickerDot} />
             </span>
           ))}
         </div>
       </div>
+
+      {/* ─── СТАТИСТИКА ─── */}
+      <section className={styles.statsSection}>
+        <div className="container">
+          <div className={styles.statsRow}>
+            {stats.map((s, i) => (
+              <RevealBlock key={s.label} delay={i * 100}>
+                <div className={styles.statItem}>
+                  <div className={styles.statNum}>
+                    <CountUp to={s.to} prefix={s.prefix || ''} suffix={s.suffix || ''} />
+                  </div>
+                  <div className={styles.statLabel}>{s.label}</div>
+                </div>
+              </RevealBlock>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ─── ЦЕННОСТИ (перенесено сюда) ─── */}
       <section className={styles.section}>
