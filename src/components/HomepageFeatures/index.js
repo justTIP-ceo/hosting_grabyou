@@ -340,7 +340,7 @@ export default function HomepageFeatures() {
       <div className={styles.ticker} aria-hidden="true">
         <div className={styles.tickerTrack}>
           {repeated.map((item, i) => (
-            <span key={i} className={`${styles.tickerItem} ${i % 2 === 1 ? styles.tickerItemOutline : ''}`}>
+            <span key={i} className={styles.tickerItem}>
               {item}<span className={styles.tickerDot} />
             </span>
           ))}
