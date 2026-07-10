@@ -234,7 +234,20 @@ export default function HomepageFeatures() {
                 Сервис срочных предложений от локального бизнеса
               </div>
               <Heading as="h1" className={`${styles.heroTitle} ${styles.heroAnimate} ${styles.heroAnimateDelay1}`}>
-                Хватай <span className={styles.heroTitleGradient}>выгоду,</span><br />пока горячо
+                Хватай{' '}
+                <span className={styles.heroTitleWord}>
+                  <span className={styles.heroTitleGradient}>выгоду,</span>
+                  <svg className={styles.heroUnderline} viewBox="0 0 220 14" fill="none" aria-hidden="true" preserveAspectRatio="none">
+                    <path d="M3 10C40 3.5 120 2 217 7.5" stroke="url(#uGrad)" strokeWidth="5" strokeLinecap="round" />
+                    <defs>
+                      <linearGradient id="uGrad" x1="0" y1="0" x2="220" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#22c55e" />
+                        <stop offset="1" stopColor="#22c7d6" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <br />пока горячо
               </Heading>
               <p className={`${styles.heroSubtitle} ${styles.heroAnimate} ${styles.heroAnimateDelay2}`}>
                 GrabYou помогает покупателям получать товары и услуги по
@@ -260,6 +273,9 @@ export default function HomepageFeatures() {
               <img src={promotionsImg}  alt="Главный экран GrabYou"       className={`${styles.heroMainShot} ${styles.heroFloatMain}`} loading="lazy" />
               <img src={myOrderImg}     alt="Мой заказ GrabYou"            className={`${styles.heroFloatingTop} ${styles.heroFloatA}`} loading="lazy" />
               <img src={qrScannerImg}   alt="QR-сканер GrabYou"            className={`${styles.heroFloatingBottom} ${styles.heroFloatB}`} loading="lazy" />
+              <span className={`${styles.sticker} ${styles.stickerA}`} aria-hidden="true">−40%</span>
+              <span className={`${styles.sticker} ${styles.stickerB}`} aria-hidden="true">350 м от вас</span>
+              <span className={`${styles.sticker} ${styles.stickerC}`} aria-hidden="true">забрать за 20 сек</span>
             </div>
           </div>
         </div>
@@ -281,14 +297,16 @@ export default function HomepageFeatures() {
         <div className="container">
           <RevealBlock>
             <div className={styles.sectionHeading}>
+              <span className={styles.sectionIndex} aria-hidden="true">01</span>
               <div className={styles.eyebrow}>Наши ценности</div>
               <Heading as="h2" className={styles.sectionTitle}>В основе GrabYou</Heading>
             </div>
           </RevealBlock>
           <div className={styles.valuesGrid}>
             {values.map((v, i) => (
-              <RevealBlock key={v.title} delay={i * 90}>
+              <RevealBlock key={v.title} delay={i * 90} className={i === 0 ? styles.valueFeatured : ''}>
                 <div className={`${styles.valueCard} ${styles[`valueCard_${v.color}`]}`}>
+                  <div className={styles.valueWatermark} aria-hidden="true"><v.Icon /></div>
                   <div className={`${styles.valueIcon} ${styles[`valueIcon_${v.color}`]}`}><v.Icon /></div>
                   <Heading as="h3" className={styles.cardTitle}>{v.title}</Heading>
                   <p className={styles.cardText}>{v.text}</p>
@@ -304,6 +322,7 @@ export default function HomepageFeatures() {
         <div className="container">
           <RevealBlock>
             <div className={styles.sectionHeading}>
+              <span className={styles.sectionIndex} aria-hidden="true">02</span>
               <div className={styles.eyebrow}>Как это работает</div>
               <Heading as="h2" className={styles.sectionTitle}>Три шага. Меньше минуты.</Heading>
               <p className={styles.sectionSubtitle}>Никаких звонков менеджерам, подтверждений по почте и ожидания ответа.</p>
@@ -313,10 +332,8 @@ export default function HomepageFeatures() {
             {steps.map((step, i) => (
               <RevealBlock key={step.number} delay={i * 110}>
                 <div className={styles.stepCard}>
-                  <div className={styles.stepTop}>
-                    <div className={styles.stepNumber}>{step.number}</div>
-                    <div className={styles.stepIconWrap}><step.Icon /></div>
-                  </div>
+                  <span className={styles.stepGhost} aria-hidden="true">{step.number}</span>
+                  <div className={styles.stepIconWrap}><step.Icon /></div>
                   <Heading as="h3" className={styles.cardTitle}>{step.title}</Heading>
                   <p className={styles.cardText}>{step.description}</p>
                 </div>
@@ -349,10 +366,13 @@ export default function HomepageFeatures() {
                   Не нужно листать категории. Напиши текстом что ищешь —
                   GrabAI разберёт запрос и найдёт подходящие предложения рядом с тобой.
                 </p>
-                <div className={styles.aiExamples}>
-                  {['«хочу что-нибудь к чаю»','«что-то вкусное рядом с метро»','«букет подруге вечером»','«обед до 200 рублей»'].map((ex) => (
-                    <div key={ex} className={styles.aiExample}>{ex}</div>
-                  ))}
+                <div className={styles.aiChat}>
+                  <div className={`${styles.aiBubble} ${styles.aiBubbleUser}`}>хочу что-нибудь к чаю</div>
+                  <div className={`${styles.aiBubble} ${styles.aiBubbleBot}`}>Нашёл 6 предложений рядом: эклеры −35% в 400 м, круассаны −40% у метро…</div>
+                  <div className={`${styles.aiBubble} ${styles.aiBubbleUser}`}>букет подруге вечером до 1000 ₽</div>
+                  <div className={`${styles.aiBubble} ${styles.aiBubbleBot} ${styles.aiTyping}`}>
+                    <span /><span /><span />
+                  </div>
                 </div>
               </div>
               <div className={styles.aiVisual}>

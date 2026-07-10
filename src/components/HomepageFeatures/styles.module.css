@@ -1,6 +1,22 @@
 .page {
   padding: 0 0 5rem;
   overflow-x: clip;
+  position: relative;
+}
+
+/* Зерно плёнки поверх всего — убирает «плоский цифровой» вид */
+.page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-theme='light'] .page::after {
+  opacity: 0.035;
 }
 
 /* ─── Анимации появления ─── */
@@ -252,6 +268,84 @@
   color: var(--ifm-heading-color);
 }
 
+/* Слово с фигурным подчёркиванием */
+.heroTitleWord {
+  position: relative;
+  display: inline-block;
+}
+
+@keyframes underlineDraw {
+  from { stroke-dashoffset: 230; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.heroUnderline {
+  position: absolute;
+  left: 0;
+  bottom: -0.08em;
+  width: 100%;
+  height: 0.22em;
+  overflow: visible;
+}
+
+.heroUnderline path {
+  stroke-dasharray: 230;
+  stroke-dashoffset: 230;
+  animation: underlineDraw 0.9s ease 1s forwards;
+}
+
+/* Стикеры вокруг скриншотов */
+@keyframes stickerPop {
+  0%   { transform: scale(0) rotate(var(--rot, 0deg)); }
+  75%  { transform: scale(1.12) rotate(var(--rot, 0deg)); }
+  100% { transform: scale(1) rotate(var(--rot, 0deg)); }
+}
+
+.sticker {
+  position: absolute;
+  z-index: 4;
+  display: inline-block;
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  font-family: var(--grabyou-font-display, inherit);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transform: rotate(var(--rot, 0deg));
+  animation: stickerPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.stickerA {
+  --rot: -7deg;
+  top: 4%;
+  right: -8px;
+  background: #ef4444;
+  color: #fff;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.28);
+  animation-delay: 1.05s;
+  font-size: 0.95rem;
+}
+
+.stickerB {
+  --rot: 4deg;
+  top: 44%;
+  left: -26px;
+  background: var(--ifm-color-primary);
+  color: #06281a;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.22);
+  animation-delay: 1.25s;
+}
+
+.stickerC {
+  --rot: -4deg;
+  bottom: 6%;
+  right: 2%;
+  background: #fff;
+  color: #0d241c;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.22);
+  animation-delay: 1.45s;
+}
+
 /* Градиент применяем к span внутри заголовка */
 .heroTitleGradient {
   background: linear-gradient(
@@ -297,12 +391,13 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 0.62rem;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background: var(--ifm-color-primary);
-  box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
+  top: 0.58rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--grabyou-accent));
+  box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.1);
 }
 
 .heroButtons {
@@ -391,35 +486,43 @@
   text-align: center;
 }
 
-.sectionHeading::before,
-.sectionHeadingCentered::before {
-  content: '';
+/* Огромный призрачный номер секции */
+.sectionIndex {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 88px;
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    var(--ifm-color-primary) 0%,
-    var(--grabyou-accent) 100%
-  );
-  box-shadow: 0 0 18px rgba(34, 197, 94, 0.25);
+  top: -2.2rem;
+  right: 0;
+  font-family: var(--grabyou-font-display, inherit);
+  font-size: clamp(5rem, 11vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(34, 197, 94, 0.16);
+  pointer-events: none;
+  user-select: none;
 }
 
-.sectionHeadingCentered::before {
-  left: 50%;
-  transform: translateX(-50%);
+[data-theme='light'] .sectionIndex {
+  -webkit-text-stroke: 1.5px rgba(34, 197, 94, 0.2);
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   margin-bottom: 0.8rem;
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ifm-font-color-secondary);
+  color: var(--ifm-color-primary);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ifm-color-primary);
 }
 
 .sectionTitle {
@@ -468,24 +571,15 @@
     0 0 0 1px rgba(34, 199, 214, 0.03);
 }
 
-.problemCard::before,
-.infoCard::before,
-.stepCard::before,
-.shotCard::before,
-.finalCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 1.5rem;
-  width: 92px;
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    var(--ifm-color-primary) 0%,
-    var(--grabyou-accent) 100%
-  );
-  box-shadow: 0 0 22px rgba(34, 197, 94, 0.3);
+/* Фирменная форма карточек — один «срезанный» уголок */
+.problemCard,
+.infoCard,
+.stepCard,
+.shotCard,
+.finalCard,
+.momentCard,
+.valueCard {
+  border-radius: 26px 26px 26px 8px;
 }
 
 .problemCard {
@@ -860,16 +954,59 @@
   border-radius: 24px;
 }
 
-/* Ценности */
+/* Ценности — бенто-сетка */
 .valuesGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   align-items: stretch;
 }
 
 .valuesGrid .revealBlock {
   height: 100%;
+}
+
+.valueFeatured {
+  grid-column: span 2;
+}
+
+.valuesGrid > :last-child {
+  grid-column: span 2;
+}
+
+.valueFeatured .valueCard {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.14) 0%, rgba(30, 68, 48, 0.96) 55%, rgba(79, 227, 187, 0.07) 100%);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+[data-theme='light'] .valueFeatured .valueCard {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, #ffffff 55%);
+  border-color: rgba(34, 197, 94, 0.28);
+}
+
+.valueFeatured .cardTitle {
+  font-size: 1.55rem;
+}
+
+/* Гигантская полупрозрачная иконка-водяной знак */
+.valueWatermark {
+  position: absolute;
+  right: -18px;
+  bottom: -22px;
+  opacity: 0.07;
+  pointer-events: none;
+  transform: rotate(-8deg);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.valueWatermark svg {
+  width: 130px;
+  height: 130px;
+}
+
+.valueCard:hover .valueWatermark {
+  transform: rotate(0deg) scale(1.08);
+  opacity: 0.12;
 }
 
 .valueCard {
@@ -935,38 +1072,77 @@
 
 @media (max-width: 1100px) {
   .valuesGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .valueFeatured { grid-column: span 2; }
+  .valuesGrid > :last-child { grid-column: span 2; }
 }
 
 @media (max-width: 600px) {
   .valuesGrid { grid-template-columns: 1fr; }
+  .valueFeatured,
+  .valuesGrid > :last-child { grid-column: span 1; }
 }
 
-/* AI примеры */
-.aiExamples {
+/* AI чат */
+.aiChat {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
+  max-width: 460px;
 }
 
-.aiExample {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.1rem;
-  padding: 0.55rem 1rem;
-  border-radius: 14px;
-  background: rgba(95, 223, 240, 0.07);
-  border: 1px solid rgba(95, 223, 240, 0.12);
+.aiBubble {
+  padding: 0.6rem 1rem;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  max-width: 88%;
+}
+
+.aiBubbleUser {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, #1fae52 100%);
+  color: #06281a;
+  font-weight: 600;
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.25);
+}
+
+.aiBubbleBot {
+  align-self: flex-start;
+  background: rgba(79, 227, 187, 0.1);
+  border: 1px solid rgba(79, 227, 187, 0.2);
   color: var(--ifm-font-color-base);
-  font-size: 0.97rem;
-  line-height: 1.4;
-  max-width: fit-content;
+  border-radius: 18px 18px 18px 4px;
 }
 
-[data-theme='light'] .aiExample {
-  background: rgba(34, 199, 214, 0.06);
-  border-color: rgba(34, 199, 214, 0.16);
+[data-theme='light'] .aiBubbleBot {
+  background: rgba(34, 199, 214, 0.07);
+  border-color: rgba(34, 199, 214, 0.18);
 }
+
+/* Индикатор «печатает…» */
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-4px); opacity: 1; }
+}
+
+.aiTyping {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
+
+.aiTyping span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--grabyou-accent);
+  animation: typingDot 1.2s ease-in-out infinite;
+}
+
+.aiTyping span:nth-child(2) { animation-delay: 0.18s; }
+.aiTyping span:nth-child(3) { animation-delay: 0.36s; }
 
 /* Секция помощи */
 .helpCard {
@@ -1079,24 +1255,29 @@
   padding: 1.7rem 1.5rem 1.5rem;
 }
 
-.stepNumber {
-  width: 54px;
-  height: 54px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(95, 223, 240, 0.16);
-  background: rgba(95, 223, 240, 0.06);
-  color: var(--ifm-heading-color);
+/* Гигантский контурный номер шага */
+.stepGhost {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.9rem;
+  font-family: var(--grabyou-font-display, inherit);
+  font-size: 4.6rem;
   font-weight: 800;
-  font-size: 0.95rem;
-  box-shadow: inset 0 0 0 1px rgba(95, 223, 240, 0.03);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(34, 197, 94, 0.28);
+  pointer-events: none;
+  user-select: none;
+  transition: -webkit-text-stroke-color 0.25s ease, transform 0.25s ease;
 }
 
-[data-theme='light'] .stepNumber {
-  border: 1px solid rgba(34, 199, 214, 0.14);
-  background: rgba(34, 199, 214, 0.07);
+.stepCard:hover .stepGhost {
+  -webkit-text-stroke-color: rgba(34, 197, 94, 0.6);
+  transform: translateY(-3px);
+}
+
+[data-theme='light'] .stepGhost {
+  -webkit-text-stroke: 1.5px rgba(34, 197, 94, 0.3);
 }
 
 .cardTitle {
@@ -1480,8 +1661,19 @@
   .heroTitleGradient,
   .tickerTrack,
   .aiCard,
-  .helpGlow {
+  .helpGlow,
+  .sticker,
+  .aiTyping span {
     animation: none !important;
+  }
+
+  .sticker {
+    transform: rotate(var(--rot, 0deg));
+  }
+
+  .heroUnderline path {
+    animation: none !important;
+    stroke-dashoffset: 0;
   }
 
   .heroButtons :global(.button--primary) {
