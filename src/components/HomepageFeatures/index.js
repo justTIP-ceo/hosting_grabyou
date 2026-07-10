@@ -431,6 +431,7 @@ export default function HomepageFeatures() {
       <section className={styles.section}>
         <div className="container">
           <RevealBlock>
+            <div className={styles.aiRow}>
             <div className={styles.aiCard}>
               <div className={styles.aiContent}>
                 <div className={styles.eyebrow}>GrabAI — встроенный ИИ</div>
@@ -450,14 +451,15 @@ export default function HomepageFeatures() {
                   </div>
                 </div>
               </div>
-              <div className={styles.aiVisual}>
-                <div className={styles.aiImageWrap}>
-                  <div className={styles.aiRing} aria-hidden="true" />
-                  <img src={aiPicImg} alt="GrabAI" className={styles.aiImage} loading="lazy" />
-                  <span className={`${styles.aiChip} ${styles.aiChipA}`} aria-hidden="true">нашёл 6 рядом</span>
-                  <span className={`${styles.aiChip} ${styles.aiChipB}`} aria-hidden="true">−35%</span>
-                </div>
+            </div>
+            <div className={styles.aiVisual}>
+              <div className={styles.aiImageWrap}>
+                <div className={styles.aiRing} aria-hidden="true" />
+                <img src={aiPicImg} alt="GrabAI" className={styles.aiImage} loading="lazy" />
+                <span className={`${styles.aiChip} ${styles.aiChipA}`} aria-hidden="true">нашёл 6 рядом</span>
+                <span className={`${styles.aiChip} ${styles.aiChipB}`} aria-hidden="true">−35%</span>
               </div>
+            </div>
             </div>
           </RevealBlock>
         </div>
