@@ -149,7 +149,7 @@ const faq = [
 function PartnerFormModal({ open, onClose }) {
   const [form, setForm] = useState({ name: '', address: '', phone: '', email: '' });
   const [consent, setConsent] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
   useEffect(() => {
     if (!open) return;
@@ -166,18 +166,21 @@ function PartnerFormModal({ open, onClose }) {
 
   const set = (key) => (e) => setForm({ ...form, [key]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!consent) return;
-    const subject = encodeURIComponent('Заявка на партнёрство GrabYou');
-    const body = encodeURIComponent(
-      `Название заведения: ${form.name}\n` +
-      `Город / адрес: ${form.address}\n` +
-      `Телефон: ${form.phone}\n` +
-      `Email: ${form.email}`
-    );
-    window.location.href = `mailto:grabyou@mail.ru?subject=${subject}&body=${body}`;
-    setSent(true);
+    if (!consent || status === 'sending') return;
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/partner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const json = await res.json().catch(() => ({}));
+      setStatus(res.ok && json.ok ? 'success' : 'error');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -185,15 +188,15 @@ function PartnerFormModal({ open, onClose }) {
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button type="button" className={styles.modalClose} onClick={onClose} aria-label="Закрыть">×</button>
 
-        {sent ? (
+        {status === 'success' ? (
           <div className={styles.modalSuccess}>
-            <Heading as="h3" className={styles.modalTitle}>Почти готово!</Heading>
+            <Heading as="h3" className={styles.modalTitle}>Заявка отправлена!</Heading>
             <p className={styles.modalSub}>
-              Мы открыли письмо с вашей заявкой — просто нажмите «Отправить»
-              в почтовом клиенте. Или напишите нам напрямую в{' '}
+              Спасибо! Мы получили вашу заявку и свяжемся с вами в ближайшее время.
+              Если хотите ускорить — напишите нам в{' '}
               <Link href="https://t.me/GrabYouOfficial" target="_blank" rel="noopener noreferrer">Telegram</Link>.
             </p>
-            <button type="button" className={styles.modalSubmit} onClick={onClose}>Закрыть</button>
+            <button type="button" className={styles.modalSubmit} onClick={onClose}>Отлично</button>
           </div>
         ) : (
           <>
@@ -229,8 +232,17 @@ function PartnerFormModal({ open, onClose }) {
                 <span>Даю согласие на обработку персональных данных</span>
               </label>
 
-              <button type="submit" className={styles.modalSubmit} disabled={!consent}>
-                Отправить заявку
+              {status === 'error' && (
+                <p className={styles.modalError}>
+                  Не получилось отправить. Попробуйте ещё раз или напишите нам в{' '}
+                  <Link href="https://t.me/GrabYouOfficial" target="_blank" rel="noopener noreferrer">Telegram</Link>
+                  {' '}/{' '}
+                  <Link href="mailto:grabyou@mail.ru">на почту</Link>.
+                </p>
+              )}
+
+              <button type="submit" className={styles.modalSubmit} disabled={!consent || status === 'sending'}>
+                {status === 'sending' ? 'Отправляем…' : 'Отправить заявку'}
               </button>
             </form>
           </>
