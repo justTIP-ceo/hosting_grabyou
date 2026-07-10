@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Heading from '@theme/Heading';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -176,60 +176,6 @@ const steps = [
   { number: '03', Icon: IconCheck, title: 'Пришёл — показал QR — ушёл',         description: 'Продавец сканирует твой QR за секунду. Никаких звонков, «подождите минуту» и лишних слов.' },
 ];
 
-/* ─── Живая карточка предложения с тикающим таймером ─── */
-const liveDeals = [
-  { title: 'Вечерний сет из пекарни', place: 'Пекарня · 350 м', oldPrice: 420, price: 252, discount: -40 },
-  { title: 'Букет дня со скидкой',    place: 'Цветочная · 180 м', oldPrice: 1200, price: 780, discount: -35 },
-  { title: 'Два капучино по цене одного', place: 'Кофейня · 90 м', oldPrice: 340, price: 170, discount: -50 },
-];
-
-function LiveDealCard({ className = '' }) {
-  const [seconds, setSeconds] = useState(14 * 60 + 32);
-  const [dealIndex, setDealIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setSeconds((s) => {
-        if (s <= 1) {
-          setDealIndex((d) => (d + 1) % liveDeals.length);
-          return 14 * 60 + 59;
-        }
-        return s - 1;
-      });
-    }, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const deal = liveDeals[dealIndex];
-  const mm = String(Math.floor(seconds / 60)).padStart(2, '0');
-  const ss = String(seconds % 60).padStart(2, '0');
-
-  return (
-    <div className={`${styles.liveDeal} ${className}`}>
-      <div className={styles.liveDealTop}>
-        <span className={styles.liveDealBadge}>
-          <span className={styles.liveDealPulse} />
-          сейчас рядом
-        </span>
-        <span className={styles.liveDealDiscount}>{deal.discount}%</span>
-      </div>
-      <div className={styles.liveDealTitle}>{deal.title}</div>
-      <div className={styles.liveDealPlace}>{deal.place}</div>
-      <div className={styles.liveDealBottom}>
-        <span className={styles.liveDealPrice}>
-          <s>{deal.oldPrice} ₽</s> {deal.price} ₽
-        </span>
-        <span className={styles.liveDealTimer}>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-          {mm}:{ss}
-        </span>
-      </div>
-    </div>
-  );
-}
-
 function RevealBlock({ children, delay = 0, className = '' }) {
   const ref = useReveal();
   return (
@@ -308,16 +254,12 @@ export default function HomepageFeatures() {
                   Скачать приложение
                 </Link>
               </div>
-              <div className={`${styles.liveDealMobile} ${styles.heroAnimate} ${styles.heroAnimateDelay4}`}>
-                <LiveDealCard />
-              </div>
             </div>
 
             <div className={styles.heroVisual} ref={tiltRef}>
               <img src={promotionsImg}  alt="Главный экран GrabYou"       className={`${styles.heroMainShot} ${styles.heroFloatMain}`} loading="lazy" />
               <img src={myOrderImg}     alt="Мой заказ GrabYou"            className={`${styles.heroFloatingTop} ${styles.heroFloatA}`} loading="lazy" />
               <img src={qrScannerImg}   alt="QR-сканер GrabYou"            className={`${styles.heroFloatingBottom} ${styles.heroFloatB}`} loading="lazy" />
-              <LiveDealCard className={styles.liveDealDesktop} />
             </div>
           </div>
         </div>
