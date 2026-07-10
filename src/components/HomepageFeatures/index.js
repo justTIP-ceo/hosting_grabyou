@@ -230,19 +230,6 @@ const stats = [
   { to: 5,  suffix: '+', label: 'категорий рядом' },
 ];
 
-/* ─── CSS-3D телефон ─── */
-function Phone({ src, alt, className = '' }) {
-  return (
-    <div className={`${styles.phone} ${className}`}>
-      <div className={styles.phoneFrame}>
-        <img src={src} alt={alt} className={styles.phoneScreen} loading="lazy" />
-        <div className={styles.phoneNotch} aria-hidden="true" />
-        <div className={styles.phoneGlare} aria-hidden="true" />
-      </div>
-    </div>
-  );
-}
-
 function RevealBlock({ children, delay = 0, className = '' }) {
   const ref = useReveal();
   return (
@@ -338,14 +325,12 @@ export default function HomepageFeatures() {
             </div>
 
             <div className={styles.heroVisual} ref={tiltRef}>
-              <div className={styles.phoneStage}>
-                <Phone src={myOrderImg}     alt="Мой заказ GrabYou"      className={styles.phoneBack} />
-                <Phone src={promotionsImg}  alt="Главный экран GrabYou"  className={styles.phoneMain} />
-                <div className={styles.phoneShadow} aria-hidden="true" />
-                <span className={`${styles.sticker} ${styles.stickerA}`} aria-hidden="true">−40%</span>
-                <span className={`${styles.sticker} ${styles.stickerB}`} aria-hidden="true">350 м от вас</span>
-                <span className={`${styles.sticker} ${styles.stickerC}`} aria-hidden="true">забрать за 20 сек</span>
-              </div>
+              <img src={promotionsImg}  alt="Главный экран GrabYou"       className={`${styles.heroMainShot} ${styles.heroFloatMain}`} loading="lazy" />
+              <img src={myOrderImg}     alt="Мой заказ GrabYou"            className={`${styles.heroFloatingTop} ${styles.heroFloatA}`} loading="lazy" />
+              <img src={qrScannerImg}   alt="QR-сканер GrabYou"            className={`${styles.heroFloatingBottom} ${styles.heroFloatB}`} loading="lazy" />
+              <span className={`${styles.sticker} ${styles.stickerA}`} aria-hidden="true">−40%</span>
+              <span className={`${styles.sticker} ${styles.stickerB}`} aria-hidden="true">350 м от вас</span>
+              <span className={`${styles.sticker} ${styles.stickerC}`} aria-hidden="true">забрать за 20 сек</span>
             </div>
           </div>
         </div>
