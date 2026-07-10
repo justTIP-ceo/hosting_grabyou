@@ -65,6 +65,11 @@ const config = {
         },
         items: [
           {
+            to: '/partners',
+            label: 'Партнёрам',
+            position: 'right',
+          },
+          {
             to: '/download',
             label: 'Скачать',
             position: 'right',
