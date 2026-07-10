@@ -1489,10 +1489,10 @@
     0 0 0 1px rgba(95, 223, 240, 0.06),
     inset 0 0 120px rgba(95, 223, 240, 0.03);
   display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: 2rem;
+  grid-template-columns: 1fr minmax(300px, 400px);
+  gap: 2.8rem;
   align-items: center;
-  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  padding: 2.5rem;
 }
 
 [data-theme='light'] .aiCard {
@@ -1567,14 +1567,14 @@
 }
 
 @keyframes aiImageFloat {
-  0%, 100% { transform: rotate(3deg) translateY(0); }
-  50%       { transform: rotate(3deg) translateY(-8px); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
 
 .aiImageWrap {
   position: relative;
   width: 100%;
-  max-width: 230px;
+  max-width: 400px;
 }
 
 /* Вращающееся градиентное кольцо */
