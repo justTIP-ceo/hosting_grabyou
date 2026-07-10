@@ -18,24 +18,30 @@ function IconVK() {
     </svg>
   );
 }
-function IconAPK() {
+function IconRuStore({ size = 34 }) {
   return (
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-    </svg>
-  );
-}
-function IconRuStore() {
-  return (
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
       <defs>
-        <linearGradient id="rsGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#7B6FFF"/>
-          <stop offset="100%" stopColor="#4E43D6"/>
+        <linearGradient id="rsGrad2" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#8A94FF"/>
+          <stop offset="55%" stopColor="#5E5CE6"/>
+          <stop offset="100%" stopColor="#4636C7"/>
+        </linearGradient>
+        <linearGradient id="rsShine" x1="0" y1="0" x2="32" y2="14" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.35"/>
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0"/>
         </linearGradient>
       </defs>
-      <rect width="32" height="32" rx="9" fill="url(#rsGrad)"/>
-      <path d="M9 8h8.2C19.9 8 22 10.1 22 12.8c0 1.8-1 3.4-2.4 4.2l3 6H19l-2.7-5.5H12v5.5H9V8zm3 2.5v4.5h5c1.2 0 2.2-1 2.2-2.25S18.2 10.5 17 10.5H12z" fill="white"/>
+      <rect width="32" height="32" rx="9.5" fill="url(#rsGrad2)"/>
+      <rect width="32" height="16" rx="9.5" fill="url(#rsShine)"/>
+      <path
+        d="M11.4 23.5V10.8a2.3 2.3 0 0 1 2.3-2.3h3.1a5.2 5.2 0 0 1 1.6 10.15L21.9 23.5"
+        stroke="#ffffff"
+        strokeWidth="3.1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </svg>
   );
 }
@@ -90,30 +96,48 @@ export default function DownloadPage() {
           {/* ─── БЕНТО ─── */}
           <div className={styles.bento}>
 
-            {/* Telegram — большая карточка */}
+            {/* RuStore — главная карточка */}
             <Link
-              href="https://t.me/GrabYou_bot"
+              href="https://www.rustore.ru/catalog/app/com.grabyou.app"
               target="_blank"
               rel="noopener noreferrer"
               className={`${styles.card} ${styles.cardHero}`}
-              data-color="telegram"
+              data-color="rustore"
             >
-              <span className={styles.cardBadge}>быстрее всего</span>
-              <div className={styles.cardWatermark} aria-hidden="true"><IconTelegram /></div>
+              <span className={styles.cardBadge}>рекомендуем</span>
+              <div className={styles.cardWatermark} aria-hidden="true"><IconRuStore size={170} /></div>
               <div className={styles.cardHeroLeft}>
-                <div className={styles.cardIcon} data-color="telegram"><IconTelegram /></div>
+                <div className={styles.cardIcon} data-color="rustore"><IconRuStore size={62} /></div>
                 <div>
-                  <div className={styles.cardKicker}>Telegram · без установки</div>
-                  <div className={styles.cardHeroTitle}>Открой в Telegram за 5 секунд</div>
+                  <div className={styles.cardKicker}>RuStore · Android</div>
+                  <div className={styles.cardHeroTitle}>Установи из RuStore</div>
                   <div className={styles.cardDesc}>
-                    @GrabYou_bot — жми и пользуйся прямо в мессенджере.
-                    Работает на телефоне и компьютере.
+                    Официальный магазин приложений. Полная версия GrabYou
+                    с push-уведомлениями и автообновлениями.
                   </div>
                 </div>
               </div>
               <span className={styles.cardCta}>
-                Открыть бота <IconArrow />
+                Открыть в RuStore <IconArrow />
               </span>
+            </Link>
+
+            {/* Telegram */}
+            <Link
+              href="https://t.me/GrabYou_bot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.card}
+              data-color="telegram"
+            >
+              <div className={styles.cardWatermark} aria-hidden="true"><IconTelegram /></div>
+              <div className={styles.cardIcon} data-color="telegram"><IconTelegram /></div>
+              <div className={styles.cardBody}>
+                <div className={styles.cardKicker}>Без установки</div>
+                <div className={styles.cardTitle}>Telegram</div>
+                <div className={styles.cardDesc}>@GrabYou_bot — прямо в мессенджере, на любом устройстве</div>
+              </div>
+              <span className={styles.cardArrow}><IconArrow /></span>
             </Link>
 
             {/* VK */}
@@ -134,51 +158,6 @@ export default function DownloadPage() {
               <span className={styles.cardArrow}><IconArrow /></span>
             </Link>
 
-            {/* APK */}
-            <a
-              href="/files/GrabYou.apk"
-              download="GrabYou.apk"
-              className={styles.card}
-              data-color="android"
-            >
-              <div className={styles.cardWatermark} aria-hidden="true"><IconAPK /></div>
-              <div className={styles.cardIcon} data-color="android"><IconAPK /></div>
-              <div className={styles.cardBody}>
-                <div className={styles.cardKicker}>Android · APK</div>
-                <div className={styles.cardTitle}>Скачать напрямую</div>
-                <div className={styles.cardDesc}>Полная версия с push-уведомлениями</div>
-              </div>
-              <span className={styles.cardArrow}><IconArrow /></span>
-            </a>
-
-            {/* RuStore — тонкая строка */}
-            <Link
-              href="https://www.rustore.ru/catalog/app/com.grabyou.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.card} ${styles.cardSlim}`}
-              data-color="rustore"
-            >
-              <div className={styles.cardIcon} data-color="rustore"><IconRuStore /></div>
-              <div className={styles.cardBody}>
-                <div className={styles.cardTitle}>RuStore</div>
-                <div className={styles.cardDesc}>Официальный магазин приложений</div>
-              </div>
-              <span className={styles.cardArrow}><IconArrow /></span>
-            </Link>
-
-          </div>
-
-          {/* ─── APK HINT ─── */}
-          <div className={styles.hint}>
-            <span className={styles.hintIcon}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
-            </span>
-            <span>
-              <strong>Как установить APK:</strong> скачайте файл → откройте → разрешите установку из неизвестных источников → установите
-            </span>
           </div>
 
           <div className={styles.back}>
