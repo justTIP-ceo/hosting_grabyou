@@ -414,9 +414,11 @@ export default function HomepageFeatures() {
             ))}
           </div>
           <div className={styles.stepsScreenshots}>
+            <div className={styles.shotsGlow} aria-hidden="true" />
             {[offerImg, paymentImg, qrScannerImg].map((src, i) => (
-              <RevealBlock key={i} delay={i * 100}>
-                <div className={styles.screenshotItem}>
+              <RevealBlock key={i} delay={i * 120}>
+                <div className={`${styles.screenshotItem} ${styles[`shot${i}`]}`}>
+                  <span className={styles.shotNum} aria-hidden="true">0{i + 1}</span>
                   <img src={src} alt="" className={styles.screenshotImg} loading="lazy" />
                 </div>
               </RevealBlock>
@@ -449,7 +451,12 @@ export default function HomepageFeatures() {
                 </div>
               </div>
               <div className={styles.aiVisual}>
-                <img src={aiPicImg} alt="GrabAI" className={styles.aiImage} loading="lazy" />
+                <div className={styles.aiImageWrap}>
+                  <div className={styles.aiRing} aria-hidden="true" />
+                  <img src={aiPicImg} alt="GrabAI" className={styles.aiImage} loading="lazy" />
+                  <span className={`${styles.aiChip} ${styles.aiChipA}`} aria-hidden="true">нашёл 6 рядом</span>
+                  <span className={`${styles.aiChip} ${styles.aiChipB}`} aria-hidden="true">−35%</span>
+                </div>
               </div>
             </div>
           </RevealBlock>
