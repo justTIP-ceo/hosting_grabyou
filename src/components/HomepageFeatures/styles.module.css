@@ -507,32 +507,157 @@
   will-change: transform;
 }
 
-.heroMainShot,
-.heroFloatingTop,
-.heroFloatingBottom {
+/* ─── 3D-сцена с телефонами ─── */
+.phoneStage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 700px;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@keyframes phoneFloatMain {
+  0%, 100% { transform: rotateY(-16deg) rotateX(4deg) rotateZ(1.5deg) translateY(0); }
+  50%       { transform: rotateY(-16deg) rotateX(4deg) rotateZ(1.5deg) translateY(-14px); }
+}
+
+@keyframes phoneFloatBack {
+  0%, 100% { transform: rotateY(20deg) rotateX(2deg) rotateZ(-5deg) translateZ(-120px) translateY(0); }
+  50%       { transform: rotateY(20deg) rotateX(2deg) rotateZ(-5deg) translateZ(-120px) translateY(-9px); }
+}
+
+.phoneMain {
+  position: relative;
+  z-index: 2;
+  width: min(310px, 78%);
+  animation: phoneFloatMain 6.5s ease-in-out infinite;
+}
+
+.phoneBack {
+  position: absolute;
+  left: -4%;
+  top: 10%;
+  z-index: 1;
+  width: min(240px, 60%);
+  opacity: 0.92;
+  animation: phoneFloatBack 7.5s ease-in-out infinite 0.8s;
+  filter: brightness(0.82) saturate(0.95);
+}
+
+/* Корпус */
+.phoneFrame {
+  position: relative;
+  overflow: hidden;
+  padding: 11px;
+  border-radius: 46px;
+  background: linear-gradient(150deg, #3a4046 0%, #16191c 38%, #0b0d0f 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.16),
+    inset 0 0 14px rgba(0, 0, 0, 0.6),
+    0 30px 70px rgba(0, 0, 0, 0.45),
+    0 0 60px rgba(34, 197, 94, 0.1);
+}
+
+/* Боковые кнопки */
+.phoneFrame::before {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: 21%;
+  width: 3px;
+  height: 56px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #45494e, #1a1d20);
+  box-shadow: 0 90px 0 -10px #2c3035;
+}
+
+.phoneFrame::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 17%;
+  width: 3px;
+  height: 34px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #45494e, #1a1d20);
+  box-shadow: 0 46px 0 0 #2c3035;
+}
+
+.phoneScreen {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 28px;
+  border-radius: 36px;
+  background: #0b0d0f;
 }
 
-.heroMainShot {
-  max-width: 320px;
-  margin-left: auto;
-}
-
-.heroFloatingTop {
+/* Dynamic Island */
+.phoneNotch {
   position: absolute;
-  top: 0;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 22px;
+  border-radius: 999px;
+  background: #050607;
+  box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.12);
+}
+
+/* Блик по стеклу */
+@keyframes glareSweep {
+  0%, 55%  { transform: translateX(-130%) skewX(-18deg); }
+  85%, 100% { transform: translateX(220%) skewX(-18deg); }
+}
+
+.phoneGlare {
+  position: absolute;
+  inset: 11px;
+  border-radius: 36px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.phoneGlare::before {
+  content: '';
+  position: absolute;
+  top: -10%;
   left: 0;
-  max-width: 210px;
+  width: 45%;
+  height: 120%;
+  background: linear-gradient(105deg, transparent 0%, rgba(255, 255, 255, 0.13) 45%, rgba(255, 255, 255, 0.02) 70%, transparent 100%);
+  animation: glareSweep 7s ease-in-out infinite;
 }
 
-.heroFloatingBottom {
+/* Тень на «полу» */
+@keyframes shadowPulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.55; }
+  50%       { transform: scaleX(0.92); opacity: 0.4; }
+}
+
+.phoneShadow {
   position: absolute;
-  left: 40px;
-  bottom: 20px;
-  max-width: 220px;
+  bottom: 2%;
+  left: 18%;
+  width: 64%;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.5) 0%, transparent 70%);
+  filter: blur(10px);
+  animation: shadowPulse 6.5s ease-in-out infinite;
+  z-index: 0;
+}
+
+[data-theme='light'] .phoneShadow {
+  background: radial-gradient(ellipse, rgba(17, 49, 38, 0.35) 0%, transparent 70%);
 }
 
 .section {
@@ -1567,20 +1692,12 @@
   }
 
   .heroVisual {
-    min-height: auto;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    align-items: start;
+    min-height: 620px;
   }
 
-  .heroMainShot,
-  .heroFloatingTop,
-  .heroFloatingBottom {
-    position: static;
-    max-width: 100%;
-    transform: none;
-    margin: 0;
+  .phoneStage {
+    min-height: 620px;
+    transform: scale(0.88);
   }
 }
 
@@ -1658,21 +1775,6 @@
     width: 74px;
   }
 
-  .heroVisual {
-    grid-template-columns: 1fr;
-  }
-
-  .heroMainShot {
-    max-width: 300px;
-    margin: 0 auto;
-  }
-
-  .heroFloatingTop,
-  .heroFloatingBottom {
-    max-width: 220px;
-    margin: 0 auto;
-  }
-
   .sectionHeading,
   .sectionHeadingCentered {
     padding-top: 0.95rem;
@@ -1730,9 +1832,10 @@
   .auroraBlob,
   .particle,
   .heroBgGlow,
-  .heroFloatMain,
-  .heroFloatA,
-  .heroFloatB,
+  .phoneMain,
+  .phoneBack,
+  .phoneGlare::before,
+  .phoneShadow,
   .heroTitleGradient,
   .tickerTrack,
   .aiCard,
@@ -1744,6 +1847,14 @@
 
   .sticker {
     transform: rotate(var(--rot, 0deg));
+  }
+
+  .phoneMain {
+    transform: rotateY(-16deg) rotateX(4deg) rotateZ(1.5deg);
+  }
+
+  .phoneBack {
+    transform: rotateY(20deg) rotateX(2deg) rotateZ(-5deg) translateZ(-120px);
   }
 
   .heroUnderline path {
