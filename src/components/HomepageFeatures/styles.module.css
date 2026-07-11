@@ -1705,6 +1705,7 @@
     max-width: 100%;
     transform: none;
     margin: 0;
+    animation: none;
   }
 }
 
@@ -1731,15 +1732,20 @@
     grid-template-columns: 1fr;
   }
 
-  /* Свайп-галерея скриншотов шагов */
+  /* Свайп-галерея скриншотов шагов — на всю ширину экрана */
   .stepsScreenshots {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 1rem;
-    padding: 1rem 0.2rem 1.2rem;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 1rem 1.3rem 1.2rem;
+    scroll-padding-inline: 1.3rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
   }
 
   .stepsScreenshots::-webkit-scrollbar {
@@ -1827,15 +1833,19 @@
     width: 74px;
   }
 
-  /* Свайп-галерея скриншотов в hero */
+  /* Свайп-галерея скриншотов в hero — на всю ширину экрана */
   .heroVisual {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 0.9rem;
-    padding: 0.4rem 0.2rem 1rem;
+    margin: 0.4rem calc(50% - 50vw) 0;
+    padding: 0.4rem 1.3rem 1rem;
+    scroll-padding-inline: 1.3rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
   }
 
   .heroVisual::-webkit-scrollbar {
@@ -1846,11 +1856,13 @@
   .heroFloatingTop,
   .heroFloatingBottom {
     position: static;
-    flex: 0 0 68%;
+    flex: 0 0 70%;
     max-width: none;
-    width: 68%;
+    width: 70%;
     scroll-snap-align: center;
     margin: 0;
+    animation: none;
+    transform: none;
   }
 
   .heroMainShot {
