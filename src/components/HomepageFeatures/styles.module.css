@@ -1890,21 +1890,20 @@
     display: none;
   }
 
-  /* Одинаковые боксы кадров — картинка вписывается без искажений */
+  /* Все кадры строго одинаковые: равная ширина + одинаковые исходники */
   .heroMainShot,
   .heroFloatingTop,
   .heroFloatingBottom {
     position: static;
-    flex: 0 0 min(74vw, 340px);
-    max-width: none;
-    width: min(74vw, 340px);
-    height: auto;
-    aspect-ratio: 236 / 490;
-    object-fit: contain;
+    flex: 0 0 auto;
+    width: 74vw !important;
+    max-width: 340px !important;
+    height: auto !important;
+    aspect-ratio: auto;
     scroll-snap-align: center;
-    margin: 0;
-    animation: none;
-    transform: none;
+    margin: 0 !important;
+    animation: none !important;
+    transform: none !important;
   }
 
   .heroMainShot {
