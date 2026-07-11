@@ -1740,7 +1740,7 @@
     gap: 1rem;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding: 1rem 1.3rem 1.2rem;
+    padding: 1.3rem 1.3rem 1.8rem;
     scroll-padding-inline: 1.3rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -1763,6 +1763,15 @@
 
   .screenshotImg {
     max-width: 100%;
+  }
+
+  /* На таче нет ховера — отключаем увеличение, чтобы кадр не обрезался */
+  .screenshotItem:hover {
+    transform: none;
+  }
+
+  .screenshotItem:hover .screenshotImg {
+    filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.32));
   }
 
   .shot0,
@@ -1821,6 +1830,31 @@
     align-items: stretch;
   }
 
+  /* Список в hero — компактные чипы вместо буллетов */
+  .heroList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .heroList li {
+    padding: 0.48rem 0.9rem;
+    border-radius: 999px;
+    border: 1px dashed rgba(34, 197, 94, 0.4);
+    background: rgba(34, 197, 94, 0.07);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .heroList li::before {
+    content: none;
+  }
+
+  .heroList li:nth-child(1) { transform: rotate(-0.6deg); }
+  .heroList li:nth-child(3) { transform: rotate(0.6deg); }
+
   .problemCard,
   .infoCard,
   .stepCard,
@@ -1856,16 +1890,17 @@
     display: none;
   }
 
-  /* Одинаковая высота кадров — ширина подстраивается по пропорциям */
+  /* Одинаковые боксы кадров — картинка вписывается без искажений */
   .heroMainShot,
   .heroFloatingTop,
   .heroFloatingBottom {
     position: static;
-    flex: 0 0 auto;
+    flex: 0 0 min(74vw, 340px);
     max-width: none;
-    width: auto;
-    height: 118vw;
-    max-height: 560px;
+    width: min(74vw, 340px);
+    height: auto;
+    aspect-ratio: 236 / 490;
+    object-fit: contain;
     scroll-snap-align: center;
     margin: 0;
     animation: none;
