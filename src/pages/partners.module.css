@@ -852,6 +852,123 @@
     flex-direction: column;
     align-self: stretch;
   }
+
+  /* Выгоды — редакторский список */
+  .benefitsGrid {
+    gap: 0;
+    border-top: 1px dashed rgba(34, 197, 94, 0.3);
+  }
+
+  .benefitCard,
+  .benefitFeatured {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px dashed rgba(34, 197, 94, 0.3);
+    padding: 1.15rem 0.15rem 1.2rem;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    column-gap: 0.9rem;
+    row-gap: 0.45rem;
+    align-items: center;
+  }
+
+  .benefitCard:hover,
+  .benefitFeatured:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .benefitCard::after {
+    content: none;
+  }
+
+  .benefitWatermark {
+    display: none;
+  }
+
+  .benefitIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    grid-row: 1;
+  }
+
+  .benefitTitle,
+  .benefitFeatured .benefitTitle {
+    margin: 0;
+    font-size: 1.08rem;
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .benefitText {
+    grid-column: 2;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  /* Шаги — вертикальный таймлайн */
+  .stepsGrid {
+    gap: 0;
+  }
+
+  .stepCard {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0.4rem 0 1.6rem 3.4rem;
+    position: relative;
+    overflow: visible;
+  }
+
+  .stepCard:hover {
+    transform: none;
+  }
+
+  .stepCard::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 44px;
+    bottom: -6px;
+    width: 2px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.45) 0%, rgba(34, 199, 214, 0.18) 100%);
+  }
+
+  .stepCard:last-child::before {
+    content: none;
+  }
+
+  .stepGhost {
+    position: absolute;
+    left: 0;
+    top: 0.4rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.45);
+    color: var(--ifm-color-primary);
+    -webkit-text-stroke: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .stepTitle {
+    margin: 0.35rem 0 0.45rem;
+    font-size: 1.12rem;
+  }
+
+  .stepText {
+    font-size: 0.9rem;
+  }
 }
 
 /* Reduced motion */
