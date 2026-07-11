@@ -254,6 +254,7 @@ function PartnerFormModal({ open, onClose }) {
 
 export default function PartnersPage() {
   const [formOpen, setFormOpen] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(null);
   return (
     <Layout title="Партнёрам" description="Станьте партнёром GrabYou: превращайте свободные часы и горящие предложения в выручку и новых клиентов">
       <main className={styles.page}>
@@ -356,11 +357,21 @@ export default function PartnersPage() {
               <Heading as="h2" className={styles.sectionTitle}>Коротко о главном</Heading>
             </div>
             <div className={styles.faqList}>
-              {faq.map((f) => (
-                <details key={f.q} className={styles.faqItem}>
-                  <summary className={styles.faqQ}>{f.q}</summary>
-                  <p className={styles.faqA}>{f.a}</p>
-                </details>
+              {faq.map((f, i) => (
+                <div key={f.q} className={`${styles.faqItem} ${faqOpen === i ? styles.faqItemOpen : ''}`}>
+                  <button
+                    type="button"
+                    className={styles.faqQ}
+                    aria-expanded={faqOpen === i}
+                    onClick={() => setFaqOpen(faqOpen === i ? null : i)}
+                  >
+                    {f.q}
+                    <span className={styles.faqPlus} aria-hidden="true">+</span>
+                  </button>
+                  <div className={styles.faqAWrap}>
+                    <p className={styles.faqA}>{f.a}</p>
+                  </div>
+                </div>
               ))}
             </div>
           </section>
