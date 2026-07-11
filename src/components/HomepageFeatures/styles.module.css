@@ -1744,8 +1744,8 @@
     scroll-padding-inline: 1.3rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 2.4rem, #000 calc(100% - 2.4rem), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 2.4rem, #000 calc(100% - 2.4rem), transparent 100%);
   }
 
   .stepsScreenshots::-webkit-scrollbar {
@@ -1799,7 +1799,11 @@
   }
 
   .section {
-    padding: 2.8rem 0;
+    padding: 3.4rem 0 2.6rem;
+  }
+
+  .sectionHeading {
+    margin-bottom: 2.2rem;
   }
 }
 
@@ -1844,21 +1848,24 @@
     scroll-padding-inline: 1.3rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 1.1rem, #000 calc(100% - 1.1rem), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 2.4rem, #000 calc(100% - 2.4rem), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 2.4rem, #000 calc(100% - 2.4rem), transparent 100%);
   }
 
   .heroVisual::-webkit-scrollbar {
     display: none;
   }
 
+  /* Одинаковая высота кадров — ширина подстраивается по пропорциям */
   .heroMainShot,
   .heroFloatingTop,
   .heroFloatingBottom {
     position: static;
-    flex: 0 0 70%;
+    flex: 0 0 auto;
     max-width: none;
-    width: 70%;
+    width: auto;
+    height: 118vw;
+    max-height: 560px;
     scroll-snap-align: center;
     margin: 0;
     animation: none;
@@ -1938,7 +1945,9 @@
   }
 
   .valueCard,
-  .valueFeatured .valueCard {
+  .valueFeatured .valueCard,
+  [data-theme='light'] .valueCard,
+  [data-theme='light'] .valueFeatured .valueCard {
     background: none;
     border: none;
     border-radius: 0;
@@ -1993,7 +2002,8 @@
     gap: 0;
   }
 
-  .stepCard {
+  .stepCard,
+  [data-theme='light'] .stepCard {
     background: none;
     border: none;
     border-radius: 0;
@@ -2088,7 +2098,8 @@
   }
 
   /* GrabAI — чат без коробки, он сам себе визуал */
-  .aiCard {
+  .aiCard,
+  [data-theme='light'] .aiCard {
     background: none;
     border: none;
     box-shadow: none;
@@ -2099,7 +2110,9 @@
 
   /* CTA и помощь — постеры на всю ширину */
   .finalCard,
-  .helpCard {
+  .helpCard,
+  [data-theme='light'] .finalCard,
+  [data-theme='light'] .helpCard {
     border-radius: 0;
     border-left: none;
     border-right: none;

@@ -860,7 +860,9 @@
   }
 
   .benefitCard,
-  .benefitFeatured {
+  .benefitFeatured,
+  [data-theme='light'] .benefitCard,
+  [data-theme='light'] .benefitFeatured {
     background: none;
     border: none;
     border-radius: 0;
@@ -914,7 +916,8 @@
     gap: 0;
   }
 
-  .stepCard {
+  .stepCard,
+  [data-theme='light'] .stepCard {
     background: none;
     border: none;
     border-radius: 0;
@@ -988,7 +991,8 @@
   }
 
   /* CTA — постер на всю ширину */
-  .ctaCard {
+  .ctaCard,
+  [data-theme='light'] .ctaCard {
     border-radius: 0;
     border-left: none;
     border-right: none;
@@ -996,6 +1000,10 @@
     padding: 2.6rem 1.4rem;
     text-align: left;
     align-items: flex-start;
+  }
+
+  .section {
+    padding: 3rem 0 2.2rem;
   }
 
   .ctaButtons {
