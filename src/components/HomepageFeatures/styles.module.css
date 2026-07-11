@@ -1731,8 +1731,32 @@
     grid-template-columns: 1fr;
   }
 
+  /* Свайп-галерея скриншотов шагов */
   .stepsScreenshots {
-    gap: 1.6rem;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 1rem 0.2rem 1.2rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .stepsScreenshots::-webkit-scrollbar {
+    display: none;
+  }
+
+  .shotsGlow {
+    display: none;
+  }
+
+  .stepsScreenshots .revealBlock {
+    flex: 0 0 66%;
+    scroll-snap-align: center;
+  }
+
+  .screenshotImg {
+    max-width: 100%;
   }
 
   .shot0,
@@ -1742,7 +1766,7 @@
   }
 
   .shotNum {
-    margin-left: -104px;
+    margin-left: -80px;
   }
 
   /* Скриншот GrabAI на мобиле — под карточкой */
@@ -1803,9 +1827,30 @@
     width: 74px;
   }
 
+  /* Свайп-галерея скриншотов в hero */
   .heroVisual {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.6rem;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0.9rem;
+    padding: 0.4rem 0.2rem 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .heroVisual::-webkit-scrollbar {
+    display: none;
+  }
+
+  .heroMainShot,
+  .heroFloatingTop,
+  .heroFloatingBottom {
+    position: static;
+    flex: 0 0 68%;
+    max-width: none;
+    width: 68%;
+    scroll-snap-align: center;
+    margin: 0;
   }
 
   .heroMainShot {
@@ -2001,6 +2046,73 @@
 
   .stepCard .cardText {
     font-size: 0.9rem;
+  }
+
+  /* Статистика — большие цифры без коробок */
+  .statsRow {
+    gap: 0;
+    border-top: 1px dashed rgba(34, 197, 94, 0.3);
+    border-bottom: 1px dashed rgba(34, 197, 94, 0.3);
+  }
+
+  .statItem {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 1.1rem 0.4rem 1rem;
+  }
+
+  .statItem:hover {
+    transform: none;
+    background: none;
+  }
+
+  .statsRow > :nth-child(odd) .statItem {
+    border-right: 1px dashed rgba(34, 197, 94, 0.3);
+  }
+
+  .statsRow > :nth-child(-n + 2) .statItem {
+    border-bottom: 1px dashed rgba(34, 197, 94, 0.3);
+  }
+
+  /* GrabAI — чат без коробки, он сам себе визуал */
+  .aiCard {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    animation: none;
+  }
+
+  /* CTA и помощь — постеры на всю ширину */
+  .finalCard,
+  .helpCard {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    margin: 0 calc(50% - 50vw);
+    padding: 2.6rem 1.4rem;
+    max-width: none;
+    text-align: left;
+  }
+
+  .finalCard::before {
+    left: 1.4rem;
+    transform: none;
+  }
+
+  .finalButtons {
+    justify-content: flex-start;
+  }
+
+  .helpContent {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .helpContacts {
+    justify-content: flex-start;
   }
 }
 
