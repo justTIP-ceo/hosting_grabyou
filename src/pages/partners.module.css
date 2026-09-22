@@ -434,8 +434,8 @@
   padding: clamp(1.75rem, 5vw, 3.5rem);
   border: var(--gy-stroke-bold) solid var(--gy-border);
   border-radius: var(--gy-radius-xl);
-  background: var(--gy-ink-900);
-  color: var(--gy-paper);
+  background: var(--gy-accent);
+  color: var(--gy-ink-900);
   box-shadow: var(--gy-hard);
   text-align: center;
 }
@@ -448,13 +448,13 @@
   width: 260px;
   height: 340px;
   background: url('/img/brand/pattern-blocks.svg') no-repeat center / contain;
-  opacity: 0.18;
+  opacity: 0.22;
   transform: rotate(-8deg);
   pointer-events: none;
 }
 
 .ctaCard .eyebrow {
-  color: var(--gy-accent);
+  color: var(--gy-forest-700);
   justify-content: center;
   width: 100%;
 }
@@ -468,7 +468,7 @@
   letter-spacing: -0.04em;
   text-transform: uppercase;
   font-weight: 900;
-  color: var(--gy-paper);
+  color: var(--gy-ink-900);
 }
 
 .ctaText {
@@ -477,7 +477,8 @@
   max-width: 52ch;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--gy-lime-200);
+  font-weight: 500;
+  color: var(--gy-forest-800);
 }
 
 .ctaButtons {
@@ -495,9 +496,9 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 1.3rem;
-  border: var(--gy-stroke) solid var(--gy-accent);
+  border: var(--gy-stroke) solid var(--gy-ink-900);
   border-radius: 999px;
-  color: var(--gy-accent);
+  color: var(--gy-ink-900);
   font-weight: 800;
   font-size: 0.94rem;
   text-decoration: none;
@@ -507,9 +508,23 @@
 }
 
 .ctaLink:hover {
-  background: var(--gy-accent);
-  color: var(--gy-ink-900);
+  background: var(--gy-ink-900);
+  color: var(--gy-accent);
   text-decoration: none;
+}
+
+/* На лаймовой плашке главная кнопка инвертируется — иначе сольётся с фоном */
+.ctaCard :global(.button.button--primary),
+.ctaCard :global(.button.button--primary:hover) {
+  --ifm-button-color: var(--gy-accent);
+  color: var(--gy-accent);
+  background: var(--gy-ink-900);
+  border-color: var(--gy-ink-900);
+  box-shadow: 4px 4px 0 rgba(1, 14, 5, 0.25);
+}
+
+.ctaCard :global(.button.button--primary:hover) {
+  background: var(--gy-forest-900);
 }
 
 /* ==========================================================================

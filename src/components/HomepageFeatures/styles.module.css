@@ -223,14 +223,14 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  min-height: 420px;
+  min-height: 520px;
 }
 
 /* Корпус телефона нарисован в самом PNG, углы прозрачные. Рисовать поверх
    свою рамку нельзя — радиусы не совпадают. Тень даём drop-shadow: он идёт
    по альфе и повторяет силуэт устройства. */
 .phone {
-  width: min(270px, 64%);
+  width: min(330px, 74%);
   animation: float 7s ease-in-out infinite;
   filter: drop-shadow(var(--gy-offset-lg) var(--gy-offset-lg) 0 var(--gy-border));
 }
@@ -243,9 +243,9 @@
 
 .phoneSmall {
   position: absolute;
-  right: -2%;
+  right: -6%;
   bottom: 4%;
-  width: min(168px, 40%);
+  width: min(208px, 47%);
   animation-delay: -3.5s;
   z-index: 2;
   filter: drop-shadow(var(--gy-offset) var(--gy-offset) 0 var(--gy-border));
@@ -1021,12 +1021,12 @@
   }
 
   .phone {
-    width: min(240px, 58%);
+    width: min(290px, 62%);
   }
 
   .phoneSmall {
-    width: min(150px, 36%);
-    right: 6%;
+    width: min(182px, 39%);
+    right: 2%;
   }
 
   .valuesGrid,
