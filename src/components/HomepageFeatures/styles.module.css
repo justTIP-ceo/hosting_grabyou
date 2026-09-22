@@ -226,14 +226,13 @@
   min-height: 420px;
 }
 
+/* Корпус телефона нарисован в самом PNG, углы прозрачные. Рисовать поверх
+   свою рамку нельзя — радиусы не совпадают. Тень даём drop-shadow: он идёт
+   по альфе и повторяет силуэт устройства. */
 .phone {
-  border: var(--gy-stroke-bold) solid var(--gy-border);
-  border-radius: 30px;
-  overflow: hidden;
-  background: var(--gy-ink-900);
-  box-shadow: var(--gy-hard-lg);
   width: min(270px, 64%);
   animation: float 7s ease-in-out infinite;
+  filter: drop-shadow(var(--gy-offset-lg) var(--gy-offset-lg) 0 var(--gy-border));
 }
 
 .phone img {
@@ -247,10 +246,9 @@
   right: -2%;
   bottom: 4%;
   width: min(168px, 40%);
-  border-radius: 22px;
-  box-shadow: var(--gy-hard);
   animation-delay: -3.5s;
   z-index: 2;
+  filter: drop-shadow(var(--gy-offset) var(--gy-offset) 0 var(--gy-border));
 }
 
 @keyframes float {
@@ -573,11 +571,7 @@
 .shot {
   position: relative;
   margin: 0;
-  border: var(--gy-stroke-bold) solid var(--gy-border);
-  border-radius: var(--gy-radius-xl);
-  overflow: hidden;
-  background: var(--gy-ink-900);
-  box-shadow: var(--gy-hard);
+  filter: drop-shadow(var(--gy-offset) var(--gy-offset) 0 var(--gy-border));
 }
 
 .shot img {
@@ -588,8 +582,8 @@
 
 .shotNum {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 4%;
+  left: 8%;
   z-index: 2;
   padding: 0.2rem 0.6rem;
   border: var(--gy-stroke) solid var(--gy-ink-900);
@@ -846,9 +840,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border: var(--gy-stroke-bold) solid var(--gy-border);
-  border-radius: var(--gy-radius-xl);
-  box-shadow: var(--gy-hard-sm);
+  filter: drop-shadow(var(--gy-offset) var(--gy-offset) 0 var(--gy-border));
 }
 
 .aiTagA {

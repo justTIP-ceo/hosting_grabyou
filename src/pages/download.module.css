@@ -65,9 +65,9 @@
   margin: 0 auto 1.25rem;
   width: clamp(68px, 9vw, 88px);
   height: auto;
-  border: var(--gy-stroke-bold) solid var(--gy-ink-900);
-  border-radius: 22px;
-  box-shadow: var(--gy-hard-sm);
+  /* обводка нарисована внутри самого SVG — рамка на img давала бы
+     скругление, не совпадающее с плашкой иконки */
+  filter: drop-shadow(4px 4px 0 var(--gy-ink-900));
 }
 
 .title {
