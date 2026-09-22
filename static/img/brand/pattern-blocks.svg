@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 720" width="360" height="720">
+  <title>GrabYou — модульный паттерн</title>
+  <defs>
+    <pattern id="gyBlocks" width="360" height="720" patternUnits="userSpaceOnUse">
+      <g>
+        <rect x="0"   y="0"   width="108" height="180" fill="#aef336"/>
+        <rect x="0"   y="198" width="108" height="90"  fill="#00782e"/>
+        <rect x="0"   y="306" width="108" height="162" fill="#13aa41"/>
+        <rect x="0"   y="486" width="108" height="90"  fill="#c1fd8c"/>
+        <rect x="0"   y="594" width="108" height="108" fill="#13aa41"/>
+
+        <rect x="126" y="0"   width="108" height="234" fill="#00782e"/>
+        <rect x="126" y="252" width="108" height="144" fill="#c1fd8c"/>
+        <rect x="126" y="414" width="108" height="72"  fill="#00782e"/>
+        <rect x="126" y="504" width="108" height="198" fill="#aef336"/>
+
+        <rect x="252" y="0"   width="108" height="54"  fill="#aef336"/>
+        <rect x="252" y="72"  width="108" height="216" fill="#c1fd8c"/>
+        <rect x="252" y="306" width="108" height="126" fill="#13aa41"/>
+        <rect x="252" y="450" width="108" height="180" fill="#00782e"/>
+        <rect x="252" y="648" width="108" height="54"  fill="#13aa41"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="360" height="720" fill="url(#gyBlocks)"/>
+</svg>

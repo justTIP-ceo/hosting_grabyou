@@ -1,431 +1,603 @@
+/* ==========================================================================
+   GrabYou — фирменный стиль
+   Палитра, типографика и база компонентов.
+   Ассеты бренда: static/img/brand/, шрифты: static/fonts/
+   ========================================================================== */
+
+/* Фирменные Cygre / Bulatov SP Demo подключаются из static/fonts/brand-fonts.css
+   (см. stylesheets в docusaurus.config.js и static/fonts/README.md).
+   Свободные фолбэки — Onest / Unbounded из Google Fonts. */
+
 :root {
-  --ifm-navbar-height: 3.6rem;
+  /* ────────────────────────────────────────────────────────────────────
+     1. ПАЛИТРА БРЕНДА — 7 шкал по 10 шагов (OKLab), опорные цвета
+     зафиксированы на своих ступенях: lime-400, green-500, forest-600,
+     ink-800/900, navy-700, petrol-700, mint-200.
+     ──────────────────────────────────────────────────────────────────── */
 
-  --ifm-font-family-base: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --grabyou-font-display: 'Unbounded', 'Manrope', system-ui, sans-serif;
+  /* лайм — главный акцент */
+  --gy-lime-50: #fbfff2;
+  --gy-lime-100: #e8fdcd;
+  --gy-lime-200: #d5faa5;
+  --gy-lime-300: #c1f778;
+  --gy-lime-400: #aef336;
+  --gy-lime-500: #8cc42c;
+  --gy-lime-600: #6c9622;
+  --gy-lime-700: #4d6b19;
+  --gy-lime-800: #30430f;
+  --gy-lime-900: #161f06;
 
-  /* Светлая тема */
-  --ifm-color-primary: #22c55e;
-  --ifm-color-primary-dark: #1fb454;
-  --ifm-color-primary-darker: #1ca84e;
-  --ifm-color-primary-darkest: #178941;
-  --ifm-color-primary-light: #39d06f;
-  --ifm-color-primary-lighter: #4ad77d;
-  --ifm-color-primary-lightest: #79e39f;
+  /* зелёный — сигнальный */
+  --gy-green-50: #f0fdf4;
+  --gy-green-100: #ccedd1;
+  --gy-green-200: #a7ddae;
+  --gy-green-300: #81cc8b;
+  --gy-green-400: #56bb67;
+  --gy-green-500: #13aa41;
+  --gy-green-600: #0f8333;
+  --gy-green-700: #0b5e25;
+  --gy-green-800: #073b18;
+  --gy-green-900: #031b0b;
 
-  --grabyou-accent: #22c7d6;
-  --grabyou-accent-soft: #7ee7f2;
-  --grabyou-accent-deep: #119fbd;
+  /* тёмно-зелёный — глубина */
+  --gy-forest-50: #edfbf1;
+  --gy-forest-100: #cae5cf;
+  --gy-forest-200: #a8cfae;
+  --gy-forest-300: #86b98e;
+  --gy-forest-400: #63a36e;
+  --gy-forest-500: #3e8d4f;
+  --gy-forest-600: #00782e;
+  --gy-forest-700: #045421;
+  --gy-forest-800: #043214;
+  --gy-forest-900: #021308;
 
-  --ifm-background-color: #edf8f4;
-  --ifm-background-surface-color: #ffffff;
-  --ifm-navbar-background-color: rgba(237, 248, 244, 0.92);
-  --ifm-footer-background-color: #dff3eb;
+  /* чернила — текст и поверхности */
+  --gy-ink-50: #f5f9f6;
+  --gy-ink-100: #d6dfd8;
+  --gy-ink-200: #b7c6bc;
+  --gy-ink-300: #9aada0;
+  --gy-ink-400: #7d9585;
+  --gy-ink-500: #617d6a;
+  --gy-ink-600: #456651;
+  --gy-ink-700: #2a5039;
+  --gy-ink-800: #0c3b22;
+  --gy-ink-900: #010e05;
 
-  --ifm-font-color-base: #113126;
-  --ifm-font-color-secondary: #47645a;
-  --ifm-heading-color: #0d241c;
+  /* синий — холодный якорь */
+  --gy-navy-50: #eef4fc;
+  --gy-navy-100: #c8d2df;
+  --gy-navy-200: #a4b2c2;
+  --gy-navy-300: #8092a7;
+  --gy-navy-400: #5e738b;
+  --gy-navy-500: #3e5671;
+  --gy-navy-600: #1f3a57;
+  --gy-navy-700: #001f3e;
+  --gy-navy-800: #001225;
+  --gy-navy-900: #00070f;
 
-  --ifm-color-emphasis-100: #eefbf5;
-  --ifm-color-emphasis-200: #d8f5e8;
-  --ifm-color-emphasis-300: #bee9d5;
-  --ifm-color-emphasis-400: #9fdabd;
-  --ifm-color-emphasis-500: #7ec8a6;
-  --ifm-color-emphasis-600: #5f9c83;
-  --ifm-color-emphasis-700: #47645a;
-  --ifm-color-emphasis-800: #24453a;
-  --ifm-color-emphasis-900: #10241d;
+  /* петроль — второй холодный якорь */
+  --gy-petrol-50: #eff8fa;
+  --gy-petrol-100: #cad7da;
+  --gy-petrol-200: #a7b7bb;
+  --gy-petrol-300: #85979d;
+  --gy-petrol-400: #647980;
+  --gy-petrol-500: #445c64;
+  --gy-petrol-600: #264149;
+  --gy-petrol-700: #062730;
+  --gy-petrol-800: #03181e;
+  --gy-petrol-900: #010a0d;
 
-  --ifm-button-border-radius: 16px;
-  --ifm-card-border-radius: 24px;
-  --ifm-global-radius: 18px;
-  --ifm-code-font-size: 95%;
+  /* мята — вода на карте */
+  --gy-mint-50: #f4fffc;
+  --gy-mint-100: #d9fdf1;
+  --gy-mint-200: #bcfae7;
+  --gy-mint-300: #a0dbc9;
+  --gy-mint-400: #85bdac;
+  --gy-mint-500: #6a9f90;
+  --gy-mint-600: #518374;
+  --gy-mint-700: #38675a;
+  --gy-mint-800: #204d41;
+  --gy-mint-900: #05342a;
 
-  --docusaurus-highlighted-code-line-bg: rgba(34, 197, 94, 0.08);
+  /* сигнальные — «горит», маршрут, бумага */
+  --gy-urgent: #ea3a3a;
+  --gy-urgent-soft: #ff8a7a;
+  --gy-urgent-deep: #a81f1f;
+  --gy-route: #2f7df5;
+  --gy-route-soft: #8fbcff;
+  --gy-paper: #f8fef0;
+  --gy-paper-warm: #e8ffcb;
 
-  --ifm-link-color: #119fbd;
-  --ifm-link-hover-color: #0b7f98;
+  /* ────────────────────────────────────────────────────────────────────
+     2. СЕМАНТИКА — светлая тема
+     ──────────────────────────────────────────────────────────────────── */
+  --gy-bg: var(--gy-paper);
+  --gy-bg-alt: var(--gy-lime-100);
+  --gy-surface: #ffffff;
+  --gy-surface-alt: var(--gy-lime-50);
+  --gy-text: var(--gy-ink-900);
+  --gy-text-soft: var(--gy-ink-700);
+  --gy-text-dim: var(--gy-ink-600);
+  --gy-border: var(--gy-ink-900);
+  --gy-border-soft: rgba(1, 14, 5, 0.14);
+  --gy-accent: var(--gy-lime-400);
+  --gy-accent-hover: var(--gy-lime-300);
+  --gy-on-accent: var(--gy-ink-900);
+  --gy-signal: var(--gy-green-500);
+  --gy-deep: var(--gy-forest-600);
+  --gy-map-land: var(--gy-green-400);
+  --gy-map-water: var(--gy-mint-200);
+  --gy-map-road: #ffffff;
+  --gy-shadow: var(--gy-ink-900);
+  --gy-shadow-alpha: rgba(1, 14, 5, 0.1);
 
-  --ifm-hero-background-color: #edf8f4;
+  /* ────────────────────────────────────────────────────────────────────
+     3. ТИПОГРАФИКА
+     ──────────────────────────────────────────────────────────────────── */
+  --gy-font-display: 'Bulatov SP', 'Cygre', 'Unbounded', system-ui, sans-serif;
+  --gy-font-base: 'Cygre', 'Onest', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --gy-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  --grabyou-navbar-accent: rgba(226, 249, 255, 0.76);
-  --grabyou-secondary-bg: rgba(34, 199, 214, 0.08);
-  --grabyou-card-tint: rgba(34, 199, 214, 0.03);
-  --grabyou-soft-border: rgba(34, 199, 214, 0.16);
-  --grabyou-selection-bg: rgba(34, 199, 214, 0.18);
-  --grabyou-glow: 0 0 0 1px rgba(34, 199, 214, 0.08);
+  /* ────────────────────────────────────────────────────────────────────
+     4. ГЕОМЕТРИЯ — брутализм: жёсткие рамки, смещённые тени, без блюра
+     ──────────────────────────────────────────────────────────────────── */
+  --gy-radius-sm: 8px;
+  --gy-radius: 14px;
+  --gy-radius-lg: 22px;
+  --gy-radius-xl: 32px;
+  --gy-stroke: 2px;
+  --gy-stroke-bold: 3px;
+  --gy-offset: 6px;
+  --gy-offset-lg: 10px;
+  --gy-hard: var(--gy-offset) var(--gy-offset) 0 var(--gy-border);
+  --gy-hard-sm: 4px 4px 0 var(--gy-border);
+  --gy-hard-lg: var(--gy-offset-lg) var(--gy-offset-lg) 0 var(--gy-border);
+  --gy-ease: cubic-bezier(0.2, 0.9, 0.3, 1);
+
+  /* ── мост в токены Docusaurus / Infima ── */
+  --ifm-color-primary: var(--gy-green-600);
+  --ifm-color-primary-dark: var(--gy-green-700);
+  --ifm-color-primary-darker: var(--gy-green-800);
+  --ifm-color-primary-darkest: var(--gy-green-900);
+  --ifm-color-primary-light: var(--gy-green-500);
+  --ifm-color-primary-lighter: var(--gy-green-400);
+  --ifm-color-primary-lightest: var(--gy-green-300);
+
+  --ifm-font-family-base: var(--gy-font-base);
+  --ifm-font-family-monospace: var(--gy-font-mono);
+  --ifm-heading-font-family: var(--gy-font-display);
+  --ifm-font-weight-bold: 800;
+
+  --ifm-background-color: var(--gy-bg);
+  --ifm-background-surface-color: var(--gy-surface);
+  --ifm-navbar-background-color: var(--gy-bg);
+  --ifm-footer-background-color: var(--gy-ink-900);
+  --ifm-font-color-base: var(--gy-text);
+  --ifm-heading-color: var(--gy-text);
+  --ifm-link-color: var(--gy-forest-600);
+  --ifm-link-hover-color: var(--gy-green-500);
+
+  --ifm-navbar-height: 4.25rem;
+  --ifm-navbar-padding-horizontal: 1.25rem;
+  --ifm-global-radius: var(--gy-radius);
+  --ifm-button-border-radius: 999px;
+  --ifm-card-border-radius: var(--gy-radius-lg);
+  --ifm-code-font-size: 92%;
+  --ifm-container-width-xl: 1240px;
+  --docusaurus-highlighted-code-line-bg: rgba(174, 243, 54, 0.22);
 }
 
-/* Тёмная тема — тёмно-зелёная */
+/* ────────────────────────────────────────────────────────────────────────
+   Тёмная тема — «чернила + лайм»
+   ──────────────────────────────────────────────────────────────────────── */
 [data-theme='dark'] {
-  --ifm-color-primary: #3ddd78;
-  --ifm-color-primary-dark: #2ed469;
-  --ifm-color-primary-darker: #27c960;
-  --ifm-color-primary-darkest: #1fa34e;
-  --ifm-color-primary-light: #54e388;
-  --ifm-color-primary-lighter: #63e794;
-  --ifm-color-primary-lightest: #90efb3;
+  --gy-bg: var(--gy-ink-900);
+  --gy-bg-alt: #071a0f;
+  --gy-surface: #0a1f13;
+  --gy-surface-alt: #0d2717;
+  --gy-text: var(--gy-paper);
+  --gy-text-soft: var(--gy-lime-200);
+  --gy-text-dim: #95ad9d;
+  --gy-border: var(--gy-lime-400);
+  --gy-border-soft: rgba(174, 243, 54, 0.22);
+  --gy-accent: var(--gy-lime-400);
+  --gy-accent-hover: var(--gy-lime-300);
+  --gy-on-accent: var(--gy-ink-900);
+  --gy-signal: var(--gy-green-400);
+  --gy-deep: var(--gy-green-300);
+  /* На тёмной карта инвертируется: суша уходит вглубь, вода светлее суши,
+     улицы приглушаются — иначе сетка дорог перебивает Неву */
+  --gy-map-land: #05291a;
+  --gy-map-water: #2f7f68;
+  --gy-map-road: rgba(174, 243, 54, 0.3);
+  --gy-shadow: var(--gy-lime-400);
+  --gy-shadow-alpha: rgba(0, 0, 0, 0.55);
 
-  --grabyou-accent: #52e8c0;
-  --grabyou-accent-soft: #8ef5d8;
-  --grabyou-accent-deep: #27c9a0;
+  --ifm-color-primary: var(--gy-lime-400);
+  --ifm-color-primary-dark: var(--gy-lime-500);
+  --ifm-color-primary-darker: var(--gy-lime-600);
+  --ifm-color-primary-darkest: var(--gy-lime-700);
+  --ifm-color-primary-light: var(--gy-lime-300);
+  --ifm-color-primary-lighter: var(--gy-lime-200);
+  --ifm-color-primary-lightest: var(--gy-lime-100);
 
-  /* Тёмно-зелёный фон */
-  --ifm-background-color: #0e2318;
-  --ifm-background-surface-color: #152e20;
-  --ifm-navbar-background-color: rgba(10, 28, 18, 0.94);
-  --ifm-footer-background-color: #0b1d13;
-
-  --ifm-font-color-base: #e4f9ee;
-  --ifm-font-color-secondary: #91c4a8;
-  --ifm-heading-color: #f0fdf5;
-
-  --ifm-color-emphasis-100: #1e4430;
-  --ifm-color-emphasis-200: #265540;
-  --ifm-color-emphasis-300: #306950;
-  --ifm-color-emphasis-400: #3c8062;
-  --ifm-color-emphasis-500: #4d9a78;
-  --ifm-color-emphasis-600: #67b391;
-  --ifm-color-emphasis-700: #8dcbac;
-  --ifm-color-emphasis-800: #bbdecb;
-  --ifm-color-emphasis-900: #e4f9ee;
-
-  --ifm-link-color: #4fe3bb;
-  --ifm-link-hover-color: #87f0d3;
-
-  --docusaurus-highlighted-code-line-bg: rgba(79, 227, 187, 0.1);
-
-  --ifm-hero-background-color: #1a3d28;
-
-  --grabyou-navbar-accent: rgba(26, 58, 40, 0.96);
-  --grabyou-secondary-bg: rgba(79, 227, 187, 0.1);
-  --grabyou-card-tint: rgba(79, 227, 187, 0.05);
-  --grabyou-soft-border: rgba(79, 227, 187, 0.2);
-  --grabyou-selection-bg: rgba(79, 227, 187, 0.22);
-  --grabyou-glow: 0 0 0 1px rgba(79, 227, 187, 0.14);
+  --ifm-footer-background-color: #030f07;
+  --ifm-link-color: var(--gy-lime-300);
+  --ifm-link-hover-color: var(--gy-lime-200);
+  --docusaurus-highlighted-code-line-bg: rgba(174, 243, 54, 0.14);
 }
 
-/* База */
+/* ==========================================================================
+   База
+   ========================================================================== */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 html,
 body {
-  background: var(--ifm-background-color);
+  background: var(--gy-bg);
+  color: var(--gy-text);
+  font-family: var(--gy-font-base);
+  font-weight: 450;
 }
 
-[data-theme='dark'] html,
-[data-theme='dark'] body,
-[data-theme='dark'] #__docusaurus,
-[data-theme='dark'] .main-wrapper {
-  background-color: #0e2318 !important;
+#__docusaurus,
+.main-wrapper {
+  background: var(--gy-bg);
 }
 
 ::selection {
-  background: var(--grabyou-selection-bg);
-}
-
-main {
-  position: relative;
+  background: var(--gy-accent);
+  color: var(--gy-ink-900);
 }
 
 h1,
-h2 {
-  font-family: var(--grabyou-font-display);
-  letter-spacing: -0.01em;
-  font-weight: 700;
-}
-
+h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
+  font-family: var(--gy-font-display);
+  color: var(--gy-text);
   letter-spacing: -0.02em;
   font-weight: 800;
+  text-wrap: balance;
 }
 
-.navbar__title {
-  font-family: var(--grabyou-font-display);
+h1 {
+  letter-spacing: -0.035em;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
-  transition: color 0.18s ease;
+  transition: color 0.16s var(--gy-ease);
 }
 
-/* Navbar */
+:focus-visible {
+  outline: 3px solid var(--gy-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   Навбар
+   ========================================================================== */
 .navbar {
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: linear-gradient(
-    90deg,
-    var(--ifm-navbar-background-color) 0%,
-    var(--grabyou-navbar-accent) 100%
-  );
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(34, 199, 214, 0.03);
+  background: var(--gy-bg);
+  border-bottom: var(--gy-stroke) solid var(--gy-border);
+  box-shadow: none;
+  padding-block: 0;
 }
 
-[data-theme='dark'] .navbar {
-  box-shadow:
-    0 14px 34px rgba(0, 0, 0, 0.28),
-    0 0 0 1px rgba(95, 223, 240, 0.04);
+.navbar__inner {
+  max-width: var(--ifm-container-width-xl);
+  margin-inline: auto;
+}
+
+.navbar__brand {
+  margin-right: 1.5rem;
 }
 
 .navbar__brand:hover {
   color: inherit;
 }
 
+/* Логотип-вордмарк: цветная маска, поэтому он живёт в обеих темах */
+.navbar__logo {
+  height: auto;
+  margin-right: 0;
+}
+
+.navbar__logo img {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
 .navbar__title {
-  font-weight: 900;
-  font-size: 1.25rem;
-  letter-spacing: -0.04em;
-  background: linear-gradient(90deg, var(--ifm-color-primary) 0%, var(--grabyou-accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: none;
 }
 
 .navbar__link {
-  border-radius: 12px;
-  padding: 0.45rem 0.75rem;
+  font-family: var(--gy-font-base);
+  font-weight: 700;
+  font-size: 0.94rem;
+  letter-spacing: -0.01em;
+  color: var(--gy-text);
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: var(--gy-stroke) solid transparent;
 }
 
-.navbar__link:hover,
+.navbar__link:hover {
+  color: var(--gy-text);
+  background: var(--gy-accent);
+  border-color: var(--gy-border);
+}
+
 .navbar__link--active {
-  color: var(--ifm-link-color);
-  background: var(--grabyou-secondary-bg);
-}
-
-/* Hero */
-.hero--primary {
-  background: var(--ifm-hero-background-color);
-  color: var(--ifm-heading-color);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-/* Footer */
-.footer {
-  background: var(--ifm-footer-background-color);
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-}
-
-[data-theme='dark'] .footer {
-  box-shadow: inset 0 1px 0 rgba(95, 223, 240, 0.04);
-}
-
-.footer__title {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.footer__link-item:hover {
-  color: var(--ifm-link-color);
-}
-
-/* Кнопки */
-.button {
-  border-radius: 16px;
-  font-weight: 700;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    color 0.18s ease;
-}
-
-.button:hover {
-  transform: translateY(-1px);
-}
-
-.button--primary {
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  box-shadow:
-    0 12px 30px rgba(34, 197, 94, 0.16),
-    0 0 0 1px rgba(34, 199, 214, 0.08);
-}
-
-[data-theme='dark'] .button--primary {
-  box-shadow:
-    0 14px 36px rgba(18, 201, 98, 0.16),
-    0 0 0 1px rgba(95, 223, 240, 0.08);
-}
-
-.button--secondary {
-  border-color: var(--ifm-color-emphasis-300);
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--ifm-heading-color);
-}
-
-[data-theme='dark'] .button--secondary {
-  border-color: var(--grabyou-soft-border);
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--ifm-font-color-base);
-}
-
-.button--secondary:hover {
-  border-color: var(--ifm-link-color);
-  box-shadow: var(--grabyou-glow);
-}
-
-/* Карточки / панели */
-.card,
-.pagination-nav__link,
-.theme-doc-markdown,
-.table-of-contents,
-.menu {
-  border-radius: 20px;
-}
-
-.card,
-.pagination-nav__link {
-  border: 1px solid var(--ifm-color-emphasis-200);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.82) 0%,
-    var(--grabyou-card-tint) 100%
-  );
-  box-shadow:
-    0 12px 35px rgba(17, 49, 38, 0.06),
-    0 0 0 1px rgba(34, 199, 214, 0.03);
-}
-
-[data-theme='dark'] .card,
-[data-theme='dark'] .pagination-nav__link {
-  border-color: rgba(95, 223, 240, 0.08);
-  background: linear-gradient(
-    180deg,
-    rgba(12, 24, 20, 0.96) 0%,
-    rgba(10, 23, 19, 0.96) 60%,
-    var(--grabyou-card-tint) 100%
-  );
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.32),
-    0 0 0 1px rgba(95, 223, 240, 0.04);
-}
-
-.theme-doc-markdown,
-.table-of-contents,
-.menu {
+  border-color: var(--gy-border);
   background: transparent;
+  color: var(--gy-text);
 }
 
-/* Меню / toc */
-.menu__link,
-.table-of-contents__link {
-  border-radius: 12px;
+/* CTA «Скачать» в шапке */
+.navbar__link.navbar-cta {
+  background: var(--gy-accent);
+  border-color: var(--gy-border);
+  color: var(--gy-ink-900);
+  box-shadow: 3px 3px 0 var(--gy-border);
 }
 
-.menu__link:hover,
-.table-of-contents__link:hover,
-.table-of-contents__link--active {
-  color: var(--ifm-link-color);
+.navbar__link.navbar-cta:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--gy-border);
 }
-
-.menu__link:hover {
-  background: var(--grabyou-secondary-bg);
-}
-
-.menu__link--active {
-  color: var(--ifm-color-primary);
-  font-weight: 700;
-  background: var(--grabyou-secondary-bg);
-  box-shadow: var(--grabyou-glow);
-}
-
-/* Код */
-pre,
-code {
-  border-radius: 16px;
-}
-
-[data-theme='dark'] pre {
-  border: 1px solid rgba(95, 223, 240, 0.07);
-}
-
-/* Таблицы */
-table {
-  overflow: hidden;
-  border-radius: 16px;
-}
-
-[data-theme='dark'] table {
-  border: 1px solid rgba(95, 223, 240, 0.08);
-}
-
-/* Пагинация */
-.pagination-nav__link:hover {
-  box-shadow:
-    0 12px 35px rgba(34, 197, 94, 0.12),
-    0 0 0 1px rgba(34, 199, 214, 0.08);
-}
-
-[data-theme='dark'] .pagination-nav__link:hover {
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.34),
-    0 0 0 1px rgba(95, 223, 240, 0.09);
-}
-
 
 .navbar-telegram-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.35rem;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  margin-left: 0.4rem;
+  border-radius: 999px;
+  border: var(--gy-stroke) solid var(--gy-border);
+  color: var(--gy-text);
+  transition:
+    background-color 0.16s var(--gy-ease),
+    transform 0.16s var(--gy-ease);
 }
 
 .navbar-telegram-link:hover {
-  background: transparent !important;
+  background: var(--gy-accent);
+  color: var(--gy-ink-900);
+  transform: translateY(-2px);
 }
 
-.navbar-telegram-icon {
-  display: block;
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  border-radius: 999px;
+.navbar-telegram-link svg {
+  width: 19px;
+  height: 19px;
 }
+
+/* тумблер темы */
+.navbar__items--right [class*='toggleButton'] {
+  border: var(--gy-stroke) solid var(--gy-border);
+  border-radius: 999px;
+  color: var(--gy-text);
+  transition: background-color 0.16s var(--gy-ease);
+}
+
+.navbar__items--right [class*='toggleButton']:hover {
+  background: var(--gy-accent);
+  color: var(--gy-ink-900);
+}
+
+.navbar-sidebar {
+  background: var(--gy-bg);
+  border-right: var(--gy-stroke) solid var(--gy-border);
+}
+
+.navbar-sidebar__brand {
+  border-bottom: var(--gy-stroke) solid var(--gy-border);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Кнопки
+   ========================================================================== */
+.button {
+  font-family: var(--gy-font-base);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  border-radius: 999px;
+  border: var(--gy-stroke) solid var(--gy-border);
+  transition:
+    transform 0.16s var(--gy-ease),
+    box-shadow 0.16s var(--gy-ease),
+    background-color 0.16s var(--gy-ease),
+    color 0.16s var(--gy-ease);
+}
+
+.button--lg {
+  padding: 0.95rem 1.9rem;
+  font-size: 1.02rem;
+}
+
+/* Infima тянет цвет кнопки из --ifm-button-color, поэтому переопределяем
+   именно переменную — простой color: проигрывает правилу .button */
+.button.button--primary,
+.button.button--primary:visited {
+  --ifm-button-color: var(--gy-ink-900);
+  --ifm-button-background-color: var(--gy-accent);
+  --ifm-button-background-color-active: var(--gy-accent-hover);
+  --ifm-button-border-color: var(--gy-border);
+  color: var(--gy-ink-900);
+  background: var(--gy-accent);
+  box-shadow: var(--gy-hard-sm);
+}
+
+.button.button--primary:hover,
+.button.button--primary:active {
+  --ifm-button-color: var(--gy-ink-900);
+  color: var(--gy-ink-900);
+  background: var(--gy-accent-hover);
+  border-color: var(--gy-border);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--gy-hard);
+}
+
+.button.button--secondary,
+.button.button--secondary:visited {
+  --ifm-button-color: var(--gy-text);
+  --ifm-button-background-color: transparent;
+  --ifm-button-background-color-active: var(--gy-text);
+  --ifm-button-border-color: var(--gy-border);
+  color: var(--gy-text);
+  background: transparent;
+  box-shadow: none;
+}
+
+.button.button--secondary:hover,
+.button.button--secondary:active {
+  --ifm-button-color: var(--gy-bg);
+  color: var(--gy-bg);
+  background: var(--gy-text);
+  border-color: var(--gy-text);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--gy-hard-sm);
+}
+
+.button:active {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0 var(--gy-border);
+}
+
+/* ==========================================================================
+   Подвал
+   ========================================================================== */
+.footer {
+  background: var(--gy-ink-900);
+  border-top: var(--gy-stroke) solid var(--gy-border);
+  color: var(--gy-lime-100);
+  padding: 3rem 0 2.5rem;
+}
+
+.footer__copyright {
+  color: var(--gy-ink-300);
+  font-size: 0.86rem;
+}
+
+.footer a {
+  color: var(--gy-lime-300);
+}
+
+.footer a:hover {
+  color: var(--gy-lime-400);
+}
+
+/* ==========================================================================
+   Общие утилиты бренда — используются со страниц
+   ========================================================================== */
+
+/* вордмарк как маска: красится currentColor'ом, работает в обеих темах */
+.gyWordmark {
+  display: block;
+  background-color: currentColor;
+  -webkit-mask: var(--gy-wordmark) no-repeat center / contain;
+  mask: var(--gy-wordmark) no-repeat center / contain;
+}
+
+:root {
+  --gy-wordmark: url('/img/brand/logo-wordmark.svg');
+}
+
+/* модульный паттерн бренда */
+.gyPattern {
+  background-image: url('/img/brand/pattern-blocks.svg');
+  background-size: 180px auto;
+}
+
+/* ==========================================================================
+   Прочее оформление Docusaurus
+   ========================================================================== */
+.card {
+  border: var(--gy-stroke) solid var(--gy-border);
+  background: var(--gy-surface);
+  box-shadow: var(--gy-hard-sm);
+}
+
+pre,
+code {
+  border-radius: var(--gy-radius);
+}
+
+[data-theme='dark'] pre {
+  border: 1px solid var(--gy-border-soft);
+}
+
+table {
+  overflow: hidden;
+  border-radius: var(--gy-radius);
+}
+
+.pagination-nav__link {
+  border: var(--gy-stroke) solid var(--gy-border);
+  border-radius: var(--gy-radius);
+}
+
+/* ==========================================================================
+   Адаптив навбара — оставляем горизонтальное меню вместо бургера
+   ========================================================================== */
 @media (max-width: 996px) {
-  /* Оставляем десктопный navbar */
+  :root {
+    --ifm-navbar-height: 3.75rem;
+    --gy-offset: 5px;
+    --gy-offset-lg: 7px;
+  }
+
   .navbar {
-    padding: 0 0.5rem;
+    padding: 0 0.6rem;
   }
 
   .navbar__inner {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 0.35rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .navbar__inner::-webkit-scrollbar {
-    display: none;
+    gap: 0.3rem;
   }
 
   .navbar__brand {
     flex: 0 0 auto;
-    min-width: auto;
-    margin-right: 0.25rem;
+    margin-right: 0.35rem;
   }
 
   .navbar__logo img {
-    height: 28px;
-    width: auto;
-  }
-
-  .navbar__title {
-    font-size: 1rem;
-    white-space: nowrap;
+    height: 21px;
   }
 
   .navbar__items--left,
@@ -433,7 +605,7 @@ table {
     display: flex !important;
     flex: 0 0 auto;
     align-items: center;
-    gap: 0.15rem;
+    gap: 0.2rem;
   }
 
   .navbar__items--right {
@@ -448,23 +620,21 @@ table {
 
   .navbar__link {
     white-space: nowrap;
-    padding: 0.35rem 0.45rem;
-    font-size: 0.92rem;
+    padding: 0.32rem 0.6rem;
+    font-size: 0.84rem;
   }
 
   .navbar-telegram-link {
-    padding: 0 0.15rem;
+    width: 32px;
+    height: 32px;
+    margin-left: 0.2rem;
   }
 
-  .navbar-telegram-icon {
-    width: 26px;
-    height: 26px;
+  .navbar-telegram-link svg {
+    width: 16px;
+    height: 16px;
   }
 
-  /* Возвращаем toggle темы в правую часть navbar */
-  .navbar__items--right > [class*='colorModeToggle'],
-  .navbar__items--right > [class*='toggle'],
-  .navbar__items--right [class*='colorModeToggle'],
   .navbar__items--right [class*='toggleButton'] {
     display: flex !important;
     align-items: center;
@@ -472,10 +642,20 @@ table {
     flex: 0 0 auto;
   }
 
-  /* Прячем бургер и mobile sidebar */
   .navbar__toggle,
   .navbar-sidebar,
   .navbar-sidebar__backdrop {
     display: none !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar__link {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+  }
+
+  .navbar__logo img {
+    height: 18px;
   }
 }

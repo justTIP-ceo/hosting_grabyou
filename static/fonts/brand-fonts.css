@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Фирменная пара GrabYou: Cygre (текст) + Bulatov SP Demo (дисплей).
+
+   Файл лежит в static/, а не в src/, намеренно: webpack не разрешает
+   url() в статике, поэтому отсутствующие (ещё не купленные) файлы шрифтов
+   не ломают сборку. Браузер просто не находит их в рантайме и уходит
+   на следующий шрифт в стеке — Onest / Unbounded.
+
+   Как подключить лицензионные файлы — см. static/fonts/README.md
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Cygre';
+  src: local('Cygre Book'), local('Cygre-Book'), url('/fonts/Cygre-Book.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cygre';
+  src: local('Cygre Medium'), local('Cygre-Medium'), url('/fonts/Cygre-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cygre';
+  src: local('Cygre Bold'), local('Cygre-Bold'), url('/fonts/Cygre-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cygre';
+  src: local('Cygre Black'), local('Cygre-Black'), url('/fonts/Cygre-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bulatov SP';
+  src: local('Bulatov SP Demo'), local('BulatovSP-Demo'), url('/fonts/BulatovSP-Demo.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
