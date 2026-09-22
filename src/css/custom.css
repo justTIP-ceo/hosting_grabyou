@@ -99,6 +99,10 @@
   --gy-mint-800: #204d41;
   --gy-mint-900: #05342a;
 
+  /* карта — цвета оригинала дизайнера (static/img/brand/map-source.webp) */
+  --gy-map-green: #30bb4a;
+  --gy-map-mint: #bcfae7;
+
   /* сигнальные — «горит», маршрут, бумага */
   --gy-urgent: #ea3a3a;
   --gy-urgent-soft: #ff8a7a;
@@ -125,9 +129,9 @@
   --gy-on-accent: var(--gy-ink-900);
   --gy-signal: var(--gy-green-500);
   --gy-deep: var(--gy-forest-600);
-  --gy-map-land: var(--gy-green-400);
-  --gy-map-water: var(--gy-mint-200);
-  --gy-map-road: #ffffff;
+  --gy-map-land: var(--gy-map-green);
+  --gy-map-water: var(--gy-map-mint);
+  --gy-map-road: var(--gy-map-mint);
   --gy-shadow: var(--gy-ink-900);
   --gy-shadow-alpha: rgba(1, 14, 5, 0.1);
 
@@ -333,7 +337,7 @@ img {
 
 .navbar__logo img {
   display: block;
-  height: 26px;
+  height: 42px;
   width: auto;
 }
 
@@ -597,7 +601,7 @@ table {
   }
 
   .navbar__logo img {
-    height: 21px;
+    height: 32px;
   }
 
   .navbar__items--left,
@@ -656,6 +660,6 @@ table {
   }
 
   .navbar__logo img {
-    height: 18px;
+    height: 27px;
   }
 }

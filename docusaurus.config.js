@@ -105,7 +105,7 @@ const config = {
           alt: 'GrabYou',
           src: 'img/brand/logo-wordmark-ink.svg',
           srcDark: 'img/brand/logo-wordmark-lime.svg',
-          height: 26,
+          height: 42,
         },
         items: [
           {

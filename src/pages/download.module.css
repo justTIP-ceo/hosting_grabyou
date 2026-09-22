@@ -19,7 +19,7 @@
   position: absolute;
   inset: -12% -6% auto -6%;
   z-index: -2;
-  opacity: 0.5;
+  opacity: 0.34;
 }
 
 [data-theme='dark'] .map {
