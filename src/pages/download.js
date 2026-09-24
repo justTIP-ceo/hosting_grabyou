@@ -1,6 +1,7 @@
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import SpbMap from '@site/src/components/brand/SpbMap';
 import {
   IconArrow,
@@ -54,7 +55,7 @@ export default function DownloadPage() {
 
         <div className="container">
           <section className={styles.hero}>
-            <img src="/img/brand/logo-icon.svg" alt="" className={styles.mark} width="88" height="88" />
+            <img src={useBaseUrl('/img/brand/logo-icon.svg')} alt="" className={styles.mark} width="88" height="88" />
             <Heading as="h1" className={styles.title}>
               Открой GrabYou
             </Heading>

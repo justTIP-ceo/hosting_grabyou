@@ -1,0 +1,85 @@
+# Деплой сайта на GitHub Pages на каждый push в main.
+#
+# Зачем: Vercel в России режется на мобильных сетях (соединение замирает
+# после ~16 КБ), а Pages бесплатный и без карты. Vercel при этом остаётся —
+# на нём живёт функция формы «Партнёрам» (api/partner.js).
+#
+# Пока Pages не включён в настройках репозитория (Settings → Pages →
+# Source: GitHub Actions), workflow пропускается и не падает.
+
+name: Деплой на GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - name: Включён ли Pages
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mode=$(gh api "repos/${{ github.repository }}/pages" --jq .build_type 2>/dev/null || true)
+          if [ "$mode" = "workflow" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GitHub Pages не включён (Settings → Pages → Source: GitHub Actions) — деплой пропущен"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.enabled == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.enabled == 'true'
+        with:
+          node-version: 20
+          cache: npm
+
+      # отдаёт адрес сайта: https://justtip-ceo.github.io/hosting_grabyou/
+      # или свой домен, если он задан в настройках Pages
+      - id: pages
+        if: steps.check.outputs.enabled == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Сборка
+        if: steps.check.outputs.enabled == 'true'
+        env:
+          BASE_URL: ${{ steps.pages.outputs.base_path }}/
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          PARTNER_API_URL: ${{ vars.PARTNER_API_URL || 'https://hosting-grabyou.vercel.app/api/partner' }}
+        run: |
+          echo "Сайт: $SITE_URL$BASE_URL, заявки: $PARTNER_API_URL"
+          npm ci
+          npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.check.outputs.enabled == 'true'
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

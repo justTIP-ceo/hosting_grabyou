@@ -1,10 +1,46 @@
 // Vercel Serverless Function: приём заявок партнёров → сообщение в Telegram
 // Требует env-переменные в Vercel: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+//
+// Сайт может жить не на Vercel (например, на GitHub Pages — в России Vercel
+// режется), тогда форма шлёт заявку сюда с другого домена. Для этого — CORS.
+// Дополнительные адреса сайта можно задать в env ALLOWED_ORIGINS через запятую.
+
+const DEFAULT_ORIGINS = [
+  'https://grabyou.ru',
+  'https://www.grabyou.ru',
+  'https://justtip-ceo.github.io',
+];
+
+function allowedOrigins() {
+  const extra = (process.env.ALLOWED_ORIGINS || '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return [...DEFAULT_ORIGINS, ...extra];
+}
 
 export default async function handler(req, res) {
+  const origin = req.headers.origin || '';
+  const allowed = allowedOrigins();
+  res.setHeader('Vary', 'Origin');
+  if (allowed.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Max-Age', '86400');
+  }
+
+  // браузер перед кросс-доменным POST с JSON шлёт предварительный OPTIONS
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
+  }
+  // браузер всегда шлёт Origin при кросс-доменном POST: чужие сайты отсекаем
+  if (origin && !allowed.includes(origin)) {
+    return res.status(403).json({ ok: false, error: 'Forbidden' });
   }
 
   const { name, address, phone, email } = req.body || {};

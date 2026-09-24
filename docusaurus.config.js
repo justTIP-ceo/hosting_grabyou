@@ -7,17 +7,21 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// Подпапка, в которой живёт сайт. На своём домене — «/», на техническом
+// адресе GitHub Pages — «/hosting_grabyou/». Задаётся при сборке.
+const BASE_URL = process.env.BASE_URL || '/';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'GrabYou — срочные предложения рядом',
   tagline: 'Выгодные предложения от местного бизнеса — прямо рядом с вами',
   favicon: 'img/brand/favicon.svg',
 
-  // Адрес сайта и адрес приёма заявок задаются при сборке: Vercel собирает
-  // без переменных (как раньше), деплой в Yandex Cloud передаёт свои —
-  // см. .github/workflows/deploy-yandex.yml и deploy/yandex/README.md
+  // Адрес сайта, подпапка и адрес приёма заявок задаются при сборке:
+  // Vercel собирает без переменных (как раньше), GitHub Pages передаёт свои —
+  // см. .github/workflows/deploy-pages.yml
   url: process.env.SITE_URL || 'https://grabyou.ru',
-  baseUrl: '/',
+  baseUrl: BASE_URL,
 
   organizationName: 'justTIP-ceo',
   projectName: 'hosting_grabyou',
@@ -29,8 +33,9 @@ const config = {
   onBrokenAnchors: 'ignore',
 
   customFields: {
-    // Куда форма «Партнёрам» отправляет заявку. На Vercel — своя serverless-функция
-    // (api/partner.js), в Yandex Cloud — Cloud Function (deploy/yandex/partner-function).
+    // Куда форма «Партнёрам» отправляет заявку. Функция живёт на Vercel
+    // (api/partner.js); если сайт отдаётся не с Vercel, сюда передаётся её
+    // полный адрес — функция принимает кросс-доменные запросы (CORS).
     partnerApiUrl: process.env.PARTNER_API_URL || '/api/partner',
   },
 
@@ -54,11 +59,11 @@ const config = {
     },
     {
       tagName: 'link',
-      attributes: {rel: 'apple-touch-icon', href: '/img/brand/apple-touch-icon.png'},
+      attributes: {rel: 'apple-touch-icon', href: `${BASE_URL}img/brand/apple-touch-icon.png`},
     },
     {
       tagName: 'link',
-      attributes: {rel: 'alternate icon', href: '/img/brand/favicon.ico'},
+      attributes: {rel: 'alternate icon', href: `${BASE_URL}img/brand/favicon.ico`},
     },
     {
       tagName: 'meta',
@@ -69,7 +74,7 @@ const config = {
   stylesheets: [
     {
       // Фирменные Cygre / Bulatov SP Demo — файлы кладутся в static/fonts/
-      href: '/fonts/brand-fonts.css',
+      href: `${BASE_URL}fonts/brand-fonts.css`,
       type: 'text/css',
     },
     {
