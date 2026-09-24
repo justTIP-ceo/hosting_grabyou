@@ -208,8 +208,14 @@
 
 .cardBody {
   display: grid;
+  align-content: start;
   gap: 0.25rem;
-  flex: 1 1 14rem;
+  flex: 1 1 auto;
+}
+
+/* в строке (главная карточка) тексту нужна минимальная ширина */
+.cardFeatured .cardBody {
+  flex-basis: 14rem;
 }
 
 .kicker {

@@ -194,18 +194,31 @@ const categories = [
   {Icon: IconStore, label: 'Магазины'},
 ];
 
-/* Булавки: x/y — проценты по viewBox карты.
-   Места подобраны по карте расстояний до воды и улиц: каждая точка стоит
-   на свободном месте, карточки между собой не пересекаются. */
+/* Заведения на карте. x/y — проценты по viewBox карты.
+   card — полная карточка над точкой, pill — компактная подпись сбоку.
+   Раскладка посчитана скриптом по геометрии карты: точки стоят на суше
+   и не на улицах, подписи не пересекаются и почти не закрывают реку.
+   Размеры подписей в CSS заданы в единицах карты (cqw), поэтому
+   раскладка верна на любой ширине. */
 const mapPins = [
-  {x: 45, y: 30, tone: 'urgent', title: 'Кофейня', deal: '−30%', meta: 'до 21:00 · 350 м'},
-  {x: 20, y: 34, tone: 'lime', title: 'Пекарня', deal: '−45%', meta: 'круассаны · 600 м'},
-  {x: 82, y: 36, tone: 'green', title: 'Кондитерская', deal: '−50%', meta: 'эклеры · 450 м'},
-  {x: 20, y: 54, tone: 'route', title: 'Цветочный магазин', deal: '−40%', meta: 'букет дня · 1,2 км'},
-  {x: 80, y: 54, tone: 'urgent', title: 'Кафе', deal: '−35%', meta: 'бизнес-ланч · 900 м'},
-  {x: 78, y: 77, tone: 'lime', title: 'Суши-бар', deal: '−35%', meta: 'сеты · 1,1 км'},
-  {x: 57, y: 87, tone: 'green', title: 'Магазин у дома', deal: '−20%', meta: 'готовая еда · 250 м'},
-  {x: 30, y: 80, tone: 'route', title: 'Пиццерия', deal: '−25%', meta: 'до 22:00 · 700 м'},
+  {kind: 'card', x: 34.67, y: 25.7, tone: 'urgent', title: 'Кафе', deal: '−35%', meta: 'бизнес-ланч · 900 м'},
+  {kind: 'card', x: 51.17, y: 20.04, tone: 'green', title: 'Кондитерская', deal: '−50%', meta: 'эклеры · 450 м'},
+  {kind: 'card', x: 76.67, y: 20.04, tone: 'urgent', title: 'Кофейня', deal: '−30%', meta: 'до 21:00 · 350 м'},
+  {kind: 'card', x: 21.67, y: 56.81, tone: 'lime', title: 'Пекарня', deal: '−45%', meta: 'круассаны · 600 м'},
+  {kind: 'card', x: 43.17, y: 82.27, tone: 'lime', title: 'Суши-бар', deal: '−35%', meta: 'сеты · 1,1 км'},
+  {kind: 'card', x: 76.17, y: 76.61, tone: 'route', title: 'Цветочный магазин', deal: '−40%', meta: 'букет дня · 1,2 км'},
+  {kind: 'pill', x: 49.67, y: 47.62, side: 'r', tone: 'route', title: 'Пиццерия', deal: '−25%'},
+  {kind: 'pill', x: 67.67, y: 44.08, side: 'r', tone: 'green', title: 'Магазин у дома', deal: '−20%'},
+  {kind: 'pill', x: 60.67, y: 66.01, side: 'l', tone: 'urgent', title: 'Бургерная', deal: '−30%'},
+  {kind: 'pill', x: 35.17, y: 46.91, side: 'r', tone: 'lime', title: 'Чайная', deal: '−25%'},
+  {kind: 'pill', x: 47.67, y: 65.3, side: 'l', tone: 'green', title: 'Фермерская лавка', deal: '−35%'},
+  {kind: 'pill', x: 57.17, y: 53.98, side: 'r', tone: 'route', title: 'Барбершоп', deal: '−40%'},
+  {kind: 'pill', x: 45.17, y: 33.47, side: 'l', tone: 'urgent', title: 'Кулинария', deal: '−45%'},
+  {kind: 'pill', x: 43.67, y: 55.4, side: 'r', tone: 'lime', title: 'Раменная', deal: '−30%'},
+  {kind: 'pill', x: 83.67, y: 53.98, side: 'l', tone: 'route', title: 'Салон красоты', deal: '−30%'},
+  {kind: 'pill', x: 18.17, y: 32.77, side: 'l', tone: 'green', title: 'Фруктовая лавка', deal: '−25%'},
+  {kind: 'pill', x: 58.67, y: 39.13, side: 'r', tone: 'urgent', title: 'Пончиковая', deal: '−40%'},
+  {kind: 'pill', x: 62.17, y: 49.03, side: 'r', tone: 'lime', title: 'Сырная лавка', deal: '−20%'},
 ];
 
 export default function HomepageFeatures() {
@@ -264,16 +277,16 @@ export default function HomepageFeatures() {
             </div>
 
             <div className={styles.heroVisual}>
+              {/* плашки живут внутри телефонов: держатся у корпуса и плавают вместе с ним */}
               <div className={styles.phone}>
                 <img src={promotionsImg} alt="Лента предложений рядом в GrabYou" loading="eager" />
+                <span className={`${styles.tag} ${styles.tagA}`}>−40%</span>
+                <span className={`${styles.tag} ${styles.tagC}`}>осталось 2 шт.</span>
               </div>
               <div className={`${styles.phone} ${styles.phoneSmall}`}>
                 <img src={qrScannerImg} alt="Выдача заказа по QR-коду" loading="lazy" />
+                <span className={`${styles.tag} ${styles.tagB}`}>350 м от вас</span>
               </div>
-
-              <span className={`${styles.tag} ${styles.tagA}`}>−40%</span>
-              <span className={`${styles.tag} ${styles.tagB}`}>350 м от вас</span>
-              <span className={`${styles.tag} ${styles.tagC}`}>осталось 2 шт.</span>
             </div>
           </div>
         </div>
@@ -413,15 +426,22 @@ export default function HomepageFeatures() {
                 {mapPins.map((pin) => (
                   <div
                     key={pin.title}
-                    className={styles.mapPin}
+                    className={pin.kind === 'card' ? styles.mapPin : styles.mapPill}
                     data-tone={pin.tone}
+                    data-side={pin.side}
                     style={{left: `${pin.x}%`, top: `${pin.y}%`}}>
                     <span className={styles.mapPinDot} aria-hidden="true" />
-                    <div className={styles.mapPinCard}>
-                      <span className={styles.mapPinDeal}>{pin.deal}</span>
-                      <span className={styles.mapPinTitle}>{pin.title}</span>
-                      <span className={styles.mapPinMeta}>{pin.meta}</span>
-                    </div>
+                    {pin.kind === 'card' ? (
+                      <div className={styles.mapPinCard}>
+                        <span className={styles.mapPinDeal}>{pin.deal}</span>
+                        <span className={styles.mapPinTitle}>{pin.title}</span>
+                        <span className={styles.mapPinMeta}>{pin.meta}</span>
+                      </div>
+                    ) : (
+                      <span className={styles.mapPillLabel}>
+                        <b>{pin.deal}</b> {pin.title}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
@@ -431,6 +451,17 @@ export default function HomepageFeatures() {
               </div>
             </div>
           </Reveal>
+
+          {/* на узких экранах вместо подписей на карте — лента предложений */}
+          <div className={styles.offerStrip} aria-label="Предложения рядом">
+            {mapPins.map((pin) => (
+              <div key={pin.title} className={styles.offerChip} data-tone={pin.tone}>
+                <span className={styles.offerDot} aria-hidden="true" />
+                <span className={styles.offerDeal}>{pin.deal}</span>
+                <span className={styles.offerTitle}>{pin.title}</span>
+              </div>
+            ))}
+          </div>
 
           <Reveal delay={140}>
             <div className={styles.catRow}>

@@ -217,37 +217,44 @@
   margin-top: 1.85rem;
 }
 
-/* ── телефоны ── */
+/* ── телефоны ──
+   Пара выстроена по ширине колонки: большой слева, второй — справа
+   и ниже, перекрытие ~13%. Плашки привязаны к корпусам. */
 .heroVisual {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
   min-height: 520px;
+  padding-right: 4%;
 }
 
-/* Корпус телефона нарисован в самом PNG, углы прозрачные. Рисовать поверх
-   свою рамку нельзя — радиусы не совпадают. Тень даём drop-shadow: он идёт
-   по альфе и повторяет силуэт устройства. */
 .phone {
-  width: min(330px, 74%);
+  position: relative;
+  width: min(318px, 62%);
   animation: float 7s ease-in-out infinite;
-  filter: drop-shadow(var(--gy-offset-lg) var(--gy-offset-lg) 0 var(--gy-border));
 }
 
+/* Корпус телефона нарисован в самом PNG, углы прозрачные — своей рамки
+   не рисуем, тень даём drop-shadow по альфе. Фильтр висит на картинке,
+   а не на обёртке, чтобы не дублировать тень у плашек. */
 .phone img {
   display: block;
   width: 100%;
   height: auto;
+  filter: drop-shadow(var(--gy-offset-lg) var(--gy-offset-lg) 0 var(--gy-border));
 }
 
 .phoneSmall {
   position: absolute;
-  right: -6%;
-  bottom: 4%;
-  width: min(208px, 47%);
+  right: 0;
+  bottom: 5%;
+  width: min(256px, 50%);
   animation-delay: -3.5s;
   z-index: 2;
+}
+
+.phoneSmall img {
   filter: drop-shadow(var(--gy-offset) var(--gy-offset) 0 var(--gy-border));
 }
 
@@ -265,32 +272,34 @@
   border-radius: 999px;
   background: var(--gy-surface);
   color: var(--gy-text);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 800;
   white-space: nowrap;
   box-shadow: var(--gy-hard-sm);
 }
 
+/* у левого края большого телефона, наполовину на корпусе */
 .tagA {
-  top: 6%;
-  left: 0;
+  top: 13%;
+  left: -9%;
   background: var(--gy-urgent);
   color: #fff;
   transform: rotate(-4deg);
 }
 
+.tagC {
+  bottom: 14%;
+  left: -11%;
+  transform: rotate(-2deg);
+}
+
+/* выходит за правый край второго телефона */
 .tagB {
-  top: 38%;
-  right: 2%;
+  top: 11%;
+  right: -18%;
   background: var(--gy-accent);
   color: var(--gy-ink-900);
   transform: rotate(3deg);
-}
-
-.tagC {
-  bottom: 2%;
-  left: 2%;
-  transform: rotate(-2deg);
 }
 
 /* ==========================================================================
@@ -597,9 +606,13 @@
 
 /* ==========================================================================
    КАРТА
+   Подписи заведений заданы в единицах карты: --u = 1/1200 ширины карты.
+   Раскладка точек посчитана скриптом в тех же единицах, поэтому подписи
+   не пересекаются на любой ширине — они масштабируются вместе с картой.
    ========================================================================== */
 .mapCard {
   position: relative;
+  container-type: inline-size;
   border: var(--gy-stroke-bold) solid var(--gy-border);
   border-radius: var(--gy-radius-xl);
   overflow: hidden;
@@ -614,85 +627,139 @@
 }
 
 .mapPins {
+  --u: calc(100cqw / 1200);
   position: absolute;
   inset: 0;
 }
 
-.mapPin {
+/* якорь нулевого размера ровно в точке заведения */
+.mapPin,
+.mapPill {
   position: absolute;
-  transform: translate(-50%, -100%);
+  width: 0;
+  height: 0;
 }
 
 .mapPinDot {
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin: 0 auto;
+  position: absolute;
+  z-index: 2;
+  left: calc(-10 * var(--u));
+  top: calc(-10 * var(--u));
+  width: calc(20 * var(--u));
+  height: calc(20 * var(--u));
   border-radius: 999px;
-  border: var(--gy-stroke-bold) solid var(--gy-ink-900);
+  border: max(2px, calc(3 * var(--u))) solid var(--gy-ink-900);
   background: var(--gy-accent);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--gy-accent) 75%, transparent);
-  animation: ping 2.6s ease-out infinite;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--gy-accent) 70%, transparent);
+  animation: ping 2.8s ease-out infinite;
 }
 
-.mapPin[data-tone='urgent'] .mapPinDot {
+.mapPill .mapPinDot {
+  left: calc(-6 * var(--u));
+  top: calc(-6 * var(--u));
+  width: calc(12 * var(--u));
+  height: calc(12 * var(--u));
+  border-width: max(1.5px, calc(2 * var(--u)));
+  animation: none;
+}
+
+[data-tone='urgent'] > .mapPinDot {
   background: var(--gy-urgent);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--gy-urgent) 75%, transparent);
-  animation-delay: -0.6s;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--gy-urgent) 70%, transparent);
+  animation-delay: -0.7s;
 }
 
-.mapPin[data-tone='green'] .mapPinDot {
+[data-tone='green'] > .mapPinDot {
   background: var(--gy-green-500);
-  animation-delay: -1.2s;
+  animation-delay: -1.4s;
 }
 
-.mapPin[data-tone='route'] .mapPinDot {
+[data-tone='route'] > .mapPinDot {
   background: var(--gy-route);
-  animation-delay: -1.8s;
+  animation-delay: -2.1s;
 }
 
 @keyframes ping {
   60%,
   100% {
-    box-shadow: 0 0 0 16px transparent;
+    box-shadow: 0 0 0 calc(16 * var(--u)) transparent;
   }
 }
 
+/* полная карточка: 180×76 над точкой, зазор 14 */
 .mapPinCard {
   position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: grid;
-  gap: 0.1rem;
-  padding: 0.5rem 0.75rem;
-  min-width: 10.5rem;
-  border: var(--gy-stroke) solid var(--gy-ink-900);
-  border-radius: var(--gy-radius);
+  left: calc(-90 * var(--u));
+  bottom: calc(14 * var(--u));
+  width: calc(180 * var(--u));
+  height: calc(76 * var(--u));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(2 * var(--u));
+  padding: 0 calc(12 * var(--u));
+  border: max(1.5px, calc(2 * var(--u))) solid var(--gy-ink-900);
+  border-radius: calc(12 * var(--u));
   background: var(--gy-paper);
   color: var(--gy-ink-900);
-  box-shadow: 3px 3px 0 var(--gy-ink-900);
+  box-shadow: calc(3 * var(--u)) calc(3 * var(--u)) 0 var(--gy-ink-900);
+  white-space: nowrap;
   text-align: left;
 }
 
 .mapPinDeal {
   font-family: var(--gy-font-display);
-  font-size: 1.05rem;
+  font-size: calc(19 * var(--u));
   font-weight: 900;
   line-height: 1;
   color: var(--gy-urgent-deep);
 }
 
 .mapPinTitle {
-  font-size: 0.8rem;
+  font-size: calc(13.5 * var(--u));
   font-weight: 800;
   line-height: 1.2;
 }
 
 .mapPinMeta {
-  font-size: 0.72rem;
+  font-size: calc(12 * var(--u));
   font-weight: 600;
+  line-height: 1.3;
   color: var(--gy-ink-600);
+}
+
+/* компактная подпись: высота 30, точка у внешнего края */
+.mapPillLabel {
+  position: absolute;
+  top: calc(-15 * var(--u));
+  left: calc(-16 * var(--u));
+  height: calc(30 * var(--u));
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  padding: 0 calc(11 * var(--u)) 0 calc(28 * var(--u));
+  border: max(1.5px, calc(2 * var(--u))) solid var(--gy-ink-900);
+  border-radius: 999px;
+  background: var(--gy-paper);
+  color: var(--gy-ink-900);
+  box-shadow: calc(2 * var(--u)) calc(2 * var(--u)) 0 var(--gy-ink-900);
+  font-size: calc(13 * var(--u));
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mapPillLabel b {
+  font-weight: 900;
+  color: var(--gy-urgent-deep);
+}
+
+.mapPill[data-side='l'] .mapPillLabel {
+  left: auto;
+  right: calc(-16 * var(--u));
+  padding: 0 calc(28 * var(--u)) 0 calc(11 * var(--u));
 }
 
 .mapLegend {
@@ -721,6 +788,102 @@
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--gy-ink-600);
+}
+
+/* лента предложений — только на узких экранах, где подписи на карте мелкие */
+.offerStrip {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .mapPinCard,
+  .mapPillLabel {
+    display: none;
+  }
+
+  /* без подписей точки можно сделать заметнее */
+  .mapPinDot,
+  .mapPill .mapPinDot {
+    left: -7px;
+    top: -7px;
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+  }
+
+  .offerStrip {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem calc(-1 * var(--ifm-spacing-horizontal)) 0;
+    padding: 0.25rem var(--ifm-spacing-horizontal) 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--ifm-spacing-horizontal);
+    scrollbar-width: none;
+  }
+
+  .offerStrip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mapLegend {
+    left: 0.6rem;
+    bottom: 0.6rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .mapLegendCity {
+    font-size: 0.8rem;
+  }
+
+  .mapLegendNote {
+    display: none;
+  }
+}
+
+.offerChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+  padding: 0.5rem 0.85rem;
+  border: var(--gy-stroke) solid var(--gy-border);
+  border-radius: 999px;
+  background: var(--gy-surface);
+  color: var(--gy-text);
+  font-size: 0.86rem;
+  font-weight: 700;
+  scroll-snap-align: start;
+  white-space: nowrap;
+}
+
+.offerDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid var(--gy-ink-900);
+  background: var(--gy-accent);
+}
+
+.offerChip[data-tone='urgent'] .offerDot {
+  background: var(--gy-urgent);
+}
+
+.offerChip[data-tone='green'] .offerDot {
+  background: var(--gy-green-500);
+}
+
+.offerChip[data-tone='route'] .offerDot {
+  background: var(--gy-route);
+}
+
+.offerDeal {
+  font-weight: 900;
+  color: var(--gy-urgent);
+}
+
+[data-theme='dark'] .offerDeal {
+  color: var(--gy-urgent-soft);
 }
 
 /* ── категории ── */
@@ -1018,15 +1181,21 @@
   .heroVisual {
     min-height: 0;
     margin-top: 0.5rem;
+    padding-right: 0;
+    /* пара телефонов по центру, с запасом под выступающие плашки */
+    width: min(100%, 520px);
+    margin-inline: auto;
   }
 
   .phone {
-    width: min(290px, 62%);
+    width: 60%;
+    margin-left: 5%;
   }
 
   .phoneSmall {
-    width: min(182px, 39%);
-    right: 2%;
+    width: 47%;
+    right: 3%;
+    margin-left: 0;
   }
 
   .valuesGrid,
@@ -1041,29 +1210,16 @@
 
   .aiVisual {
     order: -1;
-    max-width: 420px;
+    width: min(100%, 340px);
     margin-inline: auto;
   }
 
   .aiTagA {
-    left: 0;
+    left: -2%;
   }
 
   .aiTagB {
-    right: 0;
-  }
-
-  .mapPinCard {
-    min-width: 8.5rem;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .mapPinTitle {
-    font-size: 0.72rem;
-  }
-
-  .mapPinMeta {
-    display: none;
+    right: -2%;
   }
 }
 
@@ -1072,25 +1228,27 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  /* три высоких скриншота столбиком — это ~2000px прокрутки;
+     на телефоне их листают вбок */
   .shots {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    margin-inline: auto;
+    display: flex;
+    gap: 1rem;
+    margin-inline: calc(-1 * var(--ifm-spacing-horizontal));
+    padding: 0.5rem var(--ifm-spacing-horizontal) 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--ifm-spacing-horizontal);
+    scrollbar-width: none;
   }
 
-  /* На узком экране подписи булавок мешают — оставляем только точки */
-  .mapPinCard {
+  .shots::-webkit-scrollbar {
     display: none;
   }
 
-  .mapLegend {
-    left: 0.6rem;
-    bottom: 0.6rem;
-    padding: 0.4rem 0.7rem;
-  }
-
-  .mapLegendCity {
-    font-size: 0.8rem;
+  .shots > * {
+    flex: 0 0 68%;
+    max-width: 260px;
+    scroll-snap-align: start;
   }
 }
 
@@ -1101,7 +1259,7 @@
   }
 
   .heroTitle {
-    font-size: clamp(2.2rem, 12vw, 3rem);
+    font-size: clamp(2rem, 11.5vw, 3rem);
   }
 
   .heroButtons :global(.button),
@@ -1111,7 +1269,39 @@
   }
 
   .tag {
-    font-size: 0.72rem;
-    padding: 0.32rem 0.65rem;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  /* плашки не должны вылезать за край экрана */
+  .tagA {
+    left: -6%;
+  }
+
+  .tagC {
+    left: -7%;
+  }
+
+  .tagB {
+    right: -7%;
+  }
+
+  .aiVisual {
+    width: min(100%, 270px);
+  }
+
+  .aiTagA {
+    left: -6%;
+  }
+
+  .aiTagB {
+    right: -4%;
+  }
+
+  .ctaCard::after {
+    width: 150px;
+    height: 200px;
+    right: -30px;
+    top: -30px;
   }
 }

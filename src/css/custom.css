@@ -639,11 +639,20 @@ table {
     height: 16px;
   }
 
+  /* Docusaurus на мобильном прячет переключатель темы в боковое меню,
+     а боковое меню у нас отключено — возвращаем его в шапку */
+  .navbar__items--right > [class*='colorModeToggle'],
   .navbar__items--right [class*='toggleButton'] {
     display: flex !important;
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
+  }
+
+  .navbar__items--right [class*='toggleButton'] {
+    width: 32px;
+    height: 32px;
+    margin-left: 0.2rem;
   }
 
   .navbar__toggle,
@@ -661,5 +670,38 @@ table {
 
   .navbar__logo img {
     height: 27px;
+  }
+
+  /* На узком экране длинная подпись не влезает в кнопку — пусть переносится,
+     а не обрезается (Infima по умолчанию запрещает перенос) */
+  .button {
+    white-space: normal;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  /* страховка от разрыва длинных слов в заголовках */
+  h1,
+  h2,
+  h3 {
+    hyphens: auto;
+    overflow-wrap: normal;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar {
+    padding: 0 0.35rem;
+  }
+
+  .navbar__link {
+    padding: 0.28rem 0.42rem;
+    font-size: 0.74rem;
+  }
+
+  .navbar-telegram-link,
+  .navbar__items--right [class*='toggleButton'] {
+    width: 29px;
+    height: 29px;
   }
 }
