@@ -13,7 +13,10 @@ const config = {
   tagline: 'Выгодные предложения от местного бизнеса — прямо рядом с вами',
   favicon: 'img/brand/favicon.svg',
 
-  url: 'https://grabyou.ru',
+  // Адрес сайта и адрес приёма заявок задаются при сборке: Vercel собирает
+  // без переменных (как раньше), деплой в Yandex Cloud передаёт свои —
+  // см. .github/workflows/deploy-yandex.yml и deploy/yandex/README.md
+  url: process.env.SITE_URL || 'https://grabyou.ru',
   baseUrl: '/',
 
   organizationName: 'justTIP-ceo',
@@ -24,6 +27,12 @@ const config = {
   // Якоря (#how-it-works, #how) стоят на <section id> внутри React-компонентов,
   // а проверка Docusaurus видит только заголовки MDX — отсюда ложные срабатывания.
   onBrokenAnchors: 'ignore',
+
+  customFields: {
+    // Куда форма «Партнёрам» отправляет заявку. На Vercel — своя serverless-функция
+    // (api/partner.js), в Yandex Cloud — Cloud Function (deploy/yandex/partner-function).
+    partnerApiUrl: process.env.PARTNER_API_URL || '/api/partner',
+  },
 
   i18n: {
     defaultLocale: 'ru',

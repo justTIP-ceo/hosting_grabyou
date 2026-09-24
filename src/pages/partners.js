@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
   IconBread,
   IconClock,
@@ -97,6 +98,7 @@ const faq = [
 
 /* ─── Модалка-анкета ─── */
 function PartnerFormModal({open, onClose}) {
+  const {siteConfig} = useDocusaurusContext();
   const [form, setForm] = useState({name: '', address: '', phone: '', email: ''});
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
@@ -123,7 +125,7 @@ function PartnerFormModal({open, onClose}) {
     if (!consent || status === 'sending') return;
     setStatus('sending');
     try {
-      const res = await fetch('/api/partner', {
+      const res = await fetch(siteConfig.customFields.partnerApiUrl, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(form),
