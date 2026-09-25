@@ -64,6 +64,9 @@ jobs:
           SITE_URL: ${{ steps.pages.outputs.origin }}
           PARTNER_API_URL: ${{ vars.PARTNER_API_URL || 'https://hosting-grabyou.vercel.app/api/partner' }}
         run: |
+          # пока в Pages не включён HTTPS, адрес приходит с http:// —
+          # в canonical и og:url всегда пишем https
+          export SITE_URL="${SITE_URL/#http:\/\//https://}"
           echo "Сайт: $SITE_URL$BASE_URL, заявки: $PARTNER_API_URL"
           npm ci
           npm run build
